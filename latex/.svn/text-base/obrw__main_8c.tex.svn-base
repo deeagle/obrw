@@ -1,0 +1,56 @@
+\hypertarget{obrw__main_8c}{
+\section{obrw\_\-main.c File Reference}
+\label{obrw__main_8c}\index{obrw\_\-main.c@{obrw\_\-main.c}}
+}
+
+
+$<$$<$ OBRW -\/ OpenBoxRandomWallpaper $>$$>$ -\/-\/ \hyperlink{obrw__main_8c}{obrw\_\-main.c}  
+
+
+{\ttfamily \#include \char`\"{}obrw\_\-main.h\char`\"{}}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include \char`\"{}obrw\_\-chk\_\-externals.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}obrw\_\-config.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}obrw\_\-globals.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}obrw\_\-wallpaper\_\-opt.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{obrw__main_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em The main-\/method, which starts the obrw-\/process. \item\end{DoxyCompactList}\item 
+void \hyperlink{obrw__main_8c_ae25197b45fe5826829be52fb31eb8b0b}{freeAllToClose} (void)
+\begin{DoxyCompactList}\small\item\em Free all used alocated heap-\/memory (if used) (to use before programm ends). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+$<$$<$ OBRW -\/ OpenBoxRandomWallpaper $>$$>$ -\/-\/ \hyperlink{obrw__main_8c}{obrw\_\-main.c} URL: \href{http://deeagle.de}{\tt http://deeagle.de}
+
+Copyright (c) 2007-\/2010 Martin Kock $<$\href{mailto:code@deeagle.de}{\tt code@deeagle.de}$>$
+
+Permission to use, copy, modify, distribute and sell this software and its documentation for any purpose is hereby granted without fee, provided that the above copyright notice appear in all copies and that both that copyright notice and this permission notice appear in supporting documentation. It is provided \char`\"{}as is\char`\"{} without express or implied warranty.\par
+\par
+\par
+
+
+The file includes the main-\/method of the tool obrw. Also there is an method to free all used alocated variables. 
+
+\subsection{Function Documentation}
+\hypertarget{obrw__main_8c_ae25197b45fe5826829be52fb31eb8b0b}{
+\index{obrw\_\-main.c@{obrw\_\-main.c}!freeAllToClose@{freeAllToClose}}
+\index{freeAllToClose@{freeAllToClose}!obrw_main.c@{obrw\_\-main.c}}
+\subsubsection[{freeAllToClose}]{\setlength{\rightskip}{0pt plus 5cm}void freeAllToClose (void)}}
+\label{obrw__main_8c_ae25197b45fe5826829be52fb31eb8b0b}
+
+
+Free all used alocated heap-\/memory (if used) (to use before programm ends). 
+
+Free all used alocated heap-\/memory (if used, to use before programm ends -\/$>$ success and fail).\hypertarget{obrw__main_8c_a3c04138a5bfe5d72780bb7e82a18e627}{
+\index{obrw\_\-main.c@{obrw\_\-main.c}!main@{main}}
+\index{main@{main}!obrw_main.c@{obrw\_\-main.c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (int {\em argc}, \/  char $\ast$$\ast$ {\em argv})}}
+\label{obrw__main_8c_a3c04138a5bfe5d72780bb7e82a18e627}
+
+
+The main-\/method, which starts the obrw-\/process. 
+

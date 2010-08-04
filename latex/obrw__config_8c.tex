@@ -1,0 +1,93 @@
+\hypertarget{obrw__config_8c}{
+\section{obrw\_\-config.c File Reference}
+\label{obrw__config_8c}\index{obrw\_\-config.c@{obrw\_\-config.c}}
+}
+
+
+$<$$<$ OBRW -\/ OpenBoxRandomWallpaper $>$$>$ -\/-\/ \hyperlink{obrw__config_8c}{obrw\_\-config.c}  
+
+
+{\ttfamily \#include \char`\"{}obrw\_\-config.h\char`\"{}}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$sys/stat.h$>$}\par
+{\ttfamily \#include $<$sys/types.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include \char`\"{}obrw\_\-globals.h\char`\"{}}\par
+{\ttfamily \#include $<$time.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$dirent.h$>$}\par
+{\ttfamily \#include $<$ctype.h$>$}\par
+{\ttfamily \#include \char`\"{}obrw\_\-config.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \hyperlink{obrw__config_8c_a42eff4a7c6042d13b06eb00af6595d4b}{obrwConfig\_\-getWallpaperDir} (void)
+\begin{DoxyCompactList}\small\item\em Returns the actually wallpaperpath (DIR which includes the wallpapers). \item\end{DoxyCompactList}\item 
+const char $\ast$ \hyperlink{obrw__config_8c_a56e3608ea3df2a638843babdcd3f2262}{obrwConfig\_\-getWallpaperLastSet} (void)
+\begin{DoxyCompactList}\small\item\em The getter-\/method of the last set wallpaper, included in the configfile. \item\end{DoxyCompactList}\item 
+int \hyperlink{obrw__config_8c_a3c1ae7081277dc9a93b423bcf0fd8c39}{obrwConfig\_\-readConfigFile} (void)
+\begin{DoxyCompactList}\small\item\em Read the configfile and parse included wallpaperpath and last set wallpaper. \item\end{DoxyCompactList}\item 
+int \hyperlink{obrw__config_8c_a2fd407c299e1699ab0d00fed0c98ded5}{obrwConfig\_\-writeSettingsToConfigFile} (void)
+\begin{DoxyCompactList}\small\item\em Write the now used settings into the configfile. \item\end{DoxyCompactList}\item 
+void \hyperlink{obrw__config_8c_aa2ea802b76dcec34176b34a6bd954928}{obrwConfig\_\-freeLocalsToClose} (void)
+\begin{DoxyCompactList}\small\item\em Free memory of used locale variables. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+$<$$<$ OBRW -\/ OpenBoxRandomWallpaper $>$$>$ -\/-\/ \hyperlink{obrw__config_8c}{obrw\_\-config.c} URL: \href{http://deeagle.de}{\tt http://deeagle.de}
+
+Copyright (c) 2007-\/2010 Martin Kock $<$\href{mailto:code@deeagle.de}{\tt code@deeagle.de}$>$
+
+Permission to use, copy, modify, distribute and sell this software and its documentation for any purpose is hereby granted without fee, provided that the above copyright notice appear in all copies and that both that copyright notice and this permission notice appear in supporting documentation. It is provided \char`\"{}as is\char`\"{} without express or implied warranty.\par
+\par
+\par
+
+
+The file includes the definitons of functions which are associated with the configfile '$\sim$/.obrw.conf'. 
+
+\subsection{Function Documentation}
+\hypertarget{obrw__config_8c_aa2ea802b76dcec34176b34a6bd954928}{
+\index{obrw\_\-config.c@{obrw\_\-config.c}!obrwConfig\_\-freeLocalsToClose@{obrwConfig\_\-freeLocalsToClose}}
+\index{obrwConfig\_\-freeLocalsToClose@{obrwConfig\_\-freeLocalsToClose}!obrw_config.c@{obrw\_\-config.c}}
+\subsubsection[{obrwConfig\_\-freeLocalsToClose}]{\setlength{\rightskip}{0pt plus 5cm}void obrwConfig\_\-freeLocalsToClose (void)}}
+\label{obrw__config_8c_aa2ea802b76dcec34176b34a6bd954928}
+
+
+Free memory of used locale variables. 
+
+Free memory of used locale variables with help of the free-\/methods in \hyperlink{obrw__utils_8c}{obrw\_\-utils.c}.\hypertarget{obrw__config_8c_a42eff4a7c6042d13b06eb00af6595d4b}{
+\index{obrw\_\-config.c@{obrw\_\-config.c}!obrwConfig\_\-getWallpaperDir@{obrwConfig\_\-getWallpaperDir}}
+\index{obrwConfig\_\-getWallpaperDir@{obrwConfig\_\-getWallpaperDir}!obrw_config.c@{obrw\_\-config.c}}
+\subsubsection[{obrwConfig\_\-getWallpaperDir}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ obrwConfig\_\-getWallpaperDir (void)}}
+\label{obrw__config_8c_a42eff4a7c6042d13b06eb00af6595d4b}
+
+
+Returns the actually wallpaperpath (DIR which includes the wallpapers). 
+
+The getter-\/method of the wallpaperdir, included in the configfile.\hypertarget{obrw__config_8c_a56e3608ea3df2a638843babdcd3f2262}{
+\index{obrw\_\-config.c@{obrw\_\-config.c}!obrwConfig\_\-getWallpaperLastSet@{obrwConfig\_\-getWallpaperLastSet}}
+\index{obrwConfig\_\-getWallpaperLastSet@{obrwConfig\_\-getWallpaperLastSet}!obrw_config.c@{obrw\_\-config.c}}
+\subsubsection[{obrwConfig\_\-getWallpaperLastSet}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ obrwConfig\_\-getWallpaperLastSet (void)}}
+\label{obrw__config_8c_a56e3608ea3df2a638843babdcd3f2262}
+
+
+The getter-\/method of the last set wallpaper, included in the configfile. 
+
+\hypertarget{obrw__config_8c_a3c1ae7081277dc9a93b423bcf0fd8c39}{
+\index{obrw\_\-config.c@{obrw\_\-config.c}!obrwConfig\_\-readConfigFile@{obrwConfig\_\-readConfigFile}}
+\index{obrwConfig\_\-readConfigFile@{obrwConfig\_\-readConfigFile}!obrw_config.c@{obrw\_\-config.c}}
+\subsubsection[{obrwConfig\_\-readConfigFile}]{\setlength{\rightskip}{0pt plus 5cm}int obrwConfig\_\-readConfigFile (void)}}
+\label{obrw__config_8c_a3c1ae7081277dc9a93b423bcf0fd8c39}
+
+
+Read the configfile and parse included wallpaperpath and last set wallpaper. 
+
+\hypertarget{obrw__config_8c_a2fd407c299e1699ab0d00fed0c98ded5}{
+\index{obrw\_\-config.c@{obrw\_\-config.c}!obrwConfig\_\-writeSettingsToConfigFile@{obrwConfig\_\-writeSettingsToConfigFile}}
+\index{obrwConfig\_\-writeSettingsToConfigFile@{obrwConfig\_\-writeSettingsToConfigFile}!obrw_config.c@{obrw\_\-config.c}}
+\subsubsection[{obrwConfig\_\-writeSettingsToConfigFile}]{\setlength{\rightskip}{0pt plus 5cm}int obrwConfig\_\-writeSettingsToConfigFile (void)}}
+\label{obrw__config_8c_a2fd407c299e1699ab0d00fed0c98ded5}
+
+
+Write the now used settings into the configfile. 
+

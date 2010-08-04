@@ -1,0 +1,72 @@
+\hypertarget{obrw__wallpaper__opt_8c}{
+\section{obrw\_\-wallpaper\_\-opt.c File Reference}
+\label{obrw__wallpaper__opt_8c}\index{obrw\_\-wallpaper\_\-opt.c@{obrw\_\-wallpaper\_\-opt.c}}
+}
+
+
+$<$$<$ OBRW -\/ OpenBoxRandomWallpaper $>$$>$ -\/-\/ \hyperlink{obrw__wallpaper__opt_8c}{obrw\_\-wallpaper\_\-opt.c}  
+
+
+{\ttfamily \#include \char`\"{}obrw\_\-wallpaper\_\-opt.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \hyperlink{obrw__wallpaper__opt_8c_ae7dd996909fd215c8c29a50795a178a7}{obrwWallpaperOpt\_\-getUsedWallpaper} (void)
+\begin{DoxyCompactList}\small\item\em The getter-\/method to get the name of the last wallpaper. \item\end{DoxyCompactList}\item 
+int \hyperlink{obrw__wallpaper__opt_8c_a8502bfce6216106d924a3328fdd3d46e}{obrwWallpaperOpt\_\-readDirAndSetWallpaper} (const char $\ast$dirPath)
+\begin{DoxyCompactList}\small\item\em Reads the wallpaperdir, add wallpaper and set it. \item\end{DoxyCompactList}\item 
+int \hyperlink{obrw__wallpaper__opt_8c_afc5c86f4f18a026051628743948f3831}{obrwWallpaperOpt\_\-setWallpaperWithFeh} (const char $\ast$dirPath, const char $\ast$wpToSet)
+\begin{DoxyCompactList}\small\item\em Set a wallpaper with the external tool feh. \item\end{DoxyCompactList}\item 
+void \hyperlink{obrw__wallpaper__opt_8c_a26419c983fbf7103bf85e61cab78d33b}{obrwWallpaperOpt\_\-freeLocalsToClose} (void)
+\begin{DoxyCompactList}\small\item\em Free all used allocated heap-\/memory (if used). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+$<$$<$ OBRW -\/ OpenBoxRandomWallpaper $>$$>$ -\/-\/ \hyperlink{obrw__wallpaper__opt_8c}{obrw\_\-wallpaper\_\-opt.c} URL: \href{http://deeagle.de}{\tt http://deeagle.de}
+
+Copyright (c) 2007-\/2010 Martin Kock $<$\href{mailto:root@deeagle.de}{\tt root@deeagle.de}$>$
+
+Permission to use, copy, modify, distribute and sell this software and its documentation for any purpose is hereby granted without fee, provided that the above copyright notice appear in all copies and that both that copyright notice and this permission notice appear in supporting documentation. It is provided \char`\"{}as is\char`\"{} without express or implied warranty.\par
+\par
+\par
+
+
+The file includes all methods and functions which are in context to all things about a wallpaper. 
+
+\subsection{Function Documentation}
+\hypertarget{obrw__wallpaper__opt_8c_a26419c983fbf7103bf85e61cab78d33b}{
+\index{obrw\_\-wallpaper\_\-opt.c@{obrw\_\-wallpaper\_\-opt.c}!obrwWallpaperOpt\_\-freeLocalsToClose@{obrwWallpaperOpt\_\-freeLocalsToClose}}
+\index{obrwWallpaperOpt\_\-freeLocalsToClose@{obrwWallpaperOpt\_\-freeLocalsToClose}!obrw_wallpaper_opt.c@{obrw\_\-wallpaper\_\-opt.c}}
+\subsubsection[{obrwWallpaperOpt\_\-freeLocalsToClose}]{\setlength{\rightskip}{0pt plus 5cm}void obrwWallpaperOpt\_\-freeLocalsToClose (void)}}
+\label{obrw__wallpaper__opt_8c_a26419c983fbf7103bf85e61cab78d33b}
+
+
+Free all used allocated heap-\/memory (if used). 
+
+Free all used allocated heap-\/memory (if used, to use before programm ends -\/$>$ success and fail).\hypertarget{obrw__wallpaper__opt_8c_ae7dd996909fd215c8c29a50795a178a7}{
+\index{obrw\_\-wallpaper\_\-opt.c@{obrw\_\-wallpaper\_\-opt.c}!obrwWallpaperOpt\_\-getUsedWallpaper@{obrwWallpaperOpt\_\-getUsedWallpaper}}
+\index{obrwWallpaperOpt\_\-getUsedWallpaper@{obrwWallpaperOpt\_\-getUsedWallpaper}!obrw_wallpaper_opt.c@{obrw\_\-wallpaper\_\-opt.c}}
+\subsubsection[{obrwWallpaperOpt\_\-getUsedWallpaper}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ obrwWallpaperOpt\_\-getUsedWallpaper (void)}}
+\label{obrw__wallpaper__opt_8c_ae7dd996909fd215c8c29a50795a178a7}
+
+
+The getter-\/method to get the name of the last wallpaper. 
+
+The getter-\/method to get the name of the last used wallpaper.\hypertarget{obrw__wallpaper__opt_8c_a8502bfce6216106d924a3328fdd3d46e}{
+\index{obrw\_\-wallpaper\_\-opt.c@{obrw\_\-wallpaper\_\-opt.c}!obrwWallpaperOpt\_\-readDirAndSetWallpaper@{obrwWallpaperOpt\_\-readDirAndSetWallpaper}}
+\index{obrwWallpaperOpt\_\-readDirAndSetWallpaper@{obrwWallpaperOpt\_\-readDirAndSetWallpaper}!obrw_wallpaper_opt.c@{obrw\_\-wallpaper\_\-opt.c}}
+\subsubsection[{obrwWallpaperOpt\_\-readDirAndSetWallpaper}]{\setlength{\rightskip}{0pt plus 5cm}int obrwWallpaperOpt\_\-readDirAndSetWallpaper (const char $\ast$ {\em dirPath})}}
+\label{obrw__wallpaper__opt_8c_a8502bfce6216106d924a3328fdd3d46e}
+
+
+Reads the wallpaperdir, add wallpaper and set it. 
+
+Reads the wallpaperdir (attribute), add the wallpapers to a list and tries to set a random of the wallpapers.\hypertarget{obrw__wallpaper__opt_8c_afc5c86f4f18a026051628743948f3831}{
+\index{obrw\_\-wallpaper\_\-opt.c@{obrw\_\-wallpaper\_\-opt.c}!obrwWallpaperOpt\_\-setWallpaperWithFeh@{obrwWallpaperOpt\_\-setWallpaperWithFeh}}
+\index{obrwWallpaperOpt\_\-setWallpaperWithFeh@{obrwWallpaperOpt\_\-setWallpaperWithFeh}!obrw_wallpaper_opt.c@{obrw\_\-wallpaper\_\-opt.c}}
+\subsubsection[{obrwWallpaperOpt\_\-setWallpaperWithFeh}]{\setlength{\rightskip}{0pt plus 5cm}int obrwWallpaperOpt\_\-setWallpaperWithFeh (const char $\ast$ {\em dirPath}, \/  const char $\ast$ {\em wpToSet})}}
+\label{obrw__wallpaper__opt_8c_afc5c86f4f18a026051628743948f3831}
+
+
+Set a wallpaper with the external tool feh. 
+

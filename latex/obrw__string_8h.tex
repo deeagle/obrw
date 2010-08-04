@@ -1,0 +1,69 @@
+\hypertarget{obrw__string_8h}{
+\section{obrw\_\-string.h File Reference}
+\label{obrw__string_8h}\index{obrw\_\-string.h@{obrw\_\-string.h}}
+}
+
+
+$<$$<$ OBRW -\/ OpenBoxRandomWallpaper $>$$>$ -\/-\/ \hyperlink{obrw__string_8h}{obrw\_\-string.h}  
+
+
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include \char`\"{}obrw\_\-globals.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{obrw__string_8h_a6a86317900b9fa3ef7b80e4c52ee8a6d}{obrwString\_\-2CStringsTo1} (const char $\ast$, const char $\ast$)
+\begin{DoxyCompactList}\small\item\em Concatenates two cstrings to one cstring. \item\end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{obrw__string_8h_abbc9f6bbe4d35d6256459c6e611960ec}{obrwString\_\-parseConfigFileFor} (const char $\ast$)
+\begin{DoxyCompactList}\small\item\em Pareses cstrings and extract chars between \char`\"{}\char`\"{} with termination '$\backslash$0'. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+$<$$<$ OBRW -\/ OpenBoxRandomWallpaper $>$$>$ -\/-\/ \hyperlink{obrw__string_8h}{obrw\_\-string.h} URL: \href{http://deeagle.de}{\tt http://deeagle.de}
+
+Copyright (c) 2007-\/2010 Martin Kock $<$\href{mailto:root@deeagle.de}{\tt root@deeagle.de}$>$
+
+Permission to use, copy, modify, distribute and sell this software and its documentation for any purpose is hereby granted without fee, provided that the above copyright notice appear in all copies and that both that copyright notice and this permission notice appear in supporting documentation. It is provided \char`\"{}as is\char`\"{} without express or implied warranty.\par
+\par
+\par
+
+
+The file includes the special cstring-\/methods for the tool obrw. 
+
+\subsection{Function Documentation}
+\hypertarget{obrw__string_8h_a6a86317900b9fa3ef7b80e4c52ee8a6d}{
+\index{obrw\_\-string.h@{obrw\_\-string.h}!obrwString\_\-2CStringsTo1@{obrwString\_\-2CStringsTo1}}
+\index{obrwString\_\-2CStringsTo1@{obrwString\_\-2CStringsTo1}!obrw_string.h@{obrw\_\-string.h}}
+\subsubsection[{obrwString\_\-2CStringsTo1}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ obrwString\_\-2CStringsTo1 (const char $\ast$ {\em str1}, \/  const char $\ast$ {\em str2})}}
+\label{obrw__string_8h_a6a86317900b9fa3ef7b80e4c52ee8a6d}
+
+
+Concatenates two cstrings to one cstring. 
+
+\begin{DoxyReturn}{Returns}
+The concatenate cstring with termination '$\backslash$0'. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+\item[{\em char$\ast$}]success. \item[{\em NULL}]fail.\end{DoxyRetVals}
+\hypertarget{obrw__string_8h_abbc9f6bbe4d35d6256459c6e611960ec}{
+\index{obrw\_\-string.h@{obrw\_\-string.h}!obrwString\_\-parseConfigFileFor@{obrwString\_\-parseConfigFileFor}}
+\index{obrwString\_\-parseConfigFileFor@{obrwString\_\-parseConfigFileFor}!obrw_string.h@{obrw\_\-string.h}}
+\subsubsection[{obrwString\_\-parseConfigFileFor}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ obrwString\_\-parseConfigFileFor (const char $\ast$ {\em line})}}
+\label{obrw__string_8h_abbc9f6bbe4d35d6256459c6e611960ec}
+
+
+Pareses cstrings and extract chars between \char`\"{}\char`\"{} with termination '$\backslash$0'. 
+
+For example:\par
+ in: tag = \char`\"{}the needed information\char`\"{}\par
+ out: the needed information\par
+.
+
+\begin{DoxyReturn}{Returns}
+The parsed cstring with the needed information. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+\item[{\em char$\ast$}]success. \item[{\em NULL}]fail. \end{DoxyRetVals}
