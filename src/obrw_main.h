@@ -36,7 +36,7 @@
  * \retval EXIT_SUCCESS all good.
  * \retval EXIT_FAILURE any kind of error.
  */
-int main( int, char** );
+int main();
 
 /**
  * Free all used alocated heap-memory (if used, to use before programm ends -> success and fail).

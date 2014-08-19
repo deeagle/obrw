@@ -24,15 +24,12 @@
 
 /** The main-method, which starts the obrw-process. */
 int
-main( int argc, char** argv )
+main()
 {
 	//TODO 
 	//set global debug lvl
 	OBRW_GLOBAL_DEBUG = 1;
 	obrwUtils_setRandomCounterToZero();
-
-	argc = 0;
-	argv = NULL;
 
 	if( 0 < OBRW_GLOBAL_DEBUG )
 	{
