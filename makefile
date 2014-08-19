@@ -5,15 +5,24 @@ CC = gcc
 
 CFLAGS = -std=c99 -Wall -Wextra -pedantic
 
-obrw: obrw_main.h obrw_main.c obrw_chk_externals.h obrw_chk_externals.c obrw_config.h obrw_config.c obrw_globals.h obrw_globals.c obrw_utils.h obrw_utils.c obrw_string.h obrw_string.c obrw_wallpaper_opt.h obrw_wallpaper_opt.c
-		$(CC) $(CFLAGS) -o obrw obrw_main.c
+SRC = src/*
+TARGET_DIR = bin
+NAME = obrw
+MAIN_C = src/obrw_main.c
 
-debug: obrw_main.h obrw_main.c obrw_chk_externals.c obrw_config.c obrw_globals.h obrw_globals.c obrw_utils.c obrw_string.c obrw_wallpaper_opt.c
-		$(CC) $(CFLAGS) -g -o obrw obrw_main.c
+# the compile 
 
-val: obrw_main.c obrw_chk_externals.c obrw_config.c obrw_globals.h obrw_globals.c obrw_utils.c obrw_string.c obrw_wallpaper_opt.c
-		$(CC) $(CFLAGS) -g -o obrw obrw_main.c
-		valgrind -v --tool=memcheck --leak-check=full --show-reachable=yes --track-origins=yes --gen-suppressions=all ./obrw
+all: obrw
+
+obrw: $(SRC)
+		$(CC) $(CFLAGS) -o $(TARGET_DIR)/$(NAME) $(MAIN_C)
+
+debug: $(SRC)
+		$(CC) $(CFLAGS) -g -o $(TARGET_DIR)/$(NAME) $(MAIN_C)
+
+val: $(SRC)
+		$(CC) $(CFLAGS) -g -o $(TARGET_DIR)/$(NAME) $(MAIN_C)
+		valgrind -v --tool=memcheck --leak-check=full --show-reachable=yes --track-origins=yes --gen-suppressions=all ./$(TARGET_DIR)/$(NAME)
 
 clean:
-	rm obrw
+	rm $(TARGET_DIR)/$(NAME)
