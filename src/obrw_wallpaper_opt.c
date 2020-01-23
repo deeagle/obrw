@@ -210,7 +210,7 @@ obrwWallpaperOpt_addWallpaper( const char* wallpaper )
 
 	if( 1 < OBRW_GLOBAL_DEBUG )
 	{	
-		printf( "[DBG] Add file %d = %s\n", wallpaperNamesLength, wallpaper );
+		printf( "[DBG] Add file %zu = %s\n", wallpaperNamesLength, wallpaper );
 	}//if
 
 	wallpaperNamesLength++;
