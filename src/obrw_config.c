@@ -307,18 +307,18 @@ obrwConfig_writeSettingsToConfigFile( void )
 					strcat( configNow, "lastSet = \"" );
 					toSet = obrwWallpaperOpt_getUsedWallpaper();
 					strncat( configNow, toSet, strlen( toSet ) );
-					strncat( configNow, "\"\n", 2 );
+					strcat( configNow, "\"\n" );
 				}//if
 				else
 				{
 					strncat( configNow, lineBuffer, strlen( lineBuffer ) );
-					strncat( configNow, "\n", 1 );
+					strcat( configNow, "\n" );
 				}//else
 			}//if
 			else
 			{
 				strncat( configNow, lineBuffer, strlen( lineBuffer ) );
-				strncat( configNow, "\n", 1 );
+				strcat( configNow, "\n" );
 			}//else
 		}//while
 
