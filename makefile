@@ -15,6 +15,7 @@ MAIN_C = src/obrw_main.c
 all: obrw
 
 obrw: $(SRC)
+		mkdir $(TARGET_DIR)
 		$(CC) $(CFLAGS) -o $(TARGET_DIR)/$(NAME) $(MAIN_C)
 
 debug: $(SRC)
