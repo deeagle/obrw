@@ -339,11 +339,19 @@ obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath )
 		return -1;
 	}//if
 
-	do
-	{
-		usedWallpaper = obrwUtils_randomDigit() % wallpaperNamesLength;
-	}//do
-	while( 0 == strcmp( obrwConfig_getWallpaperLastSet(), wallpaperNames[usedWallpaper] ) );//while
+    int usedWallpaper;
+    if( obrwConfig_getWallpaperLastSet() == NULL )
+    {
+        usedWallpaper = obrwUtils_randomDigit() % wallpaperNamesLength;
+    }
+    else
+    {
+        do
+        {
+            usedWallpaper = obrwUtils_randomDigit() % wallpaperNamesLength;
+        }//do
+        while( 0 == strcmp( obrwConfig_getWallpaperLastSet(), wallpaperNames[usedWallpaper] ) );//while
+    }
 
 	if( 0 != obrwWallpaperOpt_setWallpaperWithFeh( dirPath, wallpaperNames[usedWallpaper] ) )
 	{
