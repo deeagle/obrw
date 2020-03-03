@@ -308,7 +308,7 @@ obrwWallpaperOpt_readDirAndSetWallpaper( const char* dirPath )
 
 		closedir( wpDir );
 
-		obrwWallpaperOpt_chooseWallpaperAndTryToSet( dirPath );	
+		obrwWallpaperOpt_chooseWallpaperAndTryToSet( dirPath );
 	}//if
 	else
 	{

@@ -142,11 +142,15 @@ obrwConfig_readConfigFile( void )
 		printf( "[ERR] Configfile problems detect.\n" );
 		return EXIT_FAILURE;
 	}//if
+
+	printf( "[DBG] Configfile is read and writeable\n" );
 	
 	if( userHome == NULL )
 	{
 		return EXIT_FAILURE;
 	}//if
+
+	printf( "[DBG] user home is not NULL\n" );
 	
 	filename = obrwString_2CStringsTo1( userHome, obrwConf );
 
@@ -252,6 +256,8 @@ obrwConfig_readConfigFile( void )
 		return EXIT_FAILURE;
 	}//else
 
+
+
 	obrwUtils_freeCString( lineBuffer );
 	obrwUtils_freeCString( filename );
 	obrwUtils_freeCString( wpDir );
@@ -279,6 +285,7 @@ obrwConfig_writeSettingsToConfigFile( void )
 	
 	filename = obrwString_2CStringsTo1( userHome, obrwConf );
 
+    printf( "[DBG] config file is %s\n", filename );
 	// (1) open file
 	if( ( fp = fopen( filename, "r+" ) ) != NULL )
 	{
@@ -301,8 +308,11 @@ obrwConfig_writeSettingsToConfigFile( void )
 			//if( strncmp( lineBuffer[0], 'w', 1 ) == 0 )
 			if( lineBuffer[0] == 'l' )
 			{
+			    printf( "[DBG] found line which starts with char 'l'\n" );
+
 				if( strncmp( lineBuffer, "lastSet = ", 10 ) == 0 )
 				{
+				    printf( "[DBG] found line with 'lastSet' information\n" );
 					//FIXME
 					strcat( configNow, "lastSet = \"" );
 					toSet = obrwWallpaperOpt_getUsedWallpaper();
@@ -311,6 +321,7 @@ obrwConfig_writeSettingsToConfigFile( void )
 				}//if
 				else
 				{
+				    printf( "[DBG] was no config value key -> %s", lineBuffer );
 					strncat( configNow, lineBuffer, strlen( lineBuffer ) );
 					strcat( configNow, "\n" );
 				}//else
@@ -354,7 +365,7 @@ obrwConfig_writeSettingsToConfigFile( void )
 	{
 		printf( "[ERR] Couldn't open configfile to write new config.\n" );
 	}//else
-	
+
 	//success
 	return EXIT_SUCCESS;
 }//obrwConfig_writeSettingsToConfigFile()
