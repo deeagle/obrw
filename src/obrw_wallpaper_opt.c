@@ -39,7 +39,9 @@ obrwWallpaperOpt_getUsedWallpaper( void )
 	if( 0 > usedWallpaper )
 	{
 		//failure
-		return NULL;
+		printf( "[DBG] no last wallpaper found.\n");
+
+		return "";
 	}//if
 
 	if( 1 < OBRW_GLOBAL_DEBUG )
