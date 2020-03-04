@@ -39,7 +39,9 @@ obrwWallpaperOpt_getUsedWallpaper( void )
 	if( 0 > usedWallpaper )
 	{
 		//failure
-		return NULL;
+		printf( "[DBG] no last wallpaper found.\n");
+
+		return "";
 	}//if
 
 	if( 1 < OBRW_GLOBAL_DEBUG )
@@ -210,7 +212,7 @@ obrwWallpaperOpt_addWallpaper( const char* wallpaper )
 
 	if( 1 < OBRW_GLOBAL_DEBUG )
 	{	
-		printf( "[DBG] Add file %d = %s\n", wallpaperNamesLength, wallpaper );
+		printf( "[DBG] Add file %zu = %s\n", wallpaperNamesLength, wallpaper );
 	}//if
 
 	wallpaperNamesLength++;
@@ -306,7 +308,7 @@ obrwWallpaperOpt_readDirAndSetWallpaper( const char* dirPath )
 
 		closedir( wpDir );
 
-		obrwWallpaperOpt_chooseWallpaperAndTryToSet( dirPath );	
+		obrwWallpaperOpt_chooseWallpaperAndTryToSet( dirPath );
 	}//if
 	else
 	{
@@ -339,11 +341,19 @@ obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath )
 		return -1;
 	}//if
 
-	do
-	{
-		usedWallpaper = obrwUtils_randomDigit() % wallpaperNamesLength;
-	}//do
-	while( 0 == strcmp( obrwConfig_getWallpaperLastSet(), wallpaperNames[usedWallpaper] ) );//while
+    int usedWallpaper;
+    if( obrwConfig_getWallpaperLastSet() == NULL )
+    {
+        usedWallpaper = obrwUtils_randomDigit() % wallpaperNamesLength;
+    }
+    else
+    {
+        do
+        {
+            usedWallpaper = obrwUtils_randomDigit() % wallpaperNamesLength;
+        }//do
+        while( 0 == strcmp( obrwConfig_getWallpaperLastSet(), wallpaperNames[usedWallpaper] ) );//while
+    }
 
 	if( 0 != obrwWallpaperOpt_setWallpaperWithFeh( dirPath, wallpaperNames[usedWallpaper] ) )
 	{

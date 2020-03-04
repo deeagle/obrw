@@ -65,6 +65,7 @@ obrwUtils_freeCString( char* cstr )
 {
 	if( cstr != NULL )
 	{
+	    printf( "[DBG] free string <%s>\n", cstr );
 		//TODO
 		//valgrinderror ?
 		//memset( cstr, '0', strlen( cstr ) );
