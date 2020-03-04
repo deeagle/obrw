@@ -39,3 +39,6 @@ docs:
 clean:
 	rm $(TARGET_DIR)/$(NAME)
 	rm -Rf $(DOCS_DIR)
+
+clean-docs:
+	rm -Rf $(DOCS_DIR)
