@@ -36,7 +36,7 @@ static double DIGIT_BORDER_HIGH;
 /** 
  * Set's the local multiplikator for random digits.
  *
- * \retuns Nothing, it's void.
+ * \returns Nothing, it's void.
  */
 void obrwUtils_setHighDigitBorder( double );
 
