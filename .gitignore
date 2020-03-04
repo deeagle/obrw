@@ -1,5 +1,6 @@
 .cproject
 .project
 bin/*
+doc/*
 .settings
 *.swp
