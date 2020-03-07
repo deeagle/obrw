@@ -26,9 +26,6 @@
 int
 main()
 {
-	//TODO 
-	//set global debug lvl
-	OBRW_GLOBAL_DEBUG = 1;
 	obrwUtils_setRandomCounterToZero();
 
 	if( 0 < OBRW_GLOBAL_DEBUG )
