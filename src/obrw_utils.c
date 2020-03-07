@@ -65,7 +65,11 @@ obrwUtils_freeCString( char* cstr )
 {
 	if( cstr != NULL )
 	{
-	    printf( "[DBG] free string <%s>\n", cstr );
+        char *logMsg = (char*)malloc((15 + strlen(cstr)) * sizeof(char));
+        sprintf( logMsg, "free string <%s>.", cstr);
+        obrwLogger_debug( logMsg );
+        free(logMsg);
+
 		//TODO
 		//valgrinderror ?
 		//memset( cstr, '0', strlen( cstr ) );
@@ -73,3 +77,4 @@ obrwUtils_freeCString( char* cstr )
 		cstr = NULL;
 	}//if
 }//obrwUtils_freeCString( char* )
+

@@ -18,6 +18,7 @@
 static const char* SUCCESS_TAG = " OK \0";
 static const char* INFO_TAG = "INFO\0";
 static const char* WARNING_TAG = "WARN\0";
+static const char* DEBUG_TAG = "DEBG\0";
 static const char* ERROR_TAG = "ERR!\0";
 
 static void obrwLogger_success(const char* message)
@@ -33,6 +34,11 @@ static void obrwLogger_info(const char* message)
 static void obrwLogger_warning(const char* message)
 {
     obrwLogger_log(WARNING_TAG, message);
+}
+
+static void obrwLogger_debug(const char* message)
+{
+    obrwLogger_log(DEBUG_TAG, message);
 }
 
 static void obrwLogger_error(const char* message)
