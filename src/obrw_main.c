@@ -31,6 +31,12 @@ main()
 	OBRW_GLOBAL_DEBUG = 1;
 	obrwUtils_setRandomCounterToZero();
 
+    obrwLogger_success("Axo!");
+    obrwLogger_info("Axo!");
+    obrwLogger_warning("Axo!");
+    obrwLogger_error("Axo!");
+    obrwLogger_log("test", "test");
+
 	if( 0 < OBRW_GLOBAL_DEBUG )
 	{
 		printf( "[MSG] OBRW DEBUG-LVL is %d.\n", OBRW_GLOBAL_DEBUG );
