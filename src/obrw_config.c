@@ -61,14 +61,14 @@ obrwConfig_isConfigFileReadWriteable( void )
 
 	if( userHome == NULL )
 	{
-		printf( "[ERR] No user homedir avaiable\n" );
+		obrwLogger_error ( "No user homedir avaiable" );
 		return EXIT_FAILURE;
 	}//if
 
 	//if( userHome == "NOHOME" )
 	if( strncmp( userHome, "NOHOME", 6 ) == 0 )
 	{
-		printf( "[ERR] User home = NOHOME !?\n" );
+		obrwLogger_error ( "No user home available: User home = NOHOME !?" );
 		return EXIT_FAILURE;
 	}//if 
 	
@@ -139,18 +139,18 @@ obrwConfig_readConfigFile( void )
 
 	if( obrwConfig_isConfigFileReadWriteable() == EXIT_FAILURE )
 	{
-		printf( "[ERR] Configfile problems detect.\n" );
+		obrwLogger_error ( "Configfile problems detect." );
 		return EXIT_FAILURE;
 	}//if
 
-	printf( "[DBG] Configfile is read and writeable\n" );
+	obrwLogger_debug ( "Configfile is read and writeable." );
 	
 	if( userHome == NULL )
 	{
 		return EXIT_FAILURE;
 	}//if
 
-	printf( "[DBG] user home is not NULL\n" );
+	obrwLogger_debug( "User home is not NULL" );
 	
 	filename = obrwString_2CStringsTo1( userHome, obrwConf );
 
@@ -195,7 +195,7 @@ obrwConfig_readConfigFile( void )
 
 							if( ( wpDir = obrwString_parseConfigFileFor( lineBuffer ) ) == NULL )
 							{
-								printf( "[ERR] wallpaperDir is NULL.\n" );
+								obrwLogger_error ( "WallpaperDir is NULL." );
 								return EXIT_FAILURE;
 							}//if
 							else
@@ -222,7 +222,7 @@ obrwConfig_readConfigFile( void )
 							
 							if( ( lastSet = obrwString_parseConfigFileFor( lineBuffer ) ) == NULL )
 							{
-								printf( "[ERR] lastSet wallpaper is NULL.\n" );
+								obrwLogger_error ( "Last set wallpaper is NULL." );
 								return EXIT_FAILURE;
 							}//if
 							else
@@ -242,7 +242,7 @@ obrwConfig_readConfigFile( void )
 						//next line
 						if( 1 < OBRW_GLOBAL_DEBUG )
 						{
-							printf( "[DBG] Empty line in configfile found.\n" );
+							obrwLogger_debug ( "Empty line in configfile found." );
 						}//if
 				}//switch
 		}//while
@@ -252,7 +252,7 @@ obrwConfig_readConfigFile( void )
 	}//if
 	else
 	{
-		printf( "[ERR] Configfile could't not opened (but checked?).\n" );
+		obrwLogger_error ( "Configfile could't not opened (but checked?)." );
 		return EXIT_FAILURE;
 	}//else
 
@@ -308,11 +308,11 @@ obrwConfig_writeSettingsToConfigFile( void )
 			//if( strncmp( lineBuffer[0], 'w', 1 ) == 0 )
 			if( lineBuffer[0] == 'l' )
 			{
-			    printf( "[DBG] found line which starts with char 'l'\n" );
+			    obrwLogger_debug ( "Found line which starts with char 'l'" );
 
 				if( strncmp( lineBuffer, "lastSet = ", 10 ) == 0 )
 				{
-				    printf( "[DBG] found line with 'lastSet' information\n" );
+				    obrwLogger_debug ( "Found line with 'lastSet' information" );
 					//FIXME
 					strcat( configNow, "lastSet = \"" );
 					toSet = obrwWallpaperOpt_getUsedWallpaper();
@@ -339,16 +339,16 @@ obrwConfig_writeSettingsToConfigFile( void )
 		if( 1 < OBRW_GLOBAL_DEBUG )
 		{
 			//FIXME
-			printf( "[DBG] >>>\n[DBG] New configfile to write:\n" );
-			printf( "----------------------------------------------------\n" );
+			obrwLogger_debug ( ">>> New configfile to write:" );
+			obrwLogger_debug ( "----------------------------------------------------" );
 			printf( "%s", configNow );
-			printf( "----------------------------------------------------\n" );
-			printf( "[DBG] <<<\n" );
+			obrwLogger_debug ( "----------------------------------------------------" );
+			obrwLogger_debug ( "<<<" );
 		}//if
 	}//if
 	else
 	{
-		printf( "[ERR] Couldn't open configfile to read old config.\n" );
+		obrwLogger_error ( "Couldn't open configfile to read old config." );
 		return EXIT_FAILURE;
 	}//else
 
@@ -363,7 +363,7 @@ obrwConfig_writeSettingsToConfigFile( void )
 	}//if
 	else
 	{
-		printf( "[ERR] Couldn't open configfile to write new config.\n" );
+		obrwLogger_error ( "Couldn't open configfile to write new config." );
 	}//else
 
 	//success

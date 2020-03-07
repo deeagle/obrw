@@ -64,7 +64,7 @@ obrwString_parseConfigFileFor( const char* line )
             {
                 len = strlen( strPtr );
                 parsedStr = (char*) malloc( sizeof( char ) * len );
-
+                
                 strPtr++;
                 if( parsedStr )
                 {
@@ -78,7 +78,7 @@ obrwString_parseConfigFileFor( const char* line )
                 }//if
                 else
                 {
-                    printf( "[ERR] No memory (heap) avaiable!\n" );
+                    obrwLogger_error ( "No memory (heap) avaiable!" );
                     //return NULL;
                 }//else
             }//if
