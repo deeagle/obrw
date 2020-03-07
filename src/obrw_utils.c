@@ -63,18 +63,17 @@ obrwUtils_getUserHomeDir( void )
 void
 obrwUtils_freeCString( char* cstr )
 {
-	if( cstr != NULL )
-	{
-        char *logMsg = (char*)malloc((15 + strlen(cstr)) * sizeof(char));
-        sprintf( logMsg, "free string <%s>.", cstr);
-        obrwLogger_debug( logMsg );
-        free(logMsg);
+	if ( cstr != NULL ) {
+        char *logMsg = ( char* ) malloc ( ( 15 + strlen ( cstr ) ) * sizeof ( char ) );
+        sprintf ( logMsg, "free string <%s>.", cstr );
+        obrwLogger_debug ( logMsg );
 
-		//TODO
-		//valgrinderror ?
-		//memset( cstr, '0', strlen( cstr ) );
-		free( cstr );
-		cstr = NULL;
-	}//if
+        //TODO
+        //valgrinderror ?
+        //memset( cstr, '0', strlen( cstr ) );
+        free ( cstr );
+        free ( logMsg );
+        cstr = NULL;
+    }//if
 }//obrwUtils_freeCString( char* )
 
