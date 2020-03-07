@@ -72,8 +72,10 @@ obrwString_parseConfigFileFor( const char* line )
 
                     if( 0 < OBRW_GLOBAL_DEBUG )
                     {
-                        //FIXME
-                        printf( "[DBG] ParsedStr is >> %s <<\n", parsedStr );
+                        char *logMsg = ( char* ) malloc ( ( 20 + strlen ( parsedStr ) ) * sizeof ( char ) );
+                        sprintf ( logMsg, "Parsed string is <%s>.", parsedStr );
+                        obrwLogger_debug ( logMsg );
+                        obrwUtils_freeCString ( logMsg );
                     }//if
                 }//if
                 else
@@ -84,7 +86,10 @@ obrwString_parseConfigFileFor( const char* line )
             }//if
             else
             {
-                printf( "[ERR] Error parsing %s (Return NULL ).\n", line );
+                char *logMsg = ( char* ) malloc ( ( 33 + strlen ( line ) ) * sizeof ( char ) );
+                sprintf ( logMsg, "Parsed string <%s> (return NULL).", line);
+                obrwLogger_debug ( logMsg );
+                obrwUtils_freeCString ( logMsg );
                 //return NULL;
             }//else
         }
