@@ -66,7 +66,7 @@ obrwUtils_freeCString( char* cstr )
 	if ( cstr != NULL ) {
         char *logMsg = ( char* ) malloc ( ( 15 + strlen ( cstr ) ) * sizeof ( char ) );
         sprintf ( logMsg, "free string <%s>.", cstr );
-        obrwLogger_debug ( logMsg );
+        obrwLogger_debugSystem ( logMsg );
 
         //TODO
         //valgrinderror ?

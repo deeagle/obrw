@@ -31,6 +31,7 @@ static void obrwLogger_success(const char* message);
 static void obrwLogger_info(const char* message);
 static void obrwLogger_warning(const char* message);
 static void obrwLogger_debug(const char* message);
+static void obrwLogger_debugSystem(const char* message);
 static void obrwLogger_error(const char* message);
 /** 
  * Bla bla

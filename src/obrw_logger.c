@@ -41,6 +41,11 @@ static void obrwLogger_debug(const char* message)
     obrwLogger_log(DEBUG_TAG, message);
 }
 
+static void obrwLogger_debugSystem(const char* message)
+{
+    obrwLogger_log(DEBUG_TAG, message);
+}
+
 static void obrwLogger_error(const char* message)
 {
     obrwLogger_log(ERROR_TAG, message);
