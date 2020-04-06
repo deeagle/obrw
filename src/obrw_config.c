@@ -309,8 +309,10 @@ obrwConfig_writeSettingsToConfigFile( void )
 	
 	filename = obrwString_2CStringsTo1( userHome, obrwConf );
 
-    //FIXME 0-Termination?
-    printf( "[DBG] config file is %s\n", filename );
+    char *msg = (char*) malloc(17 + strlen(filename));
+    sprintf( msg, "Config file is <%s>.", filename );
+    obrwLogger_debug ( msg );
+    obrwUtils_freeCString(msg);
 
 	// (1) open file
 	if( ( fp = fopen( filename, "r+" ) ) != NULL )
