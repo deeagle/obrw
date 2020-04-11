@@ -38,6 +38,12 @@ test: $(SRC) $(TEST_FILE_DIR)
 		fi
 		$(CC) -o $(TARGET_DIR)/$(TEST_CLASS_NAME) $(MAIN_TESTS)
 
+test-ndebug: $(SRC) $(TEST_FILE_DIR)
+		if [ ! -d "./$(TARGET_DIR)" ]; then \
+			mkdir $(TARGET_DIR); \
+		fi
+		$(CC) -DNDEBUG -o $(TARGET_DIR)/$(TEST_CLASS_NAME) $(MAIN_TESTS)
+
 run-tests:
 	./$(TARGET_DIR)/$(TEST_CLASS_NAME)
 
