@@ -71,8 +71,8 @@ obrwUtils_freeCString( char* cstr )
         //TODO
         //valgrinderror ?
         //memset( cstr, '0', strlen( cstr ) );
-        free ( cstr );
         free ( logMsg );
+        free ( cstr );
         cstr = NULL;
     }//if
 }//obrwUtils_freeCString( char* )
