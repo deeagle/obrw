@@ -19,6 +19,15 @@ void twoStringsToOne_twoEmptyStrings_returnEmtpyString();
 void twoStringToOne_oneStringEmpty_expectedStringOneAsResult();
 void twoStringToOne_oneStringEmpty_expectedStringTwoAsResult();
 void twoStringToOne_twoStrings_expectedStringOneStringTwoAsResult();
+
+void getCountOfChar_nullInputs_expectedNullResult();
+void getCountOfChar_nullStringAndSymbol_expectedResultIsZero();
+void getCountOfChar_emptyStringAndSymbol_expectedResultIsZero();
+void getCountOfChar_stringWithoutSymbolAndSymbol_expectedResultIsZero();
+void getCountOfChar_stringWithOneSymbolAndSymbol_expectedResultIsOne();
+void getCountOfChar_stringWithTwoSymbolAndSymbol_expectedResultIsTwo();
+void getCountOfChar_stringWithThreeSymbolAndSymbol_expectedResultIsThree();
+
 void parseConfigFileFor_nullInput_expectedNullResult();
 void parseConfigFileFor_withoutQuotationMark_expectedNullResult();
 void parseConfigFileFor_quotationMarkOnly_expectedEmptyString();

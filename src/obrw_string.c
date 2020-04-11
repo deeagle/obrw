@@ -46,8 +46,6 @@ obrwString_2CStringsTo1( const char* str1, const char* str2 )
 	return ptr;
 }//obrwString_2to1( const char*, const char* )
 
-
-/** Parses cstrings and extract chars between "". */
 char*
 obrwString_parseConfigFileFor( const char* line )
 {
@@ -90,3 +88,12 @@ obrwString_parseConfigFileFor( const char* line )
 
 	return parsedStr;
 }//obrwString_parseConfigFileFor( const char* )
+
+
+int
+obrwString_getCountOfChar(const char* line, const char character)
+{
+    int count = 0;
+
+    return count;
+}

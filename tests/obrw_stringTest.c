@@ -14,6 +14,14 @@ void obrw_stringTest_runAll()
     twoStringToOne_oneStringEmpty_expectedStringTwoAsResult();
     twoStringToOne_twoStrings_expectedStringOneStringTwoAsResult();
 
+    getCountOfChar_nullInputs_expectedNullResult();
+    getCountOfChar_nullStringAndSymbol_expectedResultIsZero();
+    getCountOfChar_emptyStringAndSymbol_expectedResultIsZero();
+    getCountOfChar_stringWithoutSymbolAndSymbol_expectedResultIsZero();
+    getCountOfChar_stringWithOneSymbolAndSymbol_expectedResultIsOne();
+    getCountOfChar_stringWithTwoSymbolAndSymbol_expectedResultIsTwo();
+    getCountOfChar_stringWithThreeSymbolAndSymbol_expectedResultIsThree();
+
     parseConfigFileFor_nullInput_expectedNullResult();
     parseConfigFileFor_withoutQuotationMark_expectedNullResult();
     parseConfigFileFor_quotationMarkOnly_expectedEmptyString();
@@ -23,6 +31,7 @@ void obrw_stringTest_runAll()
     parseConfigFileFor_quotationMarkStringWithSpacesInStringWithSpaces_expectedString();
     parseConfigFileFor_StringWithOneQuotationMarkStart_expectedNullResult();
     parseConfigFileFor_StringWithOneQuotationMarkEnd_expectedNullResult();
+
 }
 
 void twoStringToOne_twoNullSrings_expectedNullResult()
@@ -221,4 +230,39 @@ void parseConfigFileFor_StringWithOneQuotationMarkEnd_expectedNullResult()
 
     assert(result == NULL);
     printf("Result differs from expected value: %s != %s", result, expected);
+}
+
+void getCountOfChar_nullInputs_expectedNullResult()
+{
+    printf("%s - getCountOfChar_nullInputs_expectedNullResult\n", OBRW_STRINGTEST_CLASS_NAME);
+}
+
+void getCountOfChar_nullStringAndSymbol_expectedResultIsZero()
+{
+    printf("%s - getCountOfChar_nullStringAndSymbol_expectedResultIsZero\n", OBRW_STRINGTEST_CLASS_NAME);
+}
+
+void getCountOfChar_emptyStringAndSymbol_expectedResultIsZero()
+{
+    printf("%s - getCountOfChar_emptyStringAndSymbol_expectedResultIsZero\n", OBRW_STRINGTEST_CLASS_NAME);
+}
+
+void getCountOfChar_stringWithoutSymbolAndSymbol_expectedResultIsZero()
+{
+    printf("%s - getCountOfChar_stringWithoutSymbolAndSymbol_expectedResultIsZero\n", OBRW_STRINGTEST_CLASS_NAME);
+}
+
+void getCountOfChar_stringWithOneSymbolAndSymbol_expectedResultIsOne()
+{
+    printf("%s - getCountOfChar_stringWithOneSymbolAndSymbol_expectedResultIsOne\n", OBRW_STRINGTEST_CLASS_NAME);
+}
+
+void getCountOfChar_stringWithTwoSymbolAndSymbol_expectedResultIsTwo()
+{
+    printf("%s - getCountOfChar_stringWithTwoSymbolAndSymbol_expectedResultIsTwo\n", OBRW_STRINGTEST_CLASS_NAME);
+}
+
+void getCountOfChar_stringWithThreeSymbolAndSymbol_expectedResultIsThree()
+{
+    printf("%s - getCountOfChar_stringWithThreeSymbolAndSymbol_expectedResultIsThree\n", OBRW_STRINGTEST_CLASS_NAME);
 }
