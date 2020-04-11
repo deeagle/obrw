@@ -17,7 +17,7 @@ DOCS_APP = /usr/bin/doxygen
 
 # the compile 
 
-all: obrw
+all: test run-tests obrw
 
 obrw: $(SRC)
 		if [ ! -d "./$(TARGET_DIR)" ]; then \
