@@ -3,6 +3,9 @@
 //
 #include "obrw_stringTest.h"
 
+/**
+ * Include all test methods here.
+ */
 void obrw_stringTest_runAll()
 {
     twoStringToOne_twoNullSrings_expectedNullResult();
@@ -10,28 +13,6 @@ void obrw_stringTest_runAll()
     twoStringToOne_oneStringEmpty_expectedStringOneAsResult();
     twoStringToOne_oneStringEmpty_expectedStringTwoAsResult();
     twoStringToOne_twoStrings_expectedStringOneStringTwoAsResult();
-}
-
-void
-simpleTest()
-{
-    char* msg = "hello world\0";
-    printf("%s\n", msg);
-}
-
-void
-simpleClassTest()
-{
-    char* msg = "hello class\0";
-    printf("%s\n", msg);
-
-    char* str1 = "ei\0";
-    char* str2 = "ns\0";
-
-    char* result;
-    result = obrwString_2CStringsTo1(str1, str2 );
-
-    printf("%s\n", result);
 }
 
 void twoStringToOne_twoNullSrings_expectedNullResult()
