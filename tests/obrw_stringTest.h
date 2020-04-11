@@ -19,5 +19,13 @@ void twoStringsToOne_twoEmptyStrings_returnEmtpyString();
 void twoStringToOne_oneStringEmpty_expectedStringOneAsResult();
 void twoStringToOne_oneStringEmpty_expectedStringTwoAsResult();
 void twoStringToOne_twoStrings_expectedStringOneStringTwoAsResult();
+void parseConfigFileFor_nullInput_expectedNullResult();
+void parseConfigFileFor_withoutQuotationMark_expectedEmptyString();
+void parseConfigFileFor_quotationMarkOnly_expectedEmptyString();
+void parseConfigFileFor_quotianMarkString_expectedString();
+void parseConfigFileFor_quotianMarkStringInStringWithoutSpaces_expectedString();
+void parseConfigFileFor_quotianMarkStringInStringWithSpaces_expectedString();
+void parseConfigFileFor_StringWithOneQuotianMarkStart_expectedEmptyString();
+void parseConfigFileFor_StringWithOneQuotianMarkEnd_expectedEmptyString();
 
 #endif //OBRW_OBRW_STRINGTEST_H

@@ -88,3 +88,43 @@ void twoStringToOne_twoStrings_expectedStringOneStringTwoAsResult()
     assert(result != NULL);
     assert(0 == strcmp(expected, result));
 }
+
+void parseConfigFileFor_nullInput_expectedNullResult()
+{
+
+}
+
+void parseConfigFileFor_withoutQuotationMark_expectedEmptyString()
+{
+
+}
+
+void parseConfigFileFor_quotationMarkOnly_expectedEmptyString()
+{
+
+}
+
+void parseConfigFileFor_quotianMarkString_expectedString()
+{
+
+}
+
+void parseConfigFileFor_quotianMarkStringInStringWithoutSpaces_expectedString()
+{
+
+}
+
+void parseConfigFileFor_quotianMarkStringInStringWithSpaces_expectedString()
+{
+
+}
+
+void parseConfigFileFor_StringWithOneQuotianMarkStart_expectedEmptyString()
+{
+
+}
+
+void parseConfigFileFor_StringWithOneQuotianMarkEnd_expectedEmptyString()
+{
+
+}
