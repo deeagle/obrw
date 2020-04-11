@@ -27,6 +27,7 @@ void getCountOfChar_stringWithoutSymbolAndSymbol_expectedResultIsZero();
 void getCountOfChar_stringWithOneSymbolAndSymbol_expectedResultIsOne();
 void getCountOfChar_stringWithTwoSymbolAndSymbol_expectedResultIsTwo();
 void getCountOfChar_stringWithThreeSymbolAndSymbol_expectedResultIsThree();
+void getCountOfChar_stringWithTwoSymbolsOnlyAndSymbol_expectedResultIsTwo();
 
 void parseConfigFileFor_nullInput_expectedNullResult();
 void parseConfigFileFor_withoutQuotationMark_expectedNullResult();

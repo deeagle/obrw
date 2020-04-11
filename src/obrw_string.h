@@ -50,6 +50,9 @@ char* obrwString_parseConfigFileFor( const char* );
 
 /**
  * Returns the count of a char in the given string.
+ * <p>
+ * Implementation from programiz.com.
+ * @see https://www.programiz.com/c-programming/examples/frequency-character
  *
  * \param line The line we search the character.
  * \param character The caracter to search (if <code>NULL</code>, result will be <code>NULL</code>).

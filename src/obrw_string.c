@@ -95,5 +95,17 @@ obrwString_getCountOfChar(const char* line, const char character)
 {
     int count = 0;
 
+    if(line != NULL && character != '\0')
+    {
+        for( int i = 0; line[i] != '\0'; ++i)
+        {
+            if( character == line[i])
+            {
+                ++count;
+            }
+        }
+    }
+    // else: NULL is 0 and so it is the same like the result zero, but readable
+
     return count;
 }

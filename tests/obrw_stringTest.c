@@ -21,6 +21,7 @@ void obrw_stringTest_runAll()
     getCountOfChar_stringWithOneSymbolAndSymbol_expectedResultIsOne();
     getCountOfChar_stringWithTwoSymbolAndSymbol_expectedResultIsTwo();
     getCountOfChar_stringWithThreeSymbolAndSymbol_expectedResultIsThree();
+    getCountOfChar_stringWithTwoSymbolsOnlyAndSymbol_expectedResultIsTwo();
 
     parseConfigFileFor_nullInput_expectedNullResult();
     parseConfigFileFor_withoutQuotationMark_expectedNullResult();
@@ -237,8 +238,9 @@ void getCountOfChar_nullInputs_expectedNullResult()
     printf("%s - getCountOfChar_nullInputs_expectedNullResult\n", OBRW_STRINGTEST_CLASS_NAME);
 
     const char* line = NULL;
-    const char searchFor = NULL;
-    int expected = NULL;
+    // there is no NULL char
+    const char searchFor = '\0';
+    int expected = 0;
     int result;
 
     result = obrwString_getCountOfChar(line, searchFor);
@@ -323,6 +325,20 @@ void getCountOfChar_stringWithThreeSymbolAndSymbol_expectedResultIsThree()
     const char* line = "nice \" test\"-\"string\0";
     const char searchFor = '"';
     int expected = 3;
+    int result;
+
+    result = obrwString_getCountOfChar(line, searchFor);
+
+    assert(expected == result);
+}
+
+void getCountOfChar_stringWithTwoSymbolsOnlyAndSymbol_expectedResultIsTwo()
+{
+    printf("%s - getCountOfChar_stringWithTwoSymbolsOnlyAndSymbol_expectedResultIsTwo\n", OBRW_STRINGTEST_CLASS_NAME);
+
+    const char* line = "\"\"\0";
+    const char searchFor = '"';
+    int expected = 2;
     int result;
 
     result = obrwString_getCountOfChar(line, searchFor);
