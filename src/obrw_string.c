@@ -26,10 +26,9 @@
 char*
 obrwString_2CStringsTo1( const char* str1, const char* str2 )
 {
-	size_t len;
-	char* ptr;
+	size_t len = 0;
+	char* ptr = NULL;
 
-	// no cstring could be NULL
 	if( str1 != NULL && str2 != NULL )
 	{
 		len = strlen( str1 ) + strlen( str2 ) + 1;
