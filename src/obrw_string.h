@@ -41,11 +41,25 @@ char* obrwString_2CStringsTo1( const char*, const char* );
  * in:	tag = "the needed information"\n
  * out:	the needed information\n.
  *
- * \returns The parsed cstring with the needed information.
+ * \param line The line to parse
+ * \returns The chars between the quotation marks, otherwise <code>NULL</code>
  * \retval char* success.
  * \retval NULL fail.
  */
 char* obrwString_parseConfigFileFor( const char* );
+
+/**
+ * Returns the count of a char in the given string.
+ * <p>
+ * Implementation from programiz.com.
+ * @see https://www.programiz.com/c-programming/examples/frequency-character
+ *
+ * \param line The line we search the character.
+ * \param character The caracter to search (if <code>NULL</code>, result will be <code>NULL</code>).
+ *
+ * \return The count of the char in the string.
+ */
+int obrwString_getCountOfChar( const char*, char );
 
 
 #endif //OBRW_STRING_H

@@ -26,10 +26,9 @@
 char*
 obrwString_2CStringsTo1( const char* str1, const char* str2 )
 {
-	size_t len;
-	char* ptr;
+	size_t len = 0;
+	char* ptr = NULL;
 
-	// no cstring could be NULL
 	if( str1 != NULL && str2 != NULL )
 	{
 		len = strlen( str1 ) + strlen( str2 ) + 1;
@@ -47,47 +46,70 @@ obrwString_2CStringsTo1( const char* str1, const char* str2 )
 	return ptr;
 }//obrwString_2to1( const char*, const char* )
 
-
-/** Parses cstrings and extract chars between "". */
 char*
 obrwString_parseConfigFileFor( const char* line )
 {
 	char *parsedStr = NULL;
 	char *strPtr = NULL;
 	size_t len = 0;
+	const char valueSeparator = '"';
 
 	if( line != NULL )
 	{
-		// find the first " (DEZ = 34) in the cstring, 
-		// do a copy and deletes the second " at the end of the line.
-		if( ( strPtr = strchr( line, (int) '"' ) ) != NULL )
-		{
-			len = strlen( strPtr );
-			parsedStr = (char*) malloc( sizeof( char ) * len );
-			
-			strPtr++;
-			if( parsedStr )
-			{
-				strncpy( parsedStr, strPtr, ( strlen( strPtr ) - 1 ) );
+	    if( obrwString_getCountOfChar(line, valueSeparator) >= 2 )
+        {
+            // find the first " (DEZ = 34) in the cstring,
+            // do a copy and deletes the second " at the end of the line.
+            if( ( strPtr = strchr( line, (int) valueSeparator ) ) != NULL )
+            {
+                len = strlen( strPtr );
+                parsedStr = (char*) malloc( sizeof( char ) * len );
 
-				if( 0 < OBRW_GLOBAL_DEBUG )
-				{
-					//FIXME
-					printf( "[DBG] ParsedStr is >> %s <<\n", parsedStr );
-				}//if
-			}//if
-			else
-			{
-				printf( "[ERR] No memory (heap) avaiable!\n" );
-				//return NULL;
-			}//else
-		}//if
-		else
-		{
-			printf( "[ERR] Error parsing %s (Return NULL ).\n", line );
-			//return NULL;
-		}//else
+                strPtr++;
+                if( parsedStr )
+                {
+                    strncpy( parsedStr, strPtr, ( strlen( strPtr ) - 1 ) );
+
+                    if( 0 < OBRW_GLOBAL_DEBUG )
+                    {
+                        //FIXME
+                        printf( "[DBG] ParsedStr is >> %s <<\n", parsedStr );
+                    }//if
+                }//if
+                else
+                {
+                    printf( "[ERR] No memory (heap) avaiable!\n" );
+                    //return NULL;
+                }//else
+            }//if
+            else
+            {
+                printf( "[ERR] Error parsing %s (Return NULL ).\n", line );
+                //return NULL;
+            }//else
+        }
 	}//if
 
 	return parsedStr;
 }//obrwString_parseConfigFileFor( const char* )
+
+
+int
+obrwString_getCountOfChar(const char* line, const char character)
+{
+    int count = 0;
+
+    if(line != NULL && character != '\0')
+    {
+        for( int i = 0; line[i] != '\0'; ++i)
+        {
+            if( character == line[i])
+            {
+                ++count;
+            }
+        }
+    }
+    // else: NULL is 0 and so it is the same like the result zero, but readable
+
+    return count;
+}
