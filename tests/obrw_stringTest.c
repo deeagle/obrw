@@ -216,7 +216,6 @@ void parseConfigFileFor_StringWithOneQuotationMarkStart_expectedNullResult()
     result = obrwString_parseConfigFileFor(str);
 
     assert(result == NULL);
-    printf("Result differs from expected value: %s != %s", result, expected);
 }
 
 void parseConfigFileFor_StringWithOneQuotationMarkEnd_expectedNullResult()
@@ -230,7 +229,6 @@ void parseConfigFileFor_StringWithOneQuotationMarkEnd_expectedNullResult()
     result = obrwString_parseConfigFileFor(str);
 
     assert(result == NULL);
-    printf("Result differs from expected value: %s != %s", result, expected);
 }
 
 void getCountOfChar_nullInputs_expectedNullResult()

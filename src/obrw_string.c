@@ -52,38 +52,42 @@ obrwString_parseConfigFileFor( const char* line )
 	char *parsedStr = NULL;
 	char *strPtr = NULL;
 	size_t len = 0;
+	const char valueSeparator = '"';
 
 	if( line != NULL )
 	{
-		// find the first " (DEZ = 34) in the cstring, 
-		// do a copy and deletes the second " at the end of the line.
-		if( ( strPtr = strchr( line, (int) '"' ) ) != NULL )
-		{
-			len = strlen( strPtr );
-			parsedStr = (char*) malloc( sizeof( char ) * len );
-			
-			strPtr++;
-			if( parsedStr )
-			{
-				strncpy( parsedStr, strPtr, ( strlen( strPtr ) - 1 ) );
+	    if( obrwString_getCountOfChar(line, valueSeparator) >= 2 )
+        {
+            // find the first " (DEZ = 34) in the cstring,
+            // do a copy and deletes the second " at the end of the line.
+            if( ( strPtr = strchr( line, (int) valueSeparator ) ) != NULL )
+            {
+                len = strlen( strPtr );
+                parsedStr = (char*) malloc( sizeof( char ) * len );
 
-				if( 0 < OBRW_GLOBAL_DEBUG )
-				{
-					//FIXME
-					printf( "[DBG] ParsedStr is >> %s <<\n", parsedStr );
-				}//if
-			}//if
-			else
-			{
-				printf( "[ERR] No memory (heap) avaiable!\n" );
-				//return NULL;
-			}//else
-		}//if
-		else
-		{
-			printf( "[ERR] Error parsing %s (Return NULL ).\n", line );
-			//return NULL;
-		}//else
+                strPtr++;
+                if( parsedStr )
+                {
+                    strncpy( parsedStr, strPtr, ( strlen( strPtr ) - 1 ) );
+
+                    if( 0 < OBRW_GLOBAL_DEBUG )
+                    {
+                        //FIXME
+                        printf( "[DBG] ParsedStr is >> %s <<\n", parsedStr );
+                    }//if
+                }//if
+                else
+                {
+                    printf( "[ERR] No memory (heap) avaiable!\n" );
+                    //return NULL;
+                }//else
+            }//if
+            else
+            {
+                printf( "[ERR] Error parsing %s (Return NULL ).\n", line );
+                //return NULL;
+            }//else
+        }
 	}//if
 
 	return parsedStr;
