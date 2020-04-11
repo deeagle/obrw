@@ -68,13 +68,15 @@ obrwString_parseConfigFileFor( const char* line )
                 strPtr++;
                 if( parsedStr )
                 {
-                    strncpy( parsedStr, strPtr, ( strlen( strPtr ) - 1 ) );
+                    const size_t lenToCopyWithoutClosingQuotationMark = ( strlen( strPtr ) - 1 );
+                    memset( parsedStr, '\0', sizeof( char ) * len);
+                    strncat( parsedStr, strPtr, lenToCopyWithoutClosingQuotationMark );
 
                     if( 0 < OBRW_GLOBAL_DEBUG )
                     {
                         char *logMsg = ( char* ) malloc ( ( 20 + strlen ( parsedStr ) ) * sizeof ( char ) );
                         sprintf ( logMsg, "Parsed string is <%s>.", parsedStr );
-                        obrwLogger_debug ( logMsg );
+                        obrwLogger_info ( logMsg );
                         obrwUtils_freeCString ( logMsg );
                     }//if
                 }//if
