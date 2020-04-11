@@ -13,6 +13,16 @@ void obrw_stringTest_runAll()
     twoStringToOne_oneStringEmpty_expectedStringOneAsResult();
     twoStringToOne_oneStringEmpty_expectedStringTwoAsResult();
     twoStringToOne_twoStrings_expectedStringOneStringTwoAsResult();
+
+    parseConfigFileFor_nullInput_expectedNullResult();
+    parseConfigFileFor_withoutQuotationMark_expectedNullResult();
+    parseConfigFileFor_quotationMarkOnly_expectedEmptyString();
+    parseConfigFileFor_quotationMarkString_expectedString();
+    parseConfigFileFor_quotationMarkStringInStringWithoutSpaces_expectedString();
+    parseConfigFileFor_quotationMarkStringInStringWithSpaces_expectedString();
+    parseConfigFileFor_quotationMarkStringWithSpacesInStringWithSpaces_expectedString();
+    parseConfigFileFor_StringWithOneQuotationMarkStart_expectedNullResult();
+    parseConfigFileFor_StringWithOneQuotationMarkEnd_expectedNullResult();
 }
 
 void twoStringToOne_twoNullSrings_expectedNullResult()
@@ -91,40 +101,124 @@ void twoStringToOne_twoStrings_expectedStringOneStringTwoAsResult()
 
 void parseConfigFileFor_nullInput_expectedNullResult()
 {
+    printf("%s - parseConfigFileFor_nullInput_expectedNullResult\n", OBRW_STRINGTEST_CLASS_NAME);
 
+    const char* str = NULL;
+    const char* expected = NULL;
+    char* result;
+
+    result = obrwString_parseConfigFileFor(str);
+
+    assert(result == NULL);
 }
 
-void parseConfigFileFor_withoutQuotationMark_expectedEmptyString()
+void parseConfigFileFor_withoutQuotationMark_expectedNullResult()
 {
+    printf("%s - parseConfigFileFor_withoutQuotationMark_expectedNullResult\n", OBRW_STRINGTEST_CLASS_NAME);
 
+    const char* str = "test-String\0";
+    const char* expected = NULL;
+    char* result;
+
+    result = obrwString_parseConfigFileFor(str);
+
+    assert(result == NULL);
 }
 
 void parseConfigFileFor_quotationMarkOnly_expectedEmptyString()
 {
+    printf("%s - parseConfigFileFor_quotationMarkOnly_expectedEmptyString\n", OBRW_STRINGTEST_CLASS_NAME);
 
+    const char* str = "\"\"\0";
+    const char* expected = "\0";
+    char* result;
+
+    result = obrwString_parseConfigFileFor(str);
+
+    assert(result != NULL);
+    assert(0 == strcmp(expected, result));
 }
 
-void parseConfigFileFor_quotianMarkString_expectedString()
+void parseConfigFileFor_quotationMarkString_expectedString()
 {
+    printf("%s - parseConfigFileFor_quotationMarkString_expectedString\n", OBRW_STRINGTEST_CLASS_NAME);
 
+    const char* str = "\"Test-String\"\0";
+    const char* expected = "Test-String\0";
+    char* result;
+
+    result = obrwString_parseConfigFileFor(str);
+
+    assert(result != NULL);
+    assert(0 == strcmp(expected, result));
 }
 
-void parseConfigFileFor_quotianMarkStringInStringWithoutSpaces_expectedString()
+void parseConfigFileFor_quotationMarkStringInStringWithoutSpaces_expectedString()
 {
+    printf("%s - parseConfigFileFor_quotationMarkStringInStringWithoutSpaces_expectedString\n", OBRW_STRINGTEST_CLASS_NAME);
 
+    const char* str = "key=\"value\"\0";
+    const char* expected = "value\0";
+    char* result;
+
+    result = obrwString_parseConfigFileFor(str);
+
+    assert(result != NULL);
+    assert(0 == strcmp(expected, result));
 }
 
-void parseConfigFileFor_quotianMarkStringInStringWithSpaces_expectedString()
+void parseConfigFileFor_quotationMarkStringInStringWithSpaces_expectedString()
 {
+    printf("%s - parseConfigFileFor_quotationMarkStringInStringWithSpaces_expectedString\n", OBRW_STRINGTEST_CLASS_NAME);
 
+    const char* str = "key = \"value\"\0";
+    const char* expected = "value\0";
+    char* result;
+
+    result = obrwString_parseConfigFileFor(str);
+
+    assert(result != NULL);
+    assert(0 == strcmp(expected, result));
 }
 
-void parseConfigFileFor_StringWithOneQuotianMarkStart_expectedEmptyString()
+void parseConfigFileFor_quotationMarkStringWithSpacesInStringWithSpaces_expectedString()
 {
+    printf("%s - parseConfigFileFor_quotationMarkStringWithSpacesInStringWithSpaces_expectedString\n", OBRW_STRINGTEST_CLASS_NAME);
 
+    const char* str = "key = \"nice value\"\0";
+    const char* expected = "nice value\0";
+    char* result;
+
+    result = obrwString_parseConfigFileFor(str);
+
+    assert(result != NULL);
+    assert(0 == strcmp(expected, result));
 }
 
-void parseConfigFileFor_StringWithOneQuotianMarkEnd_expectedEmptyString()
+void parseConfigFileFor_StringWithOneQuotationMarkStart_expectedNullResult()
 {
+    printf("%s - parseConfigFileFor_StringWithOneQuotationMarkStart_expectedNullResult\n", OBRW_STRINGTEST_CLASS_NAME);
 
+    const char* str = "key = \"value\0";
+    const char* expected = NULL;
+    char* result;
+
+    result = obrwString_parseConfigFileFor(str);
+
+    assert(result == NULL);
+    printf("Result differs from expected value: %s != %s", result, expected);
+}
+
+void parseConfigFileFor_StringWithOneQuotationMarkEnd_expectedNullResult()
+{
+    printf("%s - parseConfigFileFor_StringWithOneQuotationMarkEnd_expectedNullResult\n", OBRW_STRINGTEST_CLASS_NAME);
+
+    const char* str = "key = value\"\0";
+    const char* expected = NULL;
+    char* result;
+
+    result = obrwString_parseConfigFileFor(str);
+
+    assert(result == NULL);
+    printf("Result differs from expected value: %s != %s", result, expected);
 }
