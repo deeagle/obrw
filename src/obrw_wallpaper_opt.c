@@ -32,7 +32,7 @@ static size_t wallpaperNamesLength = 0;
 
 
 /** Checks a filename if it's a possible wallpaper. */
-static int
+int
 obrwWallpaperOpt_filterWallpapersEndTag( const char* possibleWallpaperName )
 {
 	char buffer[len_file_end];
@@ -130,7 +130,7 @@ obrwWallpaperOpt_filterWallpapersEndTag( const char* possibleWallpaperName )
 
 //TODO
 /** Checks a filename if it's a possible wallpaper. */
-static int
+int
 obrwWallpaperOpt_filterWallpapersMagicByte( const char* possibleWallpaperName )
 {
 	if( possibleWallpaperName == NULL )
@@ -144,7 +144,7 @@ obrwWallpaperOpt_filterWallpapersMagicByte( const char* possibleWallpaperName )
 
 //TODO
 /** Add a wallpaper to the wallpaper array. */
-static int
+int
 obrwWallpaperOpt_addWallpaper( const char* wallpaper )
 {
 	if( NULL == wallpaper )
@@ -321,7 +321,7 @@ obrwWallpaperOpt_readDirAndSetWallpaper( const char* dirPath, struct wallpaper* 
 
 
 /** Choose some wallpaper and tries to set a random wallpaper. */
-static int
+int
 obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath, struct wallpaper* wallpaperItem )
 {
 	if( NULL == wallpaperNames || NULL == dirPath || strlen(dirPath) <= 0 )

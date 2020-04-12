@@ -44,7 +44,7 @@ obrwConfig_getWallpaperLastSet( void )
 
 
 /** The setter-method to set the locale userhome. */
-static void
+void
 obrwConfig_setUserHomeDir( void )
 {
 	userHome = obrwUtils_getUserHomeDir();
@@ -52,7 +52,7 @@ obrwConfig_setUserHomeDir( void )
 
 
 /** Tests the configfile, if it's exists, is readable and writeable. */
-static int
+int
 obrwConfig_isConfigFileReadWriteable( void )
 { 
 	char* configPath;
