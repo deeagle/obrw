@@ -15,7 +15,24 @@ ATM it's not really perfect and I'm not a C-programmer, but the tool is working 
 ## Externals
 
 **OBRW** depends on:
-- **feh** a fast and light lmlib2-based image viewer 
+- **feh** a fast and light lmlib2-based image viewer
+
+## make
+Supported options are:
+- `make`
+  - `test`
+  - `run-tests`
+  - `obrw`
+- `obrw`
+- `val`
+  - checks valgrind
+- `test`
+  - Builds the executable `test-all`
+- `run-tests`
+  - Runs the executable `test-all`
+- `docs`
+- `clean`
+- `clean-docs` 
 
 ## Weblinks
 A good choice to start with openbox is the project page or the debian-wiki.
