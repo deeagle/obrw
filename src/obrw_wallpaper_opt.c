@@ -226,18 +226,18 @@ obrwWallpaperOpt_addWallpaper( const char* wallpaper )
 int
 obrwWallpaperOpt_readDirAndSetWallpaper( const char* dirPath, struct wallpaper* wpObject )
 {
-    assert(dirPath != NULL);
-
 	DIR* wpDir = NULL;
 	struct dirent *entry = NULL;
 	int wpCounter = 0;
 	int wpEntry = -1;
 
 
-	if( dirPath == NULL )
-	{
-		return EXIT_FAILURE;
-	}//if
+    if (NULL == dirPath || strlen(dirPath) <= 0)
+    {
+        obrwLogger_error("No dirPath set.");
+
+        return EXIT_FAILURE;
+    }//if
 	else
 	{
 		if( 0 < OBRW_GLOBAL_DEBUG )
@@ -329,19 +329,18 @@ obrwWallpaperOpt_readDirAndSetWallpaper( const char* dirPath, struct wallpaper* 
 }//obrwWallpaperOpt_readWallpaperDir( const char* )
 
 
-//TODO
 /** Choose some wallpaper and tries to set a random wallpaper. */
 static int
 obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath, struct wallpaper* wpObject )
 {
-	if( NULL == wallpaperNames || NULL == dirPath )
+	if( NULL == wallpaperNames || NULL == dirPath || strlen(dirPath) <= 0 )
 	{
 		if( NULL == wallpaperNames )
 		{
 			obrwLogger_error ( "Problem with stored wallpapers." );
 		}//if
 
-		if( NULL == dirPath )
+		if( NULL == dirPath || strlen(dirPath) <= 0 )
 		{
 			obrwLogger_error ( "No dirPath set." );
 		}//if
@@ -350,7 +349,7 @@ obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath, struct wallpap
 		return -1;
 	}//if
 
-    int usedWallpaperIndex;
+    int usedWallpaperIndex = -1;
     if( obrwConfig_getWallpaperLastSet() == NULL )
     {
         usedWallpaperIndex = obrwUtils_randomDigit() % wallpaperNamesLength;
@@ -374,7 +373,7 @@ obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath, struct wallpap
 	}//if
 		
 	//success
-	return 0;
+	return EXIT_SUCCESS;
 }//obrwWallpaperOpt_chooseWallpaperAndTryToSet()
 
 
