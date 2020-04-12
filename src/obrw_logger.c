@@ -109,7 +109,6 @@ obrwLogger_log(const char* tag, const char* message)
     assert(tag != NULL);
     assert(strlen(tag) > 0);
     assert(message != NULL);
-    assert(strlen(message) > 0);
     assert(isTagKnown(tag) == TRUE);
 
    printf("[%s] %s\n", tag, message);
