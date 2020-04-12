@@ -44,7 +44,7 @@ obrwConfig_getWallpaperLastSet( void )
 
 
 /** The setter-method to set the locale userhome. */
-static void
+void
 obrwConfig_setUserHomeDir( void )
 {
 	userHome = obrwUtils_getUserHomeDir();
@@ -52,7 +52,7 @@ obrwConfig_setUserHomeDir( void )
 
 
 /** Tests the configfile, if it's exists, is readable and writeable. */
-static int
+int
 obrwConfig_isConfigFileReadWriteable( void )
 { 
 	char* configPath;
@@ -222,12 +222,12 @@ obrwConfig_readConfigFile( void )
 							}//if
 							else
 							{
-								wallpaperDir = (char*) malloc( sizeof( char ) * strlen( wpDir ) + 1 );
+                                wallpaperDir = (char *) malloc(sizeof(char) * strlen(wpDir) + 1);
 
-								if( wallpaperDir )
-								{
-									strncpy( wallpaperDir, wpDir, strlen( wpDir ) );
-								}//if
+                                if(wallpaperDir)
+                                {
+                                    strncpy(wallpaperDir, wpDir, strlen(wpDir));
+                                }//if
 							}//else
 						}//if
 
@@ -294,13 +294,13 @@ obrwConfig_readConfigFile( void )
 
 /** Write the now used settings into the configfile. */
 int
-obrwConfig_writeSettingsToConfigFile( void )
+obrwConfig_writeSettingsToConfigFile( struct wallpaper* wallpaperItem )
 {
 	FILE *fp;
 	char* lineBuffer;
 	char* filename;
 	char* configNow;
-	const char* toSet;
+	char* toSet;
 	char* bufP;
 	int bufferSize = 256;
 
@@ -341,9 +341,8 @@ obrwConfig_writeSettingsToConfigFile( void )
 				if( strncmp( lineBuffer, "lastSet = ", 10 ) == 0 )
 				{
 				    obrwLogger_debug ( "Found line with 'lastSet' information" );
-					//FIXME
 					strcat( configNow, "lastSet = \"" );
-					toSet = obrwWallpaperOpt_getUsedWallpaper();
+					toSet = wallpaperItem->name;
 					strncat( configNow, toSet, strlen( toSet ) );
 					strcat( configNow, "\"\n" );
 				}//if
@@ -368,7 +367,7 @@ obrwConfig_writeSettingsToConfigFile( void )
 		// (3) close file
 		fclose( fp );
 
-		if( 1 < OBRW_GLOBAL_DEBUG )
+		if( 0 < OBRW_GLOBAL_DEBUG )
 		{
 			obrwLogger_debug ( "New configfile to write:" );
 			obrwLogger_debug ( "----------------------------------------------------" );

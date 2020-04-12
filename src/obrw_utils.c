@@ -64,7 +64,7 @@ void
 obrwUtils_freeCString( char* cstr )
 {
 	if ( cstr != NULL ) {
-        char *logMsg = ( char* ) malloc ( ( 15 + strlen ( cstr ) ) * sizeof ( char ) );
+        char *logMsg = ( char* ) malloc ( ( 16 + strlen ( cstr ) ) * sizeof ( char ) );
         sprintf ( logMsg, "free string <%s>.", cstr );
         obrwLogger_debugSystem ( logMsg );
 

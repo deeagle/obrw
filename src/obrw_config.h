@@ -50,7 +50,7 @@ static char* wallpaperLast;		/** Last seted wallpaper */
  *
  * \return Nothing, it's void.
  */
-static void obrwConfig_setUserHomeDir( void );
+void obrwConfig_setUserHomeDir( void );
 
 /** 
  * Tests the configfile, if it's exists, is readable and writeable. 
@@ -59,7 +59,7 @@ static void obrwConfig_setUserHomeDir( void );
  * \retval EXIT_SUCCESS success.
  * \retval EXIT_FAILURE failed.
  */
-static int obrwConfig_isConfigFileReadWriteable( void );
+int obrwConfig_isConfigFileReadWriteable( void );
 
 /**
  * The getter-method of the wallpaperdir, included in the configfile.
@@ -96,7 +96,7 @@ int obrwConfig_readConfigFile( void );
  * \retval EXIT_SUCCESS success.
  * \retval EXIT_FAILURE failed.
  */
-int obrwConfig_writeSettingsToConfigFile( void );
+int obrwConfig_writeSettingsToConfigFile( struct wallpaper* );
 
 /** 
  * Free memory of used locale variables with help of the free-methods in obrw_utils.c

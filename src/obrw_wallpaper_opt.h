@@ -37,6 +37,7 @@
 	#define FILE_READ	R_OK
 #endif
 #include "obrw_config.h"
+#include "obrw_factory.h"
 #include "obrw_globals.h"
 #include "obrw_logger.h"
 #include "obrw_utils.h"
@@ -59,8 +60,6 @@ static const char* file_end_png;
 static const char* file_end_bmp;
 static char** wallpaperNames;
 static size_t wallpaperNamesLength;
-static int usedWallpaper;
-
 
 /**
  * Checks a filename if it's a possible wallpaper (easy test above endtag). For example:\n
@@ -71,14 +70,14 @@ static int usedWallpaper;
  * \retval -1 wallpaperpath is NULL.
  * \retval -2 endtag not known or no wallpaper.
  */
-static int obrwWallpaperOpt_filterWallpapersEndTag( const char* );
+int obrwWallpaperOpt_filterWallpapersEndTag( const char* );
 
 /** 
  * Checks a filename if it's a possible wallpaper (2nd test above magicbytes of file)
  * 
  * \returns TODO
  */
-static int obrwWallpaperOpt_filterWallpapersMagicByte( const char* );
+int obrwWallpaperOpt_filterWallpapersMagicByte( const char* );
 
 /**
  * Add's a wallpaper to the wallpaper-array. If it's the first wallpaper to add, the methods will try to get 1st 4096 bytes of heap-memory. If it fails it will try to get 2048. If it fails an error will occure.
@@ -90,7 +89,7 @@ static int obrwWallpaperOpt_filterWallpapersMagicByte( const char* );
  * \retval -2 max count reached, wallpaper thrown away.
  * \retval -3 could not alocate heap-space .
  */
-static int obrwWallpaperOpt_addWallpaper( const char* );
+int obrwWallpaperOpt_addWallpaper( const char* );
 
 /**
  * Choose some wallpaper and tries to set a random wallpaper.
@@ -100,16 +99,7 @@ static int obrwWallpaperOpt_addWallpaper( const char* );
  * \retval -1 fail, no dirpath seteda.
  * \retval -2 fail, error with feh.
  */
-static int obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* );
-
-/**
- * The getter-method to get the name of the last used wallpaper.
- *
- * \returns The name of the last used wallpaper or NULL if failure.
- * \retval wallpapername success.
- * \retval NULL fail.
- */
-const char* obrwWallpaperOpt_getUsedWallpaper( void );
+int obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char*, struct wallpaper* );
 
 /**
  * Reads the wallpaperdir (attribute), add the wallpapers to a list and tries to set a random of the wallpapers.
@@ -118,7 +108,7 @@ const char* obrwWallpaperOpt_getUsedWallpaper( void );
  * \retval EXIT_SUCCESS success.
  * \retval EXIT_FAILED fail.
  */
-int obrwWallpaperOpt_readDirAndSetWallpaper( const char* );
+int obrwWallpaperOpt_readDirAndSetWallpaper( const char*, struct wallpaper* );
 
 /**
  * Set a wallpaper with the external tool feh 

@@ -29,35 +29,10 @@ static const char *file_end_bmp = ".bmp";
 
 static char** wallpaperNames;
 static size_t wallpaperNamesLength = 0;
-static int usedWallpaper = -1;
-
-
-/** The getter-method to get the name of the last wallpaper. */
-const char*
-obrwWallpaperOpt_getUsedWallpaper( void )
-{
-	if( 0 > usedWallpaper )
-	{
-		//failure
-		obrwLogger_info( "No last wallpaper found.");
-
-		return "";
-	}//if
-
-	if( 1 < OBRW_GLOBAL_DEBUG )
-	{
-        char *logMsg = ( char* ) malloc ( ( 22 + strlen ( wallpaperNames[usedWallpaper] ) ) * sizeof ( char ) );
-        sprintf ( logMsg, "Last wallpaper was <%s>.", wallpaperNames[usedWallpaper] );
-        obrwLogger_debug ( logMsg );
-        obrwUtils_freeCString ( logMsg );
-	}//if
-	//success
-	return &wallpaperNames[usedWallpaper][0];
-}//obrwWallpaperOpt_getUsedWallpaper()
 
 
 /** Checks a filename if it's a possible wallpaper. */
-static int
+int
 obrwWallpaperOpt_filterWallpapersEndTag( const char* possibleWallpaperName )
 {
 	char buffer[len_file_end];
@@ -155,7 +130,7 @@ obrwWallpaperOpt_filterWallpapersEndTag( const char* possibleWallpaperName )
 
 //TODO
 /** Checks a filename if it's a possible wallpaper. */
-static int
+int
 obrwWallpaperOpt_filterWallpapersMagicByte( const char* possibleWallpaperName )
 {
 	if( possibleWallpaperName == NULL )
@@ -169,7 +144,7 @@ obrwWallpaperOpt_filterWallpapersMagicByte( const char* possibleWallpaperName )
 
 //TODO
 /** Add a wallpaper to the wallpaper array. */
-static int
+int
 obrwWallpaperOpt_addWallpaper( const char* wallpaper )
 {
 	if( NULL == wallpaper )
@@ -240,122 +215,116 @@ obrwWallpaperOpt_addWallpaper( const char* wallpaper )
 
 /** Reads the wallpaperdir, add wallpaper and set it. */
 int
-obrwWallpaperOpt_readDirAndSetWallpaper( const char* dirPath )
+obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath, struct wallpaper *wallpaperItem)
 {
-	DIR* wpDir = NULL;
-	struct dirent *entry = NULL;
-	int wpCounter = 0;
-	int wpEntry = -1;
+    DIR *wpDir = NULL;
+    struct dirent *entry = NULL;
+    int wpCounter = 0;
+    int wpEntry = 0;
 
 
-	if( dirPath == NULL )
-	{
-		return EXIT_FAILURE;
-	}//if
-	else
-	{
-		if( 0 < OBRW_GLOBAL_DEBUG )
-		{
-            char *logMsg = ( char* ) malloc ( ( 22 + strlen ( dirPath ) ) * sizeof ( char ) );
-            sprintf ( logMsg, "Wallpaperpath is <%s>.", dirPath );
-            obrwLogger_debug ( logMsg );
-            obrwUtils_freeCString ( logMsg );
-		}//if
-	}//else
+    if(NULL == dirPath || strlen(dirPath) <= 0)
+    {
+        obrwLogger_error("No dirPath set.");
 
-	//Open DIR /.../wallpaper/
-	if( ( wpDir = opendir( dirPath ) ) != NULL )
-	{
-		//counts entries in DIR
-		entry = readdir( wpDir );
-		while( entry )
-		{
-			wpCounter++;
-			entry = readdir( wpDir );
-		}//while
+        return EXIT_FAILURE;
+    }//if
+    else
+    {
+        if(0 < OBRW_GLOBAL_DEBUG)
+        {
+            char *logMsg = (char *) malloc((22 + strlen(dirPath)) * sizeof(char));
+            sprintf(logMsg, "Wallpaperpath is <%s>.", dirPath);
+            obrwLogger_debug(logMsg);
+            obrwUtils_freeCString(logMsg);
+        }//if
+    }//else
 
-		if( 0 < wpCounter )
-		{
-			//sets dirPointer back to start setting
-			rewinddir( wpDir );
-			wpEntry = 0;
+    //Open DIR /.../wallpaper/
+    wpDir = opendir(dirPath);
+    if(wpDir == NULL)
+    {
+        obrwLogger_error("Can't open given path of wallpaper directory.");
 
-			//forward pointer in DIR
-			entry = readdir( wpDir );
-			while( entry )
-			{
-				if( strcmp( entry -> d_name, "." ) && strcmp( entry -> d_name, ".." ) )
-				{
-					//FILTER End-Tags
-					if( 0 == obrwWallpaperOpt_filterWallpapersEndTag( entry -> d_name ) )
-					{
-						//TODO FILTER Magic-Bytes
-						if( 0 == obrwWallpaperOpt_filterWallpapersMagicByte( entry -> d_name ) )
-						{
-							//FIXME
-							//printf( "[DBG] File %d = %s\n", wpEntry, entry -> d_name );
-							wpEntry++;
-							if( 0 == obrwWallpaperOpt_addWallpaper( entry -> d_name ) )
-							{
-							}//if
-							else
-							{
-								return EXIT_FAILURE;
-							}//else
-						}//if
-					}//if
-				}//if
-				else
-				{
-					//dirname here is '.' and '..'
-				}//else
+        return EXIT_FAILURE;
+    }
 
-				//forward pointer in DIR 
-				entry = readdir( wpDir );
-			}//while
+    //counts entries in DIR
+    entry = readdir(wpDir);
+    while(entry)
+    {
+        wpCounter++;
+        entry = readdir(wpDir);
+    }//while
 
-			if( 0 < OBRW_GLOBAL_DEBUG )
-			{
-                // char length for wallpaper count: 1.000.000.000 = 10
-                char *logMsg = ( char* ) malloc ( ( 32 + 10 ) * sizeof ( char ) );
-                sprintf ( logMsg, "Count of found wallpapers is <%d>.", wpEntry );
-                obrwLogger_debug ( logMsg );
-                obrwUtils_freeCString ( logMsg );
-			}//if
-		}//if
-		else
-		{
-			obrwLogger_error ( "No Wallpapers in wallpaperpath avaiable." );
-			return EXIT_FAILURE;
-		}//else
+    if(0 < wpCounter)
+    {
+        //sets dirPointer back to start setting
+        rewinddir(wpDir);
 
-		closedir( wpDir );
+        //forward pointer in DIR
+        entry = readdir(wpDir);
+        while(entry)
+        {
+            if(0 != strcmp(entry->d_name, ".") || 0 != strcmp(entry->d_name, ".."))
+            {
+                //FILTER End-Tags
+                if(0 == obrwWallpaperOpt_filterWallpapersEndTag(entry->d_name))
+                {
+                    //TODO FILTER Magic-Bytes
+                    if(0 == obrwWallpaperOpt_filterWallpapersMagicByte(entry->d_name))
+                    {
+                        //printf( "[DBG] File %d = %s\n", wpEntry, entry -> d_name );
+                        wpEntry++;
+                        if(0 == obrwWallpaperOpt_addWallpaper(entry->d_name))
+                        {
+                        }//if
+                        else
+                        {
+                            return EXIT_FAILURE;
+                        }//else
+                    }//if
+                }//if
+            }//if
+            else
+            {
+                //dirname here is '.' and '..'
+            }//else
 
-		obrwWallpaperOpt_chooseWallpaperAndTryToSet( dirPath );
-	}//if
-	else
-	{
-		obrwLogger_error ( "Wallpaperdir isn't avaiable!" );
-		return EXIT_FAILURE;
-	}//else
+            //forward pointer in DIR
+            entry = readdir(wpDir);
+        }//while
 
-	return EXIT_SUCCESS;
+        if(0 < OBRW_GLOBAL_DEBUG)
+        {
+            // char length for wallpaper count: 1.000.000.000 = 10
+            char *logMsg = (char *) malloc((32 + 10) * sizeof(char));
+            sprintf(logMsg, "Count of found wallpapers is <%d>.", wpEntry);
+            obrwLogger_debug(logMsg);
+            obrwUtils_freeCString(logMsg);
+        }//if
+    }//if
+
+    closedir(wpDir);
+
+    obrwWallpaperOpt_chooseWallpaperAndTryToSet(dirPath, wallpaperItem);
+
+    return EXIT_SUCCESS;
 }//obrwWallpaperOpt_readWallpaperDir( const char* )
 
 
-//TODO
 /** Choose some wallpaper and tries to set a random wallpaper. */
-static int
-obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath )
+int
+obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath, struct wallpaper* wallpaperItem )
 {
-	if( NULL == wallpaperNames || NULL == dirPath )
+	if( NULL == wallpaperNames || NULL == dirPath || strlen(dirPath) <= 0 )
 	{
 		if( NULL == wallpaperNames )
 		{
 			obrwLogger_error ( "Problem with stored wallpapers." );
 		}//if
 
-		if( NULL == dirPath )
+		if( NULL == dirPath || strlen(dirPath) <= 0 )
 		{
 			obrwLogger_error ( "No dirPath set." );
 		}//if
@@ -364,29 +333,31 @@ obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath )
 		return -1;
 	}//if
 
-    int usedWallpaper;
+    int usedWallpaperIndex;
     if( obrwConfig_getWallpaperLastSet() == NULL )
     {
-        usedWallpaper = obrwUtils_randomDigit() % wallpaperNamesLength;
+        usedWallpaperIndex = obrwUtils_randomDigit() % wallpaperNamesLength;
     }
     else
     {
         do
         {
-            usedWallpaper = obrwUtils_randomDigit() % wallpaperNamesLength;
+            usedWallpaperIndex = obrwUtils_randomDigit() % wallpaperNamesLength;
         }//do
-        while( 0 == strcmp( obrwConfig_getWallpaperLastSet(), wallpaperNames[usedWallpaper] ) );//while
+        while( 0 == strcmp( obrwConfig_getWallpaperLastSet(), wallpaperNames[usedWallpaperIndex] ) );//while
     }
 
-	if( 0 != obrwWallpaperOpt_setWallpaperWithFeh( dirPath, wallpaperNames[usedWallpaper] ) )
+    wallpaperItem->arrayIndex = usedWallpaperIndex;
+    strcpy(wallpaperItem->name, wallpaperNames[usedWallpaperIndex]);
+
+	if( 0 != obrwWallpaperOpt_setWallpaperWithFeh( dirPath, wallpaperNames[usedWallpaperIndex] ) )
 	{
-		usedWallpaper = -1;
 		//failure
 		return -2;
 	}//if
 		
 	//success
-	return 0;
+	return EXIT_SUCCESS;
 }//obrwWallpaperOpt_chooseWallpaperAndTryToSet()
 
 
