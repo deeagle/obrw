@@ -222,12 +222,12 @@ obrwConfig_readConfigFile( void )
 							}//if
 							else
 							{
-								wallpaperDir = (char*) malloc( sizeof( char ) * strlen( wpDir ) + 1 );
+                                wallpaperDir = (char *) malloc(sizeof(char) * strlen(wpDir) + 1);
 
-								if( wallpaperDir )
-								{
-									strncpy( wallpaperDir, wpDir, strlen( wpDir ) );
-								}//if
+                                if(wallpaperDir)
+                                {
+                                    strncpy(wallpaperDir, wpDir, strlen(wpDir));
+                                }//if
 							}//else
 						}//if
 
