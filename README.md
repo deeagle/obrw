@@ -1,6 +1,6 @@
-# OBRW
+# OBRW - OpenBoxRandomWallpaper
 
-**OBRW** means *OpenBoxRandomWallpaper*.
+![Build status](https://github.com/deeagle/obrw/workflows/Build/badge.svg)
 
 ## Desc
 
