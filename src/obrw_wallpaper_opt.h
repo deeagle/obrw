@@ -37,6 +37,7 @@
 	#define FILE_READ	R_OK
 #endif
 #include "obrw_config.h"
+#include "obrw_factory.h"
 #include "obrw_globals.h"
 #include "obrw_logger.h"
 #include "obrw_utils.h"
@@ -52,11 +53,6 @@
 #define DIR_D			   2
 /** file is DIR but didn't readable */
 #define DIR_DNR			   3
-
-struct wallpaper {
-	int id;
-	char name[1024];
-};
 
 static const size_t len_file_end;
 static const char* file_end_jpg;
@@ -130,8 +126,6 @@ int obrwWallpaperOpt_setWallpaperWithFeh( const char*, const char* );
  * \returns Nothing, it's void
  */
 void obrwWallpaperOpt_freeLocalsToClose( void );
-
-struct wallpaper obrwWallpaperOpt_getNewObject( void );
 
 
 #endif //OBRW_WALLPAPER_OPT_H

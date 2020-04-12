@@ -50,15 +50,15 @@ main()
 		return EXIT_FAILURE;
 	}//if
 
-	struct wallpaper usedWP = obrwWallpaperOpt_getNewObject();
+	struct wallpaper usedWallpaperItem = obrwFactory_getWallpaperItem();
 
-	if( obrwWallpaperOpt_readDirAndSetWallpaper( obrwConfig_getWallpaperDir(), &usedWP ) /* == EXIT_FAILURE */ )
+	if( obrwWallpaperOpt_readDirAndSetWallpaper( obrwConfig_getWallpaperDir(), &usedWallpaperItem ) /* == EXIT_FAILURE */ )
 	{
 		freeAllToClose();
 		obrwLogger_error("Wallpaperoptions error!");
 	}//if
 
-	if( obrwConfig_writeSettingsToConfigFile(&usedWP) /* == EXIT_FAILURE */ )
+	if( obrwConfig_writeSettingsToConfigFile(&usedWallpaperItem) /* == EXIT_FAILURE */ )
 	{
 		freeAllToClose();
 		obrwLogger_error("Wallpaper write error!");

@@ -30,15 +30,6 @@ static const char *file_end_bmp = ".bmp";
 static char** wallpaperNames;
 static size_t wallpaperNamesLength = 0;
 
-struct wallpaper obrwWallpaperOpt_getNewObject()
-{
-    struct wallpaper usedWallpaper;
-    usedWallpaper.id = -1;
-    strcpy(usedWallpaper.name, "");
-
-    return usedWallpaper;
-}
-
 
 /** Checks a filename if it's a possible wallpaper. */
 static int
@@ -224,7 +215,7 @@ obrwWallpaperOpt_addWallpaper( const char* wallpaper )
 
 /** Reads the wallpaperdir, add wallpaper and set it. */
 int
-obrwWallpaperOpt_readDirAndSetWallpaper( const char* dirPath, struct wallpaper* wpObject )
+obrwWallpaperOpt_readDirAndSetWallpaper( const char* dirPath, struct wallpaper* wallpaperItem )
 {
 	DIR* wpDir = NULL;
 	struct dirent *entry = NULL;
@@ -317,7 +308,7 @@ obrwWallpaperOpt_readDirAndSetWallpaper( const char* dirPath, struct wallpaper* 
 
 		closedir( wpDir );
 
-		obrwWallpaperOpt_chooseWallpaperAndTryToSet( dirPath, wpObject );
+		obrwWallpaperOpt_chooseWallpaperAndTryToSet(dirPath, wallpaperItem );
 	}//if
 	else
 	{
@@ -331,7 +322,7 @@ obrwWallpaperOpt_readDirAndSetWallpaper( const char* dirPath, struct wallpaper* 
 
 /** Choose some wallpaper and tries to set a random wallpaper. */
 static int
-obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath, struct wallpaper* wpObject )
+obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath, struct wallpaper* wallpaperItem )
 {
 	if( NULL == wallpaperNames || NULL == dirPath || strlen(dirPath) <= 0 )
 	{
@@ -363,8 +354,8 @@ obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath, struct wallpap
         while( 0 == strcmp( obrwConfig_getWallpaperLastSet(), wallpaperNames[usedWallpaperIndex] ) );//while
     }
 
-    wpObject->id = usedWallpaperIndex;
-    strcpy(wpObject->name, wallpaperNames[usedWallpaperIndex]);
+    wallpaperItem->arrayIndex = usedWallpaperIndex;
+    strcpy(wallpaperItem->name, wallpaperNames[usedWallpaperIndex]);
 
 	if( 0 != obrwWallpaperOpt_setWallpaperWithFeh( dirPath, wallpaperNames[usedWallpaperIndex] ) )
 	{
