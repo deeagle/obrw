@@ -294,7 +294,7 @@ obrwConfig_readConfigFile( void )
 
 /** Write the now used settings into the configfile. */
 int
-obrwConfig_writeSettingsToConfigFile( void )
+obrwConfig_writeSettingsToConfigFile( struct wallpaper* wpObject )
 {
 	FILE *fp;
 	char* lineBuffer;
@@ -340,6 +340,7 @@ obrwConfig_writeSettingsToConfigFile( void )
 
 				if( strncmp( lineBuffer, "lastSet = ", 10 ) == 0 )
 				{
+				    printf("index from set dir %d\n", wpObject->id);
 				    obrwLogger_debug ( "Found line with 'lastSet' information" );
 					//FIXME
 					strcat( configNow, "lastSet = \"" );
@@ -368,7 +369,7 @@ obrwConfig_writeSettingsToConfigFile( void )
 		// (3) close file
 		fclose( fp );
 
-		if( 1 < OBRW_GLOBAL_DEBUG )
+		if( 0 < OBRW_GLOBAL_DEBUG )
 		{
 			obrwLogger_debug ( "New configfile to write:" );
 			obrwLogger_debug ( "----------------------------------------------------" );

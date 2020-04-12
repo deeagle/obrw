@@ -53,13 +53,17 @@
 /** file is DIR but didn't readable */
 #define DIR_DNR			   3
 
+struct wallpaper {
+	int id;
+};
+
 static const size_t len_file_end;
 static const char* file_end_jpg;
 static const char* file_end_png;
 static const char* file_end_bmp;
 static char** wallpaperNames;
 static size_t wallpaperNamesLength;
-static int usedWallpaper;
+static int usedWallpaperIndex;
 
 
 /**
@@ -100,7 +104,7 @@ static int obrwWallpaperOpt_addWallpaper( const char* );
  * \retval -1 fail, no dirpath seteda.
  * \retval -2 fail, error with feh.
  */
-static int obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* );
+static int obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char*, struct wallpaper* );
 
 /**
  * The getter-method to get the name of the last used wallpaper.
@@ -118,7 +122,7 @@ const char* obrwWallpaperOpt_getUsedWallpaper( void );
  * \retval EXIT_SUCCESS success.
  * \retval EXIT_FAILED fail.
  */
-int obrwWallpaperOpt_readDirAndSetWallpaper( const char* );
+int obrwWallpaperOpt_readDirAndSetWallpaper( const char*, struct wallpaper* );
 
 /**
  * Set a wallpaper with the external tool feh 
@@ -136,6 +140,8 @@ int obrwWallpaperOpt_setWallpaperWithFeh( const char*, const char* );
  * \returns Nothing, it's void
  */
 void obrwWallpaperOpt_freeLocalsToClose( void );
+
+struct wallpaper obrwWallpaperOpt_getNewObject( void );
 
 
 #endif //OBRW_WALLPAPER_OPT_H
