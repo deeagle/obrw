@@ -17,6 +17,10 @@
 #ifndef OBRW_LOGGER_H
 #define OBRW_LOGGER_H
 
+#define TRUE 1
+#define FALSE 0
+
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -33,7 +37,24 @@ static void obrwLogger_warning(const char* message);
 static void obrwLogger_debug(const char* message);
 static void obrwLogger_debugSystem(const char* message);
 static void obrwLogger_error(const char* message);
-/** 
+
+/**
+ * Prints a multi line log message to stdout.
+ *
+ * @param tag The debug tag
+ * @param messageLines The lines to print (separation via newline).
+ */
+static void obrwLogger_logMultiLine(const char* tag, const char* messageLines);
+
+/**
+ * Returns if the given tag is known.
+ *
+ * @param tag The debug tag
+ * @return <code>TRUE</code> if the tag is known, otherwise <code>FALSE</code>.
+ */
+static int isTagKnown(const char* tag);
+
+/**
  * Bla bla
  *
  * \return Nothing, it's void.

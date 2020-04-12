@@ -370,12 +370,10 @@ obrwConfig_writeSettingsToConfigFile( void )
 
 		if( 1 < OBRW_GLOBAL_DEBUG )
 		{
-			//FIXME
-			obrwLogger_debug ( ">>> New configfile to write:" );
+			obrwLogger_debug ( "New configfile to write:" );
 			obrwLogger_debug ( "----------------------------------------------------" );
-			printf( "%s", configNow );
+			obrwLogger_logMultiLine(DEBUG_TAG, configNow);
 			obrwLogger_debug ( "----------------------------------------------------" );
-			obrwLogger_debug ( "<<<" );
 		}//if
 	}//if
 	else
