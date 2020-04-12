@@ -220,7 +220,7 @@ obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath, struct wallpaper *w
     DIR *wpDir = NULL;
     struct dirent *entry = NULL;
     int wpCounter = 0;
-    int wpEntry = -1;
+    int wpEntry = 0;
 
 
     if(NULL == dirPath || strlen(dirPath) <= 0)
@@ -261,13 +261,12 @@ obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath, struct wallpaper *w
     {
         //sets dirPointer back to start setting
         rewinddir(wpDir);
-        wpEntry = 0;
 
         //forward pointer in DIR
         entry = readdir(wpDir);
         while(entry)
         {
-            if(strcmp(entry->d_name, ".") && strcmp(entry->d_name, ".."))
+            if(0 != strcmp(entry->d_name, ".") || 0 != strcmp(entry->d_name, ".."))
             {
                 //FILTER End-Tags
                 if(0 == obrwWallpaperOpt_filterWallpapersEndTag(entry->d_name))
@@ -275,7 +274,6 @@ obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath, struct wallpaper *w
                     //TODO FILTER Magic-Bytes
                     if(0 == obrwWallpaperOpt_filterWallpapersMagicByte(entry->d_name))
                     {
-                        //FIXME
                         //printf( "[DBG] File %d = %s\n", wpEntry, entry -> d_name );
                         wpEntry++;
                         if(0 == obrwWallpaperOpt_addWallpaper(entry->d_name))
@@ -335,7 +333,7 @@ obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath, struct wallpap
 		return -1;
 	}//if
 
-    int usedWallpaperIndex = -1;
+    int usedWallpaperIndex;
     if( obrwConfig_getWallpaperLastSet() == NULL )
     {
         usedWallpaperIndex = obrwUtils_randomDigit() % wallpaperNamesLength;
