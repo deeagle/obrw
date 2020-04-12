@@ -64,8 +64,6 @@ static const char* file_end_png;
 static const char* file_end_bmp;
 static char** wallpaperNames;
 static size_t wallpaperNamesLength;
-static int usedWallpaperIndex;
-
 
 /**
  * Checks a filename if it's a possible wallpaper (easy test above endtag). For example:\n
@@ -106,15 +104,6 @@ static int obrwWallpaperOpt_addWallpaper( const char* );
  * \retval -2 fail, error with feh.
  */
 static int obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char*, struct wallpaper* );
-
-/**
- * The getter-method to get the name of the last used wallpaper.
- *
- * \returns The name of the last used wallpaper or NULL if failure.
- * \retval wallpapername success.
- * \retval NULL fail.
- */
-char* obrwWallpaperOpt_getUsedWallpaper( void );
 
 /**
  * Reads the wallpaperdir (attribute), add the wallpapers to a list and tries to set a random of the wallpapers.

@@ -29,7 +29,6 @@ static const char *file_end_bmp = ".bmp";
 
 static char** wallpaperNames;
 static size_t wallpaperNamesLength = 0;
-static int usedWallpaperIndex = -1;
 
 struct wallpaper obrwWallpaperOpt_getNewObject()
 {
@@ -39,29 +38,6 @@ struct wallpaper obrwWallpaperOpt_getNewObject()
 
     return usedWallpaper;
 }
-
-/** The getter-method to get the name of the last wallpaper. */
-char*
-obrwWallpaperOpt_getUsedWallpaper( void )
-{
-	if( 0 > usedWallpaperIndex )
-	{
-		//failure
-		obrwLogger_info( "No last wallpaper found.");
-
-		return "";
-	}//if
-
-	if( 1 < OBRW_GLOBAL_DEBUG )
-	{
-        char *logMsg = ( char* ) malloc ( ( 22 + strlen ( wallpaperNames[usedWallpaperIndex] ) ) * sizeof ( char ) );
-        sprintf ( logMsg, "Last wallpaper was <%s>.", wallpaperNames[usedWallpaperIndex] );
-        obrwLogger_debug ( logMsg );
-        obrwUtils_freeCString ( logMsg );
-	}//if
-	//success
-	return &wallpaperNames[usedWallpaperIndex][0];
-}//obrwWallpaperOpt_getUsedWallpaper()
 
 
 /** Checks a filename if it's a possible wallpaper. */
@@ -388,13 +364,11 @@ obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath, struct wallpap
         while( 0 == strcmp( obrwConfig_getWallpaperLastSet(), wallpaperNames[usedWallpaperIndex] ) );//while
     }
 
-//    wpObject.id = usedWallpaperIndex;
     wpObject->id = usedWallpaperIndex;
     strcpy(wpObject->name, wallpaperNames[usedWallpaperIndex]);
 
 	if( 0 != obrwWallpaperOpt_setWallpaperWithFeh( dirPath, wallpaperNames[usedWallpaperIndex] ) )
 	{
-        usedWallpaperIndex = -1;
 		//failure
 		return -2;
 	}//if
