@@ -38,5 +38,6 @@ void parseConfigFileFor_quotationMarkStringInStringWithSpaces_expectedString();
 void parseConfigFileFor_quotationMarkStringWithSpacesInStringWithSpaces_expectedString();
 void parseConfigFileFor_StringWithOneQuotationMarkStart_expectedNullResult();
 void parseConfigFileFor_StringWithOneQuotationMarkEnd_expectedNullResult();
+void parseConfigFileFor_possibleWallpaperDirectorySetStringOfUser_expectedPathStringResult();
 
 #endif //OBRW_OBRW_STRINGTEST_H

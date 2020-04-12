@@ -61,21 +61,23 @@ obrwConfig_isConfigFileReadWriteable( void )
 
 	if( userHome == NULL )
 	{
-		printf( "[ERR] No user homedir avaiable\n" );
+		obrwLogger_error ( "No user homedir avaiable" );
 		return EXIT_FAILURE;
 	}//if
 
 	//if( userHome == "NOHOME" )
 	if( strncmp( userHome, "NOHOME", 6 ) == 0 )
 	{
-		printf( "[ERR] User home = NOHOME !?\n" );
+		obrwLogger_error ( "No user home available: User home = NOHOME !?" );
 		return EXIT_FAILURE;
 	}//if 
-	
+
 	if( 0 < OBRW_GLOBAL_DEBUG ) 
 	{
-		//FIXME
-		printf( "[DBG] home is %s\n", userHome );
+        char *logMsg = ( char* ) malloc ( ( 16 + strlen ( userHome ) ) * sizeof ( char ) );
+        sprintf ( logMsg, "User home is <%s>.", userHome );
+        obrwLogger_debug ( logMsg );
+        obrwUtils_freeCString ( logMsg );
 	}//if
 	configPath = obrwString_2CStringsTo1( userHome, obrwConf );
 
@@ -89,34 +91,50 @@ obrwConfig_isConfigFileReadWriteable( void )
 			}//if
 			else
 			{
-				printf( "[ERR] %s exists, is readable but isn't writeable\n", configPath );
+                char *logMsg = ( char* ) malloc ( ( 56 + strlen ( configPath ) ) * sizeof ( char ) );
+                sprintf ( logMsg, "Configfile <%s> exists and is readable, but not writeable.", configPath );
+                obrwLogger_error ( logMsg );
+                obrwUtils_freeCString ( logMsg );
+
 				return EXIT_FAILURE;
 			}//else
 		}//if
 		else
 		{
-			//FIXME
-			printf( "[ERR] %s exist but isn't readable\n", configPath );
+            char *logMsg = ( char* ) malloc ( ( 41 + strlen ( configPath ) ) * sizeof ( char ) );
+            sprintf ( logMsg, "Configfile <%s> exists but is not readable.", configPath );
+            obrwLogger_error ( logMsg );
+            obrwUtils_freeCString ( logMsg );
+
 			return EXIT_FAILURE;
 		}//else
 	}//if
 	else
 	{
-		//FIXME
-		printf( "[ERR] %s doesn't exist\n", configPath );
+        char *logMsg = ( char* ) malloc ( ( 41 + strlen ( configPath ) ) * sizeof ( char ) );
+        sprintf ( logMsg, "Configfile <%s> doesn't exists.", configPath );
+        obrwLogger_error ( logMsg );
+        obrwUtils_freeCString ( logMsg );
+
 		return EXIT_FAILURE;
 	}//else
 
 	if( 1 < OBRW_GLOBAL_DEBUG )
 	{
-		//FIXME
-		printf( "[DBG] Config Access (EXIST) is %d and Access (READ) is %d\n", access( configPath, EXIST ), access( configPath, READ ) );
+        char *logMsg = ( char* ) malloc ( 58 * sizeof ( char ) );
+        sprintf ( logMsg, "Configfile access (EXIST) is <%d> and Access (READ) is <%d>.",
+                  access( configPath, EXIST ),
+                  access( configPath, READ ) );
+        obrwLogger_debug ( logMsg );
+        obrwUtils_freeCString ( logMsg );
 	}//if
 	
 	if( 0 < OBRW_GLOBAL_DEBUG )
 	{
-		//FIXME
-		printf( "[DBG] obrw.conf is: %s (EXIST and READABLE)\n", configPath );
+        char *logMsg = ( char* ) malloc ( ( 38 + strlen ( configPath ) ) * sizeof ( char ) );
+        sprintf ( logMsg, "Configfile is <%s> (EXISTS and READABLE)", configPath );
+        obrwLogger_debug ( logMsg );
+        obrwUtils_freeCString ( logMsg );
 	}//if
 
 	obrwUtils_freeCString( configPath );
@@ -139,18 +157,18 @@ obrwConfig_readConfigFile( void )
 
 	if( obrwConfig_isConfigFileReadWriteable() == EXIT_FAILURE )
 	{
-		printf( "[ERR] Configfile problems detect.\n" );
+		obrwLogger_error ( "Configfile problems detect." );
 		return EXIT_FAILURE;
 	}//if
 
-	printf( "[DBG] Configfile is read and writeable\n" );
+	obrwLogger_debug ( "Configfile is read and writeable." );
 	
 	if( userHome == NULL )
 	{
 		return EXIT_FAILURE;
 	}//if
 
-	printf( "[DBG] user home is not NULL\n" );
+	obrwLogger_debug( "User home is not NULL" );
 	
 	filename = obrwString_2CStringsTo1( userHome, obrwConf );
 
@@ -178,8 +196,10 @@ obrwConfig_readConfigFile( void )
 						//next line
 						if( 1 < OBRW_GLOBAL_DEBUG )
 						{
-							//FIXME
-							printf( "[DBG] Commentline found --> %s\n", lineBuffer );
+                            char *logMsg = ( char* ) malloc ( ( 32 + strlen ( lineBuffer ) ) * sizeof ( char ) );
+                            sprintf ( logMsg, "Found comment in config file: <%s>", lineBuffer);
+                            obrwLogger_debug ( logMsg );
+                            obrwUtils_freeCString ( logMsg );
 						}//if
 
 						break;
@@ -189,13 +209,15 @@ obrwConfig_readConfigFile( void )
 						{
 							if( 0 < OBRW_GLOBAL_DEBUG )
 							{
-								//FIXME
-								printf( "[DBG] wpDir is %s\n", lineBuffer );
+                                char *logMsg = ( char* ) malloc ( ( 36 + strlen ( lineBuffer ) ) * sizeof ( char ) );
+                                sprintf ( logMsg, "Found key 'wpDir =' in config file: <%s>", lineBuffer);
+                                obrwLogger_debug ( logMsg );
+                                obrwUtils_freeCString ( logMsg );
 							}//if
 
 							if( ( wpDir = obrwString_parseConfigFileFor( lineBuffer ) ) == NULL )
 							{
-								printf( "[ERR] wallpaperDir is NULL.\n" );
+								obrwLogger_error ( "WallpaperDir is NULL." );
 								return EXIT_FAILURE;
 							}//if
 							else
@@ -216,13 +238,15 @@ obrwConfig_readConfigFile( void )
 						{
 							if( 0 < OBRW_GLOBAL_DEBUG )
 							{
-								//FIXME
-								printf( "[DBG] lastSet is %s\n", lineBuffer );
+                                char *logMsg = ( char* ) malloc ( ( 40 + strlen ( lineBuffer ) ) * sizeof ( char ) );
+                                sprintf ( logMsg, "Found key 'lastSet =' in config file: <%s>", lineBuffer);
+                                obrwLogger_debug ( logMsg );
+                                obrwUtils_freeCString ( logMsg );
 							}//if
 							
 							if( ( lastSet = obrwString_parseConfigFileFor( lineBuffer ) ) == NULL )
 							{
-								printf( "[ERR] lastSet wallpaper is NULL.\n" );
+								obrwLogger_error ( "Last set wallpaper is NULL." );
 								return EXIT_FAILURE;
 							}//if
 							else
@@ -242,7 +266,7 @@ obrwConfig_readConfigFile( void )
 						//next line
 						if( 1 < OBRW_GLOBAL_DEBUG )
 						{
-							printf( "[DBG] Empty line in configfile found.\n" );
+							obrwLogger_debug ( "Empty line in configfile found." );
 						}//if
 				}//switch
 		}//while
@@ -252,7 +276,7 @@ obrwConfig_readConfigFile( void )
 	}//if
 	else
 	{
-		printf( "[ERR] Configfile could't not opened (but checked?).\n" );
+		obrwLogger_error ( "Configfile could't not opened (but checked?)." );
 		return EXIT_FAILURE;
 	}//else
 
@@ -285,7 +309,11 @@ obrwConfig_writeSettingsToConfigFile( void )
 	
 	filename = obrwString_2CStringsTo1( userHome, obrwConf );
 
-    printf( "[DBG] config file is %s\n", filename );
+    char *msg = (char*) malloc(17 + strlen(filename));
+    sprintf( msg, "Config file is <%s>.", filename );
+    obrwLogger_debug ( msg );
+    obrwUtils_freeCString(msg);
+
 	// (1) open file
 	if( ( fp = fopen( filename, "r+" ) ) != NULL )
 	{
@@ -308,11 +336,11 @@ obrwConfig_writeSettingsToConfigFile( void )
 			//if( strncmp( lineBuffer[0], 'w', 1 ) == 0 )
 			if( lineBuffer[0] == 'l' )
 			{
-			    printf( "[DBG] found line which starts with char 'l'\n" );
+			    obrwLogger_debug ( "Found line which starts with char 'l'" );
 
 				if( strncmp( lineBuffer, "lastSet = ", 10 ) == 0 )
 				{
-				    printf( "[DBG] found line with 'lastSet' information\n" );
+				    obrwLogger_debug ( "Found line with 'lastSet' information" );
 					//FIXME
 					strcat( configNow, "lastSet = \"" );
 					toSet = obrwWallpaperOpt_getUsedWallpaper();
@@ -321,7 +349,11 @@ obrwConfig_writeSettingsToConfigFile( void )
 				}//if
 				else
 				{
-				    printf( "[DBG] was no config value key -> %s", lineBuffer );
+                    char *logMsg = ( char* ) malloc ( ( 28 + strlen ( lineBuffer ) ) * sizeof ( char ) );
+                    sprintf ( logMsg, "Was no config value key: <%s>.", lineBuffer );
+                    obrwLogger_debug ( logMsg );
+                    obrwUtils_freeCString ( logMsg );
+
 					strncat( configNow, lineBuffer, strlen( lineBuffer ) );
 					strcat( configNow, "\n" );
 				}//else
@@ -338,17 +370,15 @@ obrwConfig_writeSettingsToConfigFile( void )
 
 		if( 1 < OBRW_GLOBAL_DEBUG )
 		{
-			//FIXME
-			printf( "[DBG] >>>\n[DBG] New configfile to write:\n" );
-			printf( "----------------------------------------------------\n" );
-			printf( "%s", configNow );
-			printf( "----------------------------------------------------\n" );
-			printf( "[DBG] <<<\n" );
+			obrwLogger_debug ( "New configfile to write:" );
+			obrwLogger_debug ( "----------------------------------------------------" );
+			obrwLogger_logMultiLine(DEBUG_TAG, configNow);
+			obrwLogger_debug ( "----------------------------------------------------" );
 		}//if
 	}//if
 	else
 	{
-		printf( "[ERR] Couldn't open configfile to read old config.\n" );
+		obrwLogger_error ( "Couldn't open configfile to read old config." );
 		return EXIT_FAILURE;
 	}//else
 
@@ -363,7 +393,7 @@ obrwConfig_writeSettingsToConfigFile( void )
 	}//if
 	else
 	{
-		printf( "[ERR] Couldn't open configfile to write new config.\n" );
+		obrwLogger_error ( "Couldn't open configfile to write new config." );
 	}//else
 
 	//success

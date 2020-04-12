@@ -21,7 +21,7 @@ obrwFileMBytes_fileFormatInit()
 {
 	if( 2 < OBRW_GLOBAL_DEBUG )
 	{
-		printf( "[DBG] Init file-format * jfif.\n" );
+		obrwLogger_debug ( "Init file-format jfif." );
 	}
 	//init jfif
 	jfif.b0 = 0xFF;

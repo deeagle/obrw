@@ -38,6 +38,8 @@
 #endif
 #include "obrw_config.h"
 #include "obrw_globals.h"
+#include "obrw_logger.h"
+#include "obrw_utils.h"
 
 
 /** Max counts of stored wallpapers. */

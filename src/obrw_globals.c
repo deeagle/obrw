@@ -21,4 +21,4 @@
 #include "obrw_globals.h"
 
 /** Global variable for used debuglevel. */
-int OBRW_GLOBAL_DEBUG = 0;
+int OBRW_GLOBAL_DEBUG = 1;

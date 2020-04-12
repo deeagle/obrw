@@ -25,6 +25,8 @@
 #include <string.h>
 #include <stdio.h>
 #include "obrw_globals.h"
+#include "obrw_logger.h"
+#include "obrw_utils.h"
 
 
 /** 

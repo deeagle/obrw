@@ -39,14 +39,17 @@ obrwWallpaperOpt_getUsedWallpaper( void )
 	if( 0 > usedWallpaper )
 	{
 		//failure
-		printf( "[DBG] no last wallpaper found.\n");
+		obrwLogger_info( "No last wallpaper found.");
 
 		return "";
 	}//if
 
 	if( 1 < OBRW_GLOBAL_DEBUG )
 	{
-		printf( "[DBG] %s\n", wallpaperNames[usedWallpaper] );
+        char *logMsg = ( char* ) malloc ( ( 22 + strlen ( wallpaperNames[usedWallpaper] ) ) * sizeof ( char ) );
+        sprintf ( logMsg, "Last wallpaper was <%s>.", wallpaperNames[usedWallpaper] );
+        obrwLogger_debug ( logMsg );
+        obrwUtils_freeCString ( logMsg );
 	}//if
 	//success
 	return &wallpaperNames[usedWallpaper][0];
@@ -84,7 +87,10 @@ obrwWallpaperOpt_filterWallpapersEndTag( const char* possibleWallpaperName )
 	
 	if( 1 < OBRW_GLOBAL_DEBUG )
 	{
-		printf( "[DBG] Buffer is %s\n", buffer );
+        char *logMsg = ( char* ) malloc ( ( 13 + strlen ( buffer ) ) * sizeof ( char ) );
+        sprintf ( logMsg, "Buffer is <%s>.", buffer );
+        obrwLogger_debug ( logMsg );
+        obrwUtils_freeCString ( logMsg );
 	}//if
 
 	//checks the endtag
@@ -96,7 +102,7 @@ obrwWallpaperOpt_filterWallpapersEndTag( const char* possibleWallpaperName )
 				{
 					if( 1 < OBRW_GLOBAL_DEBUG )
 					{
-						printf( "[DBG] Possible Wallpaper (.jpg) found.\n" );
+						obrwLogger_debug ( "Possible Wallpaper (.jpg) found." );
 					}//if
 				}//if
 				else
@@ -111,7 +117,7 @@ obrwWallpaperOpt_filterWallpapersEndTag( const char* possibleWallpaperName )
 				{
 					if( 1 < OBRW_GLOBAL_DEBUG )
 					{
-						printf( "[DBG] Possible Wallpaper (.png) found.\n" );
+						obrwLogger_debug ( "Possible Wallpaper (.png) found." );
 					}//if
 				}//if
 				else
@@ -126,7 +132,7 @@ obrwWallpaperOpt_filterWallpapersEndTag( const char* possibleWallpaperName )
 				{
 					if( 1 < OBRW_GLOBAL_DEBUG )
 					{
-						printf( "[DBG] Possible Wallpaper (.bmp) found.\n" );
+						obrwLogger_debug ( "Possible Wallpaper (.bmp) found." );
 					}//if
 				}//if
 				else
@@ -139,7 +145,7 @@ obrwWallpaperOpt_filterWallpapersEndTag( const char* possibleWallpaperName )
 		default:
 				if( 1 < OBRW_GLOBAL_DEBUG )
 				{
-					printf( "[DBG] Endtag not in mind.\n" );
+					obrwLogger_debug ( "Endtag not in mind or implemented." );
 				}//if
 	}//switch
 	
@@ -169,7 +175,15 @@ obrwWallpaperOpt_addWallpaper( const char* wallpaper )
 	if( NULL == wallpaper )
 	{
 		return -1;
-	}//if 
+	}//if
+
+    if( 1 < OBRW_GLOBAL_DEBUG )
+    {
+        char *logMsg = (char*)malloc(27 * sizeof(char));
+        sprintf( logMsg, "Add possible wallpaper: <%s>.", wallpaper);
+        obrwLogger_info( logMsg );
+        obrwUtils_freeCString( logMsg );
+    }//if
 
 	//only do something, if max-wallpaper-border isn't reached
 	//init of wallpaperNamesLength is -1
@@ -177,7 +191,7 @@ obrwWallpaperOpt_addWallpaper( const char* wallpaper )
 	{
 		if( 0 < OBRW_GLOBAL_DEBUG )
 		{
-			printf( "[DBG] Max count of wallpapers reach.\n" );
+			obrwLogger_debug ( "Max count of wallpapers reach." );
 			return -2;
 		}//if
 	}//if
@@ -196,7 +210,7 @@ obrwWallpaperOpt_addWallpaper( const char* wallpaper )
 		if( !wallpaperNames )
 		{
 			//error no memory avaiable
-			printf( "[ERR] Could't allocate Memory!\n" );
+			obrwLogger_error ( "Could't allocate Memory!" );
 			return -3;
 		}//if
 
@@ -211,8 +225,11 @@ obrwWallpaperOpt_addWallpaper( const char* wallpaper )
 	wallpaperNames[wallpaperNamesLength][strlen( wallpaper ) + 1] = '\0';
 
 	if( 1 < OBRW_GLOBAL_DEBUG )
-	{	
-		printf( "[DBG] Add file %zu = %s\n", wallpaperNamesLength, wallpaper );
+	{
+        char *logMsg = ( char* ) malloc ( ( 12 + strlen ( wallpaper ) ) * sizeof ( char ) );
+        sprintf ( logMsg, "Add file <%s>.", wallpaper );
+        obrwLogger_debug ( logMsg );
+        obrwUtils_freeCString ( logMsg );
 	}//if
 
 	wallpaperNamesLength++;
@@ -239,8 +256,10 @@ obrwWallpaperOpt_readDirAndSetWallpaper( const char* dirPath )
 	{
 		if( 0 < OBRW_GLOBAL_DEBUG )
 		{
-			//FIXME
-			printf( "[DBG] Wallpaperpath is %s.\n", dirPath );
+            char *logMsg = ( char* ) malloc ( ( 22 + strlen ( dirPath ) ) * sizeof ( char ) );
+            sprintf ( logMsg, "Wallpaperpath is <%s>.", dirPath );
+            obrwLogger_debug ( logMsg );
+            obrwUtils_freeCString ( logMsg );
 		}//if
 	}//else
 
@@ -297,12 +316,16 @@ obrwWallpaperOpt_readDirAndSetWallpaper( const char* dirPath )
 
 			if( 0 < OBRW_GLOBAL_DEBUG )
 			{
-				printf( "[DBG] Count of found wallpapers is %d.\n", wpEntry );
+                // char length for wallpaper count: 1.000.000.000 = 10
+                char *logMsg = ( char* ) malloc ( ( 32 + 10 ) * sizeof ( char ) );
+                sprintf ( logMsg, "Count of found wallpapers is <%d>.", wpEntry );
+                obrwLogger_debug ( logMsg );
+                obrwUtils_freeCString ( logMsg );
 			}//if
 		}//if
 		else
 		{
-			printf( "[ERR] No Wallpapers in wallpaperpath avaiable.\n" );
+			obrwLogger_error ( "No Wallpapers in wallpaperpath avaiable." );
 			return EXIT_FAILURE;
 		}//else
 
@@ -312,7 +335,7 @@ obrwWallpaperOpt_readDirAndSetWallpaper( const char* dirPath )
 	}//if
 	else
 	{
-		printf( "[ERR] Wallpaperdir isn't avaiable!\n" );
+		obrwLogger_error ( "Wallpaperdir isn't avaiable!" );
 		return EXIT_FAILURE;
 	}//else
 
@@ -329,12 +352,12 @@ obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath )
 	{
 		if( NULL == wallpaperNames )
 		{
-			printf( "[ERR] Problem with stored wallpapers.\n" );
+			obrwLogger_error ( "Problem with stored wallpapers." );
 		}//if
 
 		if( NULL == dirPath )
 		{
-			printf( "[ERR] No dirPath set.\n" );
+			obrwLogger_error ( "No dirPath set." );
 		}//if
 		
 		//failure
@@ -380,7 +403,7 @@ obrwWallpaperOpt_setWallpaperWithFeh( const char* dirPath, const char* wpToSet )
 	{
 		if( NULL == wpToSet )
 		{
-			printf( "[ERR] No wallpaper to set.\n" );
+			obrwLogger_error ( "No wallpaper to set." );
 		}//if
 
 		//failure
@@ -400,7 +423,7 @@ obrwWallpaperOpt_setWallpaperWithFeh( const char* dirPath, const char* wpToSet )
 	{
 		if( 0 < OBRW_GLOBAL_DEBUG )
 		{
-			printf( "[ERR] Get no heap-space for feh-string.\n" );
+			obrwLogger_error ( "Got no heap-space for feh-string." );
 		}//if 
 
 		//failure -2;
@@ -415,8 +438,10 @@ obrwWallpaperOpt_setWallpaperWithFeh( const char* dirPath, const char* wpToSet )
 
 	if( 0 < OBRW_GLOBAL_DEBUG )
 	{
-		//FIXME
-		printf( "[DBG] Try to set Wallpaper: %s\n", sysCmd );
+        char *logMsg = ( char* ) malloc ( ( 32 + strlen(sysCmd) ) * sizeof ( char ) );
+        sprintf ( logMsg, "Try to set wallpaper via: <%s>.", sysCmd );
+        obrwLogger_debug ( logMsg );
+        obrwUtils_freeCString ( logMsg );
 	}//if
 	
 	//SHELL

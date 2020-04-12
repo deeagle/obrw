@@ -26,6 +26,7 @@
 
 #include <time.h>
 #include <stdlib.h>
+#include "obrw_logger.h"
 
 /**
  * Local var describes the multiplikator for random digits. For example:

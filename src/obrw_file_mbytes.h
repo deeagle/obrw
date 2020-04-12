@@ -21,6 +21,7 @@
 #define BYTE unsigned char
 
 #include "obrw_globals.h"
+#include "obrw_logger.h"
 
 struct obrwFileMBytes_fileFormat
 {

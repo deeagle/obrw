@@ -32,6 +32,7 @@ void obrw_stringTest_runAll()
     parseConfigFileFor_quotationMarkStringWithSpacesInStringWithSpaces_expectedString();
     parseConfigFileFor_StringWithOneQuotationMarkStart_expectedNullResult();
     parseConfigFileFor_StringWithOneQuotationMarkEnd_expectedNullResult();
+    parseConfigFileFor_possibleWallpaperDirectorySetStringOfUser_expectedPathStringResult();
 
 }
 
@@ -230,6 +231,36 @@ void parseConfigFileFor_StringWithOneQuotationMarkEnd_expectedNullResult()
 
     assert(result == NULL);
 }
+
+/**
+ * Tests a possible setted wallpaper path.
+ * <p>
+ * I include it because of strange string behaviours.
+ * After a compare of <code>strncpy</codo> and <code>strncat</code>, it seems, that <code>strncat</code> works correctly.
+ * After a nice format of the compare, both work like expected ... -> :?
+ * <p>
+ * Setup was:
+ * - Both with reset destination via memset
+ * - same const source
+ * - same length to copy
+ * - results
+ *   - strncpy -> /home/user/.config/wallpaper-directory/1024x768/>.
+ *   - strncat -> /home/user/.config/wallpaper-directory/1024x768/
+ */
+void parseConfigFileFor_possibleWallpaperDirectorySetStringOfUser_expectedPathStringResult()
+{
+    printf("%s - parseConfigFileFor_possibleWallpaperDirectorySetStringOfUser_expectedPathStringResult\n", OBRW_STRINGTEST_CLASS_NAME);
+
+    const char* str = "wpDir = \"/home/user/.config/wallpaper-directory/1024x768/\"";
+    const char* expected = "/home/user/.config/wallpaper-directory/1024x768/";
+    char* result;
+
+    result = obrwString_parseConfigFileFor(str);
+
+    assert(result != NULL);
+    assert(0 == strcmp(expected, result));
+}
+
 
 void getCountOfChar_nullInputs_expectedNullResult()
 {

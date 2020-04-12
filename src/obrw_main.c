@@ -26,40 +26,40 @@
 int
 main()
 {
-	//TODO 
-	//set global debug lvl
-	OBRW_GLOBAL_DEBUG = 1;
 	obrwUtils_setRandomCounterToZero();
 
 	if( 0 < OBRW_GLOBAL_DEBUG )
 	{
-		printf( "[MSG] OBRW DEBUG-LVL is %d.\n", OBRW_GLOBAL_DEBUG );
+        char *logMsg = (char*)malloc(20 * sizeof(char));
+        sprintf( logMsg, "Debug-Lvl is %d.", OBRW_GLOBAL_DEBUG);
+        obrwLogger_info( logMsg );
+        obrwUtils_freeCString( logMsg );
 	}//if
 
 	if( obrwChkExt_isFehOnSystem() == 0 )
 	{
 		freeAllToClose();
-		printf( "[ERR] Feh is not installed!\n" );
+		obrwLogger_error("Feh is not installed!");
 		return EXIT_FAILURE;
 	}//if
 
 	if( obrwConfig_readConfigFile() /* == EXIT_FAILURE */)
 	{
 		freeAllToClose();
-		printf( "[ERR] obrw.conf error!\n" );
+		obrwLogger_error("Found error in obrw.conf!");
 		return EXIT_FAILURE;
 	}//if
 
 	if( obrwWallpaperOpt_readDirAndSetWallpaper( obrwConfig_getWallpaperDir() ) /* == EXIT_FAILURE */ )
 	{
 		freeAllToClose();
-		printf( "[ERR] Wallpaperoptions error!\n" );
+		obrwLogger_error("Wallpaperoptions error!");
 	}//if
 
 	if( obrwConfig_writeSettingsToConfigFile() /* == EXIT_FAILURE */ )
 	{
 		freeAllToClose();
-		printf( "[ERR] Wallpaper write error!\n" );
+		obrwLogger_error("Wallpaper write error!");
 	}//if
 
 	//before exit free() local globs
