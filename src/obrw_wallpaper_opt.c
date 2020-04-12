@@ -35,15 +35,15 @@ struct wallpaper obrwWallpaperOpt_getNewObject()
 {
     struct wallpaper usedWallpaper;
     usedWallpaper.id = -1;
+    strcpy(usedWallpaper.name, "");
 
     return usedWallpaper;
 }
 
 /** The getter-method to get the name of the last wallpaper. */
-const char*
+char*
 obrwWallpaperOpt_getUsedWallpaper( void )
 {
-    printf("setted wallpaper is %d\n", usedWallpaperIndex);
 	if( 0 > usedWallpaperIndex )
 	{
 		//failure
@@ -390,8 +390,7 @@ obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath, struct wallpap
 
 //    wpObject.id = usedWallpaperIndex;
     wpObject->id = usedWallpaperIndex;
-
-    printf("used wallpaper is %d\n", usedWallpaperIndex);
+    strcpy(wpObject->name, wallpaperNames[usedWallpaperIndex]);
 
 	if( 0 != obrwWallpaperOpt_setWallpaperWithFeh( dirPath, wallpaperNames[usedWallpaperIndex] ) )
 	{

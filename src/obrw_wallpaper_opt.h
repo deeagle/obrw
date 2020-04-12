@@ -55,6 +55,7 @@
 
 struct wallpaper {
 	int id;
+	char name[1024];
 };
 
 static const size_t len_file_end;
@@ -113,7 +114,7 @@ static int obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char*, struct wall
  * \retval wallpapername success.
  * \retval NULL fail.
  */
-const char* obrwWallpaperOpt_getUsedWallpaper( void );
+char* obrwWallpaperOpt_getUsedWallpaper( void );
 
 /**
  * Reads the wallpaperdir (attribute), add the wallpapers to a list and tries to set a random of the wallpapers.

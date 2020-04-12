@@ -300,7 +300,7 @@ obrwConfig_writeSettingsToConfigFile( struct wallpaper* wpObject )
 	char* lineBuffer;
 	char* filename;
 	char* configNow;
-	const char* toSet;
+	char* toSet;
 	char* bufP;
 	int bufferSize = 256;
 
@@ -340,11 +340,9 @@ obrwConfig_writeSettingsToConfigFile( struct wallpaper* wpObject )
 
 				if( strncmp( lineBuffer, "lastSet = ", 10 ) == 0 )
 				{
-				    printf("index from set dir %d\n", wpObject->id);
 				    obrwLogger_debug ( "Found line with 'lastSet' information" );
-					//FIXME
 					strcat( configNow, "lastSet = \"" );
-					toSet = obrwWallpaperOpt_getUsedWallpaper();
+					toSet = wpObject->name;
 					strncat( configNow, toSet, strlen( toSet ) );
 					strcat( configNow, "\"\n" );
 				}//if

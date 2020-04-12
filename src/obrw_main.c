@@ -58,8 +58,6 @@ main()
 		obrwLogger_error("Wallpaperoptions error!");
 	}//if
 
-	printf("index from main = %d\n", usedWP.id);
-
 	if( obrwConfig_writeSettingsToConfigFile(&usedWP) /* == EXIT_FAILURE */ )
 	{
 		freeAllToClose();
