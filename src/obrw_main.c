@@ -24,8 +24,23 @@
 
 /** The main-method, which starts the obrw-process. */
 int
-main()
+main(int argc, char **argv)
 {
+    // given arguments
+    for(int i = 0; i < argc; i++)
+    {
+        printf("argument %d are <%s>.\n", i, argv[i]);
+        if( strlen(argv[i]) > strlen("--log-level="))
+        {
+            if( strcmp(argv[i], "--log-level="))
+            {
+                printf("found log-level param\n");
+
+            }
+        }
+    }
+
+    // start
 	obrwUtils_setRandomCounterToZero();
 
 	if( 0 < OBRW_GLOBAL_DEBUG )
