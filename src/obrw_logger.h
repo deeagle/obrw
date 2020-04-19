@@ -26,10 +26,15 @@
 #include <time.h>
 
 static const char* SUCCESS_TAG;
+static const int SUCCESS_LOG_LEVEL;
 static const char* INFO_TAG;
+static const int INFO_LOG_LEVEL;
 static const char* WARNING_TAG;
+static const int WARNING_LOG_LEVEL;
 static const char* DEBUG_TAG;
+static const int DEBUG_LOG_LEVEL;
 static const char* ERROR_TAG;
+static const int ERROR_LOG_LEVEL;
 
 static void obrwLogger_success(const char* message);
 static void obrwLogger_info(const char* message);
@@ -37,6 +42,9 @@ static void obrwLogger_warning(const char* message);
 static void obrwLogger_debug(const char* message);
 static void obrwLogger_debugSystem(const char* message);
 static void obrwLogger_error(const char* message);
+
+static void obrwLogger_setLogLevelByTag(const char *logLevel);
+static void obrwLogger_setLogLevelByLevel(const int logLevel);
 
 /**
  * Prints a multi line log message to stdout.

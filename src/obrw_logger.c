@@ -15,35 +15,104 @@
  */
 #include "obrw_logger.h"
 
+static int LOG_LEVEL = 0;
+
 static const char* SUCCESS_TAG = " OK \0";
+static const int SUCCESS_LOG_LEVEL = 0;
 static const char* INFO_TAG = "INFO\0";
+static const int INFO_LOG_LEVEL = 1;
 static const char* WARNING_TAG = "WARN\0";
+static const int WARNING_LOG_LEVEL = 2;
 static const char* DEBUG_TAG = "DEBG\0";
+static const int DEBUG_LOG_LEVEL = 3;
+static const char* DEBUG_SYSTEM_TAG = "DSYS\0";
+static const int DEBUG_SYSTEM_LOG_LEVEL = 4;
 static const char* ERROR_TAG = "ERR!\0";
+static const int ERROR_LOG_LEVEL = 0;
+
+static const int HIGHEST_NUMBER_FOR_LOG_LEVEL = DEBUG_SYSTEM_LOG_LEVEL;
+
+static void obrwLogger_setLogLevelByTag(const char *logLevel)
+{
+    assert(logLevel != NULL);
+
+    printf("get log tag %s\n", logLevel);
+
+    if( obrwLogger_isTagKnown(logLevel) )
+    {
+        if(0 == strcmp(SUCCESS_TAG, logLevel))
+        {
+            obrwLogger_setLogLevelByLevel(SUCCESS_LOG_LEVEL);
+        }
+        else if(0 == strcmp(INFO_TAG, logLevel))
+        {
+            printf("hier\n");
+            obrwLogger_setLogLevelByLevel(INFO_LOG_LEVEL);
+        }
+        else if(0 == strcmp(WARNING_TAG, logLevel))
+        {
+            obrwLogger_setLogLevelByLevel(WARNING_LOG_LEVEL);
+        }
+        else if(0 == strcmp(DEBUG_TAG, logLevel))
+        {
+            obrwLogger_setLogLevelByLevel(DEBUG_LOG_LEVEL);
+        }
+        else if(0 == strcmp(DEBUG_SYSTEM_TAG, logLevel))
+        {
+            obrwLogger_setLogLevelByLevel(DEBUG_SYSTEM_LOG_LEVEL);
+        }
+        else if(0 == strcmp(ERROR_TAG, logLevel))
+        {
+            obrwLogger_setLogLevelByLevel(ERROR_LOG_LEVEL);
+        }
+    }
+}
+
+static void obrwLogger_setLogLevelByLevel(const int logLevel)
+{
+    assert(logLevel <= DEBUG_LOG_LEVEL);
+
+    LOG_LEVEL = logLevel;
+}
 
 static void obrwLogger_success(const char* message)
 {
-    obrwLogger_log(SUCCESS_TAG, message);
+    if(LOG_LEVEL >= SUCCESS_LOG_LEVEL)
+    {
+        obrwLogger_log(SUCCESS_TAG, message);
+    }
 }
 
 static void obrwLogger_info(const char* message)
 {
-    obrwLogger_log(INFO_TAG, message);
+    if(LOG_LEVEL >= INFO_LOG_LEVEL)
+    {
+        obrwLogger_log(INFO_TAG, message);
+    }
 }
 
 static void obrwLogger_warning(const char* message)
 {
-    obrwLogger_log(WARNING_TAG, message);
+    if(LOG_LEVEL >= WARNING_LOG_LEVEL)
+    {
+        obrwLogger_log(WARNING_TAG, message);
+    }
 }
 
 static void obrwLogger_debug(const char* message)
 {
-    obrwLogger_log(DEBUG_TAG, message);
+    if(LOG_LEVEL >= DEBUG_LOG_LEVEL)
+    {
+        obrwLogger_log(DEBUG_TAG, message);
+    }
 }
 
 static void obrwLogger_debugSystem(const char* message)
 {
-    obrwLogger_log(DEBUG_TAG, message);
+    if(LOG_LEVEL >= DEBUG_SYSTEM_LOG_LEVEL)
+    {
+        obrwLogger_log(DEBUG_TAG, message);
+    }
 }
 
 static void obrwLogger_error(const char* message)

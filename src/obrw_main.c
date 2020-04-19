@@ -46,6 +46,7 @@ main(int argc, char **argv)
                 {
                     printf( "tag is unknown.\n");
                 }
+                obrwLogger_setLogLevelByTag(levelString);
             }
         }
     }
