@@ -38,13 +38,13 @@ main(int argc, char **argv)
                 char *levelString = (char*)malloc(strlen("DEBUG") * sizeof(char));
                 strncpy(levelString, argv[i] + strlen("--log-level="), strlen("DEBUG"));
                 printf("found log-level param %s\n", levelString);
-                if( isTagKnown(levelString))
+                if(obrwLogger_isTagKnown(levelString))
                 {
                     printf("tag is known.\n");
                 }
                 else
                 {
-                    printf( "tag is unknown.\n.");
+                    printf( "tag is unknown.\n");
                 }
             }
         }

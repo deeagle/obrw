@@ -52,7 +52,7 @@ static void obrwLogger_logMultiLine(const char* tag, const char* messageLines);
  * @param tag The debug tag
  * @return <code>TRUE</code> if the tag is known, otherwise <code>FALSE</code>.
  */
-static int isTagKnown(const char* tag);
+static int obrwLogger_isTagKnown(const char* tag);
 
 /**
  * Bla bla

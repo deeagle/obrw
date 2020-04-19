@@ -57,7 +57,7 @@ static void obrwLogger_logMultiLine(const char *tag, const char *messageLines)
     assert(strlen(tag) > 0);
     assert(messageLines != NULL);
     assert(strlen(messageLines) > 0);
-    assert(isTagKnown(tag) == TRUE);
+    assert(obrwLogger_isTagKnown(tag) == TRUE);
 
     const int lineBufferSize = 1024;
     char lineBuffer[lineBufferSize];
@@ -87,7 +87,7 @@ static void obrwLogger_logMultiLine(const char *tag, const char *messageLines)
     }
 }
 
-static int isTagKnown(const char *tag)
+static int obrwLogger_isTagKnown(const char *tag)
 {
     assert(tag != NULL);
 
@@ -109,7 +109,7 @@ obrwLogger_log(const char* tag, const char* message)
     assert(tag != NULL);
     assert(strlen(tag) > 0);
     assert(message != NULL);
-    assert(isTagKnown(tag) == TRUE);
+    assert(obrwLogger_isTagKnown(tag) == TRUE);
 
    printf("[%s] %s\n", tag, message);
 }
