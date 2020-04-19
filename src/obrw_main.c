@@ -34,8 +34,18 @@ main(int argc, char **argv)
         {
             if( strcmp(argv[i], "--log-level="))
             {
-                printf("found log-level param\n");
-
+                // use longest entry for malloc size
+                char *levelString = (char*)malloc(strlen("DEBUG") * sizeof(char));
+                strncpy(levelString, argv[i] + strlen("--log-level="), strlen("DEBUG"));
+                printf("found log-level param %s\n", levelString);
+                if( isTagKnown(levelString))
+                {
+                    printf("tag is known.\n");
+                }
+                else
+                {
+                    printf( "tag is unknown.\n.");
+                }
             }
         }
     }
