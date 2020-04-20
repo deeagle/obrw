@@ -33,8 +33,12 @@ static const char* WARNING_TAG;
 static const int WARNING_LOG_LEVEL;
 static const char* DEBUG_TAG;
 static const int DEBUG_LOG_LEVEL;
+static const char* DEBUG_SYSTEM_TAG;
+static const int DEBUG_SYSTEM_LOG_LEVEL;
 static const char* ERROR_TAG;
 static const int ERROR_LOG_LEVEL;
+
+static const int HIGHEST_NUMBER_FOR_LOG_LEVEL;
 
 static void obrwLogger_success(const char* message);
 static void obrwLogger_info(const char* message);
