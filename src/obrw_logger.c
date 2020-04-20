@@ -30,7 +30,8 @@ static const int DEBUG_SYSTEM_LOG_LEVEL = 4;
 static const char* ERROR_TAG = "ERR!\0";
 static const int ERROR_LOG_LEVEL = 0;
 
-static const int HIGHEST_NUMBER_FOR_LOG_LEVEL = DEBUG_SYSTEM_LOG_LEVEL;
+//TODO move into init function
+static const int HIGHEST_NUMBER_FOR_LOG_LEVEL = 4;
 
 static void obrwLogger_setLogLevelByTag(const char *logLevel)
 {
