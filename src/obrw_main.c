@@ -26,30 +26,7 @@
 int
 main(int argc, char **argv)
 {
-    // given arguments
-    for(int i = 0; i < argc; i++)
-    {
-        printf("argument %d are <%s>.\n", i, argv[i]);
-        if( strlen(argv[i]) > strlen("--log-level="))
-        {
-            if( strcmp(argv[i], "--log-level="))
-            {
-                // use longest entry for malloc size
-                char *levelString = (char*)malloc(strlen("DEBUG") * sizeof(char));
-                strncpy(levelString, argv[i] + strlen("--log-level="), strlen("DEBUG"));
-                printf("found log-level param %s\n", levelString);
-                if(obrwLogger_isTagKnown(levelString))
-                {
-                    printf("tag is known.\n");
-                }
-                else
-                {
-                    printf( "tag is unknown.\n");
-                }
-                obrwLogger_setLogLevelByTag(levelString);
-            }
-        }
-    }
+    obrwMain_handleCommandLineArguments(argc, argv);
 
     // start
 	obrwUtils_setRandomCounterToZero();
@@ -95,6 +72,37 @@ main(int argc, char **argv)
 
 	return EXIT_SUCCESS;
 }//main( int, char** )
+
+void
+obrwMain_handleCommandLineArguments(const int argc, const char **argv)
+{
+    printf("argc is %d\n", argc);
+    // given arguments
+    for(int i = 0; i < argc; i++)
+    {
+        printf("argument %d are <%s>.\n", i, argv[i]);
+        // value of argv must be greater than tag because of the delivered value!
+        if(strlen(argv[i]) > strlen(CLI_ARGUMENT_LOG_LEVEL))
+        {
+            if(strcmp(argv[i], CLI_ARGUMENT_LOG_LEVEL))
+            {
+                // use longest entry for malloc size
+                char *levelString = (char *) malloc(strlen("DEBUG") * sizeof(char));
+                strncpy(levelString, argv[i] + strlen("--log-level="), strlen("DEBUG"));
+                printf("found log-level param %s\n", levelString);
+                if(obrwLogger_isTagKnown(levelString))
+                {
+                    printf("tag is known.\n");
+                }
+                else
+                {
+                    printf("tag is unknown.\n");
+                }
+                obrwLogger_setLogLevelByTag(levelString);
+            }
+        }
+    }
+}
 
 /** Free all used alocated heap-memory (if used) (to use before programm ends). */
 void

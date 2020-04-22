@@ -31,6 +31,8 @@
 #include "obrw_logger.c"
 #include "obrw_wallpaper_opt.c"
 
+static const char* CLI_ARGUMENT_LOG_LEVEL="--log-level=";
+
 /**
  * The main-method, which starts the obrw-process.
  *
@@ -39,6 +41,8 @@
  * \retval EXIT_FAILURE any kind of error.
  */
 int main();
+
+void obrwMain_handleCommandLineArguments(const int, const char**);
 
 /**
  * Free all used alocated heap-memory (if used, to use before programm ends -> success and fail).
