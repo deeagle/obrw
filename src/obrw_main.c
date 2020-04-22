@@ -87,7 +87,7 @@ obrwMain_handleCommandLineArguments(const int argc, const char **argv)
             if(strcmp(argv[i], CLI_ARGUMENT_LOG_LEVEL))
             {
                 // use longest entry for malloc size
-                char *levelString = (char *) malloc(strlen("DEBUG") * sizeof(char));
+                char *levelString = (char *) malloc(OBRW_LOGGER_STR_LEN_OF_LONGEST_CLI_PARAM * sizeof(char));
                 strncpy(levelString, argv[i] + strlen("--log-level="), strlen("DEBUG"));
                 printf("found log-level param %s\n", levelString);
                 if(obrwLogger_isTagKnown(levelString))
@@ -98,7 +98,7 @@ obrwMain_handleCommandLineArguments(const int argc, const char **argv)
                 {
                     printf("tag is unknown.\n");
                 }
-                obrwLogger_setLogLevelByTag(levelString);
+                obrwLogger_setLogLevelByCliValue(levelString);
             }
         }
     }

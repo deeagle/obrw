@@ -30,6 +30,7 @@ main()
  */
 void runAll()
 {
+    obrw_loggerTest_runAll();
     obrw_stringTest_runAll();
 }
 

@@ -26,19 +26,26 @@
 #include <time.h>
 
 static const char* SUCCESS_TAG;
+static const char* SUCCESS_CLI_VALUE;
 static const int SUCCESS_LOG_LEVEL;
 static const char* INFO_TAG;
+static const char* INFO_CLI_VALUE;
 static const int INFO_LOG_LEVEL;
 static const char* WARNING_TAG;
+static const char* WARNING_CLI_VALUE;
 static const int WARNING_LOG_LEVEL;
 static const char* DEBUG_TAG;
+static const char* DEBUG_CLI_VALUE;
 static const int DEBUG_LOG_LEVEL;
 static const char* DEBUG_SYSTEM_TAG;
+static const char* DEBUG_SYSTEM_CLI_VALUE;
 static const int DEBUG_SYSTEM_LOG_LEVEL;
 static const char* ERROR_TAG;
+static const char* ERROR_CLI_VALUE;
 static const int ERROR_LOG_LEVEL;
 
-static const int HIGHEST_NUMBER_FOR_LOG_LEVEL;
+static const int OBRW_LOGGER_HIGHEST_NUMBER_FOR_LOG_LEVEL;
+static const int OBRW_LOGGER_STR_LEN_OF_LONGEST_CLI_PARAM;
 
 static void obrwLogger_success(const char* message);
 static void obrwLogger_info(const char* message);
@@ -47,7 +54,7 @@ static void obrwLogger_debug(const char* message);
 static void obrwLogger_debugSystem(const char* message);
 static void obrwLogger_error(const char* message);
 
-static void obrwLogger_setLogLevelByTag(const char *logLevel);
+static int obrwLogger_setLogLevelByCliValue(const char *cliLogLevelValue);
 static void obrwLogger_setLogLevelByLevel(const int logLevel);
 
 /**
@@ -58,6 +65,7 @@ static void obrwLogger_setLogLevelByLevel(const int logLevel);
  */
 static void obrwLogger_logMultiLine(const char* tag, const char* messageLines);
 
+static int obrwLogger_isCliParamValueKnown(const char*);
 /**
  * Returns if the given tag is known.
  *

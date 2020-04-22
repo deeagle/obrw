@@ -18,60 +18,73 @@
 static int LOG_LEVEL = 0;
 
 static const char* SUCCESS_TAG = " OK \0";
+static const char* SUCCESS_CLI_VALUE = "SUCCESS\0";
 static const int SUCCESS_LOG_LEVEL = 0;
 static const char* INFO_TAG = "INFO\0";
+static const char* INFO_CLI_VALUE = "INFO\0";
 static const int INFO_LOG_LEVEL = 1;
 static const char* WARNING_TAG = "WARN\0";
+static const char* WARNING_CLI_VALUE = "WARNING\0";
 static const int WARNING_LOG_LEVEL = 2;
 static const char* DEBUG_TAG = "DEBG\0";
+static const char* DEBUG_CLI_VALUE = "DEBUG\0";
 static const int DEBUG_LOG_LEVEL = 3;
+static const char* DEBUG_SYSTEM_CLI_VALUE = "SYSTEM\0";
 static const char* DEBUG_SYSTEM_TAG = "DSYS\0";
 static const int DEBUG_SYSTEM_LOG_LEVEL = 4;
 static const char* ERROR_TAG = "ERR!\0";
+static const char* ERROR_CLI_VALUE = "ERROR\0";
 static const int ERROR_LOG_LEVEL = 0;
 
 //TODO move into init function
-static const int HIGHEST_NUMBER_FOR_LOG_LEVEL = 4;
+static const int OBRW_LOGGER_HIGHEST_NUMBER_FOR_LOG_LEVEL = 4;
+static const int OBRW_LOGGER_STR_LEN_OF_LONGEST_CLI_PARAM = 7;
 
-static void obrwLogger_setLogLevelByTag(const char *logLevel)
+static int obrwLogger_setLogLevelByCliValue(const char *cliLogLevelValue)
 {
-    assert(logLevel != NULL);
+    assert(cliLogLevelValue != NULL);
 
-    printf("get log tag %s\n", logLevel);
+    printf("get log tag %s\n", cliLogLevelValue);
 
-    if( obrwLogger_isTagKnown(logLevel) )
+    if( obrwLogger_isCliParamValueKnown(cliLogLevelValue) )
     {
-        if(0 == strcmp(SUCCESS_TAG, logLevel))
+        if(0 == strcmp(SUCCESS_CLI_VALUE, cliLogLevelValue))
         {
             obrwLogger_setLogLevelByLevel(SUCCESS_LOG_LEVEL);
         }
-        else if(0 == strcmp(INFO_TAG, logLevel))
+        else if(0 == strcmp(INFO_CLI_VALUE, cliLogLevelValue))
         {
             printf("hier\n");
             obrwLogger_setLogLevelByLevel(INFO_LOG_LEVEL);
         }
-        else if(0 == strcmp(WARNING_TAG, logLevel))
+        else if(0 == strcmp(WARNING_CLI_VALUE, cliLogLevelValue))
         {
             obrwLogger_setLogLevelByLevel(WARNING_LOG_LEVEL);
         }
-        else if(0 == strcmp(DEBUG_TAG, logLevel))
+        else if(0 == strcmp(DEBUG_CLI_VALUE, cliLogLevelValue))
         {
             obrwLogger_setLogLevelByLevel(DEBUG_LOG_LEVEL);
         }
-        else if(0 == strcmp(DEBUG_SYSTEM_TAG, logLevel))
+        else if(0 == strcmp(DEBUG_SYSTEM_CLI_VALUE, cliLogLevelValue))
         {
             obrwLogger_setLogLevelByLevel(DEBUG_SYSTEM_LOG_LEVEL);
         }
-        else if(0 == strcmp(ERROR_TAG, logLevel))
+        else if(0 == strcmp(ERROR_CLI_VALUE, cliLogLevelValue))
         {
             obrwLogger_setLogLevelByLevel(ERROR_LOG_LEVEL);
         }
+
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
     }
 }
 
 static void obrwLogger_setLogLevelByLevel(const int logLevel)
 {
-    assert(logLevel <= DEBUG_LOG_LEVEL);
+    assert(logLevel <= OBRW_LOGGER_HIGHEST_NUMBER_FOR_LOG_LEVEL);
 
     LOG_LEVEL = logLevel;
 }
@@ -155,6 +168,21 @@ static void obrwLogger_logMultiLine(const char *tag, const char *messageLines)
         }
         messageLineCharIndex++;
     }
+}
+
+static int obrwLogger_isCliParamValueKnown(const char *cliLogLevelArgument)
+{
+    assert(cliLogLevelArgument != NULL);
+
+    if(0 == strcmp(cliLogLevelArgument, SUCCESS_CLI_VALUE) || 0 == strcmp(cliLogLevelArgument, INFO_CLI_VALUE) ||
+       0 == strcmp(cliLogLevelArgument, WARNING_CLI_VALUE) ||
+       0 == strcmp(cliLogLevelArgument, DEBUG_CLI_VALUE) || 0 == strcmp(cliLogLevelArgument, DEBUG_SYSTEM_CLI_VALUE) ||
+       0 == strcmp(cliLogLevelArgument, ERROR_CLI_VALUE))
+    {
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 static int obrwLogger_isTagKnown(const char *tag)
