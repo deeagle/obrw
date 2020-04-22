@@ -38,13 +38,12 @@ static const int ERROR_LOG_LEVEL = 0;
 
 //TODO move into init function
 static const int OBRW_LOGGER_HIGHEST_NUMBER_FOR_LOG_LEVEL = 4;
+//TODO move into init function
 static const int OBRW_LOGGER_STR_LEN_OF_LONGEST_CLI_PARAM = 7;
 
 static int obrwLogger_setLogLevelByCliValue(const char *cliLogLevelValue)
 {
     assert(cliLogLevelValue != NULL);
-
-    printf("get log tag %s\n", cliLogLevelValue);
 
     if( obrwLogger_isCliParamValueKnown(cliLogLevelValue) )
     {

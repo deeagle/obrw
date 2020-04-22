@@ -76,11 +76,9 @@ main(int argc, char **argv)
 void
 obrwMain_handleCommandLineArguments(const int argc, const char **argv)
 {
-    printf("argc is %d\n", argc);
     // given arguments
     for(int i = 0; i < argc; i++)
     {
-        printf("argument %d are <%s>.\n", i, argv[i]);
         // value of argv must be greater than tag because of the delivered value!
         if(strlen(argv[i]) > strlen(CLI_ARGUMENT_LOG_LEVEL))
         {
@@ -88,16 +86,7 @@ obrwMain_handleCommandLineArguments(const int argc, const char **argv)
             {
                 // use longest entry for malloc size
                 char *levelString = (char *) malloc(OBRW_LOGGER_STR_LEN_OF_LONGEST_CLI_PARAM * sizeof(char));
-                strncpy(levelString, argv[i] + strlen("--log-level="), strlen("DEBUG"));
-                printf("found log-level param %s\n", levelString);
-                if(obrwLogger_isTagKnown(levelString))
-                {
-                    printf("tag is known.\n");
-                }
-                else
-                {
-                    printf("tag is unknown.\n");
-                }
+                strncpy(levelString, argv[i] + strlen("--log-level="), OBRW_LOGGER_STR_LEN_OF_LONGEST_CLI_PARAM);
                 obrwLogger_setLogLevelByCliValue(levelString);
             }
         }
