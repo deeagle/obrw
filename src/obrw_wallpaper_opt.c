@@ -139,14 +139,14 @@ obrwWallpaperOpt_addWallpaper( const char* wallpaper )
 
 	char *logMsg = (char*)malloc(27 * sizeof(char) * strlen(wallpaper));
     sprintf( logMsg, "Add possible wallpaper: <%s>.", wallpaper);
-    obrwLogger_info( logMsg );
+    obrwLogger_debug( logMsg );
     obrwUtils_freeCString( logMsg );
 
 	//only do something, if max-wallpaper-border isn't reached
 	//init of wallpaperNamesLength is -1
 	if( MAX_WALLPAPERS < wallpaperNamesLength )
 	{
-	    obrwLogger_debug ( "Max count of wallpapers reach." );
+	    obrwLogger_info ( "Max count of wallpapers reach." );
 		return -2;
 	}//if
 
@@ -271,7 +271,7 @@ obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath, struct wallpaper *w
         // char length for wallpaper count: 1.000.000.000 = 10
         char *logMsg = (char *) malloc((32 + 10) * sizeof(char));
         sprintf(logMsg, "Count of found wallpapers is <%d>.", wpEntry);
-        obrwLogger_debug(logMsg);
+        obrwLogger_info(logMsg);
         obrwUtils_freeCString(logMsg);
     }//if
 
