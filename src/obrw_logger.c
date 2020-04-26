@@ -186,6 +186,42 @@ static void obrwLogger_logMultiLine(const char *tag, const char *messageLines)
     }
 }
 
+static const int obrwLogger_getLogLevelByLogTag(const char *tag)
+{
+    assert(tag != NULL);
+    assert(strlen(tag) > 0);
+    assert(obrwLogger_isTagKnown(tag) == TRUE);
+
+    int logLevel = SUCCESS_LOG_LEVEL;
+
+    if(0 == strcmp(SUCCESS_TAG, tag))
+    {
+        logLevel = SUCCESS_LOG_LEVEL;
+    }
+    else if(0 == strcmp(INFO_TAG, tag))
+    {
+        logLevel = INFO_LOG_LEVEL;
+    }
+    else if(0 == strcmp(WARNING_TAG, tag))
+    {
+        logLevel = WARNING_LOG_LEVEL;
+    }
+    else if(0 == strcmp(DEBUG_TAG, tag))
+    {
+        logLevel = DEBUG_LOG_LEVEL;
+    }
+    else if(0 == strcmp(DEBUG_SYSTEM_TAG, tag))
+    {
+        logLevel = DEBUG_SYSTEM_LOG_LEVEL;
+    }
+    else if(0 == strcmp(ERROR_TAG, tag))
+    {
+        logLevel = ERROR_LOG_LEVEL;
+    }
+
+    return logLevel;
+}
+
 static int obrwLogger_isCliParamValueKnown(const char *cliLogLevelArgument)
 {
     assert(cliLogLevelArgument != NULL);
@@ -225,7 +261,10 @@ obrwLogger_log(const char* tag, const char* message)
     assert(message != NULL);
     assert(obrwLogger_isTagKnown(tag) == TRUE);
 
-   printf("[%s] %s\n", tag, message);
+    if(LOG_LEVEL >= obrwLogger_getLogLevelByLogTag(tag))
+    {
+        printf("[%s] %s\n", tag, message);
+    }
 }
 
 static void obrwLogger_printLogLevel()
