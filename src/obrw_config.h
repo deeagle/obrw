@@ -32,7 +32,6 @@
 	#define READ	R_OK
 #endif
 #include <stdio.h>
-#include "obrw_globals.h"
 #include "obrw_logger.h"
 #include "obrw_string.c"
 #include "obrw_utils.c"

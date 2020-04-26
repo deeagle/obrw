@@ -27,17 +27,10 @@ int
 main(int argc, char **argv)
 {
     obrwMain_handleCommandLineArguments(argc, (const char **) argv);
+    obrwLogger_printLogLevel();
 
     // start
 	obrwUtils_setRandomCounterToZero();
-
-	if( 0 < OBRW_GLOBAL_DEBUG )
-	{
-        char *logMsg = (char*)malloc(20 * sizeof(char));
-        sprintf( logMsg, "Debug-Lvl is %d.", OBRW_GLOBAL_DEBUG);
-        obrwLogger_info( logMsg );
-        obrwUtils_freeCString( logMsg );
-	}//if
 
 	if( obrwChkExt_isFehOnSystem() == 0 )
 	{

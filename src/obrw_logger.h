@@ -53,6 +53,7 @@ static void obrwLogger_warning(const char* message);
 static void obrwLogger_debug(const char* message);
 static void obrwLogger_debugSystem(const char* message);
 static void obrwLogger_error(const char* message);
+static void obrwLogger_printLogLevel();
 
 static int obrwLogger_setLogLevelByCliValue(const char *cliLogLevelValue);
 static void obrwLogger_setLogLevelByLevel(const int logLevel);

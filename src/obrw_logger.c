@@ -227,3 +227,11 @@ obrwLogger_log(const char* tag, const char* message)
 
    printf("[%s] %s\n", tag, message);
 }
+
+static void obrwLogger_printLogLevel()
+{
+    char *logMsg = (char*)malloc(20 * sizeof(char));
+    sprintf( logMsg, "Used Log-Level is %d.", LOG_LEVEL);
+    obrwLogger_info( logMsg );
+    obrwUtils_freeCString( logMsg );
+}

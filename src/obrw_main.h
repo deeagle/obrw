@@ -27,7 +27,6 @@
 #include "obrw_chk_externals.c"
 #include "obrw_config.c"
 #include "obrw_factory.c"
-#include "obrw_globals.c"
 #include "obrw_logger.c"
 #include "obrw_wallpaper_opt.c"
 
