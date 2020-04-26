@@ -152,13 +152,10 @@ obrwWallpaperOpt_addWallpaper( const char* wallpaper )
 		return -1;
 	}//if
 
-    if( 1 < OBRW_GLOBAL_DEBUG )
-    {
-        char *logMsg = (char*)malloc(27 * sizeof(char));
-        sprintf( logMsg, "Add possible wallpaper: <%s>.", wallpaper);
-        obrwLogger_info( logMsg );
-        obrwUtils_freeCString( logMsg );
-    }//if
+	char *logMsg = (char*)malloc(27 * sizeof(char) * strlen(wallpaper));
+    sprintf( logMsg, "Add possible wallpaper: <%s>.", wallpaper);
+    obrwLogger_info( logMsg );
+    obrwUtils_freeCString( logMsg );
 
 	//only do something, if max-wallpaper-border isn't reached
 	//init of wallpaperNamesLength is -1
