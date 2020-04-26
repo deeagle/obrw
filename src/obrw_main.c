@@ -75,7 +75,7 @@ obrwMain_handleCommandLineArguments(const int argc, const char **argv)
         // value of argv must be greater than tag because of the delivered value!
         if(strlen(argv[i]) > strlen(CLI_ARGUMENT_LOG_LEVEL))
         {
-            if(strcmp(argv[i], CLI_ARGUMENT_LOG_LEVEL))
+            if(0 == strncmp(argv[i], CLI_ARGUMENT_LOG_LEVEL, strlen(CLI_ARGUMENT_LOG_LEVEL)))
             {
                 // use longest entry for malloc size
                 char *levelString = (char *) malloc(OBRW_LOGGER_STR_LEN_OF_LONGEST_CLI_PARAM * sizeof(char));
