@@ -21,20 +21,20 @@
 
 #include "obrw_main.h"
 
-
 /** The main-method, which starts the obrw-process. */
 int
-main()
+main(int argc, char **argv)
 {
-	obrwUtils_setRandomCounterToZero();
+    obrwMain_handleCommandLineArguments(argc, (const char **) argv);
+    if(IS_USER_CALLED_HELP)
+    {
+        obrwMain_printHelp(argv[0]);
+        return EXIT_SUCCESS;
+    }
+    obrwLogger_printLogLevel();
 
-	if( 0 < OBRW_GLOBAL_DEBUG )
-	{
-        char *logMsg = (char*)malloc(20 * sizeof(char));
-        sprintf( logMsg, "Debug-Lvl is %d.", OBRW_GLOBAL_DEBUG);
-        obrwLogger_info( logMsg );
-        obrwUtils_freeCString( logMsg );
-	}//if
+    // start
+	obrwUtils_setRandomCounterToZero();
 
 	if( obrwChkExt_isFehOnSystem() == 0 )
 	{
@@ -69,6 +69,50 @@ main()
 
 	return EXIT_SUCCESS;
 }//main( int, char** )
+
+void
+obrwMain_handleCommandLineArguments(const int argc, const char **argv)
+{
+    // given arguments
+    for(int i = 0; i < argc; i++)
+    {
+        if(strlen(argv[i]) == strlen(CLI_HELP))
+        {
+            if(0 == strcmp(argv[i], CLI_HELP))
+            {
+                IS_USER_CALLED_HELP = TRUE;
+                break;
+            }
+        }
+
+        // value of argv must be greater than tag because of the delivered value!
+        if(strlen(argv[i]) > strlen(CLI_ARGUMENT_LOG_LEVEL))
+        {
+            if(0 == strncmp(argv[i], CLI_ARGUMENT_LOG_LEVEL, strlen(CLI_ARGUMENT_LOG_LEVEL)))
+            {
+                // use longest entry for malloc size
+                char *levelString = (char *) malloc(OBRW_LOGGER_STR_LEN_OF_LONGEST_CLI_PARAM * sizeof(char));
+                strncpy(levelString, argv[i] + strlen("--log-level="), OBRW_LOGGER_STR_LEN_OF_LONGEST_CLI_PARAM);
+                obrwLogger_setLogLevelByCliValue(levelString);
+            }
+        }
+    }
+}
+
+void obrwMain_printHelp(const char* name)
+{
+    printf("OBRW is OpenBoxRandomWallpaper\n");
+    printf("Usage: %s [OPTION]\n", name);
+    printf("Sets a randomized wallpaper from a given directory.\n");
+    printf("\n");
+    printf("  --log-level=<param>\tSupported params are:\n");
+    printf("  \t\t\t  SUCCESS, ERROR (default)\n");
+    printf("  \t\t\t  INFO\n");
+    printf("  \t\t\t  WARNING\n");
+    printf("  \t\t\t  DEBUG\n");
+    printf("  \t\t\t  SYSTEM\n");
+    printf("  --help\t\tPrints this help.\n");
+}
 
 /** Free all used alocated heap-memory (if used) (to use before programm ends). */
 void

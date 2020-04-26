@@ -72,13 +72,10 @@ obrwString_parseConfigFileFor( const char* line )
                     memset( parsedStr, '\0', sizeof( char ) * len);
                     strncat( parsedStr, strPtr, lenToCopyWithoutClosingQuotationMark );
 
-                    if( 0 < OBRW_GLOBAL_DEBUG )
-                    {
-                        char *logMsg = ( char* ) malloc ( ( 20 + strlen ( parsedStr ) ) * sizeof ( char ) );
-                        sprintf ( logMsg, "Parsed string is <%s>.", parsedStr );
-                        obrwLogger_info ( logMsg );
-                        obrwUtils_freeCString ( logMsg );
-                    }//if
+                    char *logMsg = ( char* ) malloc ( ( 20 + strlen ( parsedStr ) ) * sizeof ( char ) );
+                    sprintf ( logMsg, "Parsed string is <%s>.", parsedStr );
+                    obrwLogger_info ( logMsg );
+                    obrwUtils_freeCString ( logMsg );
                 }//if
                 else
                 {

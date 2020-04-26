@@ -27,9 +27,15 @@
 #include "obrw_chk_externals.c"
 #include "obrw_config.c"
 #include "obrw_factory.c"
-#include "obrw_globals.c"
 #include "obrw_logger.c"
 #include "obrw_wallpaper_opt.c"
+
+/** Command line param to set the log level. */
+static const char *CLI_ARGUMENT_LOG_LEVEL = "--log-level=";
+/** Command line param to call the help. */
+static const char *CLI_HELP = "--help";
+/** Helper constant to show help only (if called). */
+static int IS_USER_CALLED_HELP = FALSE;
 
 /**
  * The main-method, which starts the obrw-process.
@@ -41,9 +47,20 @@
 int main();
 
 /**
- * Free all used alocated heap-memory (if used, to use before programm ends -> success and fail).
+ * Method to handle the command line arguments centralized.
  *
- * returns Nothing, it's void.
+ * @param argc The given argument count.
+ * @param argv An char array with the given arguments.
+ */
+void obrwMain_handleCommandLineArguments(const int argc, const char **argv);
+
+/**
+ * Prints the help to stdout.
+ */
+void obrwMain_printHelp();
+
+/**
+ * Free all used allocated heap-memory (if used, to use before program ends -> success and fail).
  */
 void freeAllToClose( void );
 

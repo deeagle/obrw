@@ -72,13 +72,11 @@ obrwConfig_isConfigFileReadWriteable( void )
 		return EXIT_FAILURE;
 	}//if 
 
-	if( 0 < OBRW_GLOBAL_DEBUG ) 
-	{
-        char *logMsg = ( char* ) malloc ( ( 16 + strlen ( userHome ) ) * sizeof ( char ) );
-        sprintf ( logMsg, "User home is <%s>.", userHome );
-        obrwLogger_debug ( logMsg );
-        obrwUtils_freeCString ( logMsg );
-	}//if
+    char *logMsg = (char *) malloc((16 + strlen(userHome)) * sizeof(char));
+    sprintf(logMsg, "User home is <%s>.", userHome);
+    obrwLogger_debug(logMsg);
+    obrwUtils_freeCString(logMsg);
+
 	configPath = obrwString_2CStringsTo1( userHome, obrwConf );
 
 	// $USERHOME/.obrw.config exists and accessable?
@@ -119,23 +117,17 @@ obrwConfig_isConfigFileReadWriteable( void )
 		return EXIT_FAILURE;
 	}//else
 
-	if( 1 < OBRW_GLOBAL_DEBUG )
-	{
-        char *logMsg = ( char* ) malloc ( 58 * sizeof ( char ) );
-        sprintf ( logMsg, "Configfile access (EXIST) is <%d> and Access (READ) is <%d>.",
-                  access( configPath, EXIST ),
-                  access( configPath, READ ) );
-        obrwLogger_debug ( logMsg );
-        obrwUtils_freeCString ( logMsg );
-	}//if
-	
-	if( 0 < OBRW_GLOBAL_DEBUG )
-	{
-        char *logMsg = ( char* ) malloc ( ( 38 + strlen ( configPath ) ) * sizeof ( char ) );
-        sprintf ( logMsg, "Configfile is <%s> (EXISTS and READABLE)", configPath );
-        obrwLogger_debug ( logMsg );
-        obrwUtils_freeCString ( logMsg );
-	}//if
+    char *logMsgConfigAccess = (char *) malloc(58 * sizeof(char));
+    sprintf(logMsgConfigAccess, "Configfile access (EXIST) is <%d> and Access (READ) is <%d>.",
+            access(configPath, EXIST),
+            access(configPath, READ));
+    obrwLogger_debug(logMsgConfigAccess);
+    obrwUtils_freeCString(logMsgConfigAccess);
+
+    char *logMsgConfigReadable = (char *) malloc((38 + strlen(configPath)) * sizeof(char));
+    sprintf(logMsgConfigReadable, "Configfile is <%s> (EXISTS and READABLE)", configPath);
+    obrwLogger_debug(logMsgConfigReadable);
+    obrwUtils_freeCString(logMsgConfigReadable);
 
 	obrwUtils_freeCString( configPath );
 
@@ -189,31 +181,29 @@ obrwConfig_readConfigFile( void )
 				*bufP = '\0';
 			}//if
 
+            char *logMsgFoundComment;
+            char *logMsgFoundWallpaperKey;
+            char *logMsgFoundLastWallpaperKey;
+
 			switch( lineBuffer[0] )
 			{
 				//checks if the line starts with '#'
 				case '#':
 						//next line
-						if( 1 < OBRW_GLOBAL_DEBUG )
-						{
-                            char *logMsg = ( char* ) malloc ( ( 32 + strlen ( lineBuffer ) ) * sizeof ( char ) );
-                            sprintf ( logMsg, "Found comment in config file: <%s>", lineBuffer);
-                            obrwLogger_debug ( logMsg );
-                            obrwUtils_freeCString ( logMsg );
-						}//if
+						logMsgFoundComment = ( char* ) malloc ( ( 32 + strlen ( lineBuffer ) ) * sizeof ( char ) );
+                        sprintf ( logMsgFoundComment, "Found comment in config file: <%s>", lineBuffer);
+                        obrwLogger_debug ( logMsgFoundComment );
+                        obrwUtils_freeCString ( logMsgFoundComment );
 
 						break;
 				//checks if the line starts with 'w' --> wpDir
 				case 'w':
 						if( strncmp( lineBuffer, "wpDir =", 7 ) == 0 )
 						{
-							if( 0 < OBRW_GLOBAL_DEBUG )
-							{
-                                char *logMsg = ( char* ) malloc ( ( 36 + strlen ( lineBuffer ) ) * sizeof ( char ) );
-                                sprintf ( logMsg, "Found key 'wpDir =' in config file: <%s>", lineBuffer);
-                                obrwLogger_debug ( logMsg );
-                                obrwUtils_freeCString ( logMsg );
-							}//if
+						    logMsgFoundWallpaperKey = ( char* ) malloc ( ( 36 + strlen ( lineBuffer ) ) * sizeof ( char ) );
+                            sprintf ( logMsgFoundWallpaperKey, "Found key 'wpDir =' in config file: <%s>", lineBuffer);
+                            obrwLogger_debug ( logMsgFoundWallpaperKey );
+                            obrwUtils_freeCString ( logMsgFoundWallpaperKey );
 
 							if( ( wpDir = obrwString_parseConfigFileFor( lineBuffer ) ) == NULL )
 							{
@@ -236,13 +226,10 @@ obrwConfig_readConfigFile( void )
 				case 'l':
 						if( strncmp( lineBuffer, "lastSet =", 9 ) == 0 )
 						{
-							if( 0 < OBRW_GLOBAL_DEBUG )
-							{
-                                char *logMsg = ( char* ) malloc ( ( 40 + strlen ( lineBuffer ) ) * sizeof ( char ) );
-                                sprintf ( logMsg, "Found key 'lastSet =' in config file: <%s>", lineBuffer);
-                                obrwLogger_debug ( logMsg );
-                                obrwUtils_freeCString ( logMsg );
-							}//if
+						    logMsgFoundLastWallpaperKey = ( char* ) malloc ( ( 40 + strlen ( lineBuffer ) ) * sizeof ( char ) );
+                            sprintf ( logMsgFoundLastWallpaperKey, "Found key 'lastSet =' in config file: <%s>", lineBuffer);
+                            obrwLogger_debug ( logMsgFoundLastWallpaperKey );
+                            obrwUtils_freeCString ( logMsgFoundLastWallpaperKey );
 							
 							if( ( lastSet = obrwString_parseConfigFileFor( lineBuffer ) ) == NULL )
 							{
@@ -264,10 +251,7 @@ obrwConfig_readConfigFile( void )
 				//checks if the line starts with ' '
 				default :
 						//next line
-						if( 1 < OBRW_GLOBAL_DEBUG )
-						{
-							obrwLogger_debug ( "Empty line in configfile found." );
-						}//if
+						obrwLogger_debug ( "Empty line in configfile found." );
 				}//switch
 		}//while
 
@@ -367,13 +351,10 @@ obrwConfig_writeSettingsToConfigFile( struct wallpaper* wallpaperItem )
 		// (3) close file
 		fclose( fp );
 
-		if( 0 < OBRW_GLOBAL_DEBUG )
-		{
-			obrwLogger_debug ( "New configfile to write:" );
-			obrwLogger_debug ( "----------------------------------------------------" );
-			obrwLogger_logMultiLine(DEBUG_TAG, configNow);
-			obrwLogger_debug ( "----------------------------------------------------" );
-		}//if
+		obrwLogger_debug ( "New configfile to write:" );
+		obrwLogger_debug ( "----------------------------------------------------" );
+		obrwLogger_logMultiLine(DEBUG_TAG, configNow);
+		obrwLogger_debug ( "----------------------------------------------------" );
 	}//if
 	else
 	{
