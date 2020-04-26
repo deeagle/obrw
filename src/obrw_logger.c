@@ -15,32 +15,6 @@
  */
 #include "obrw_logger.h"
 
-static int LOG_LEVEL = 0;
-
-static const char* SUCCESS_TAG = " OK \0";
-static const char* SUCCESS_CLI_VALUE = "SUCCESS\0";
-static const int SUCCESS_LOG_LEVEL = 0;
-static const char* INFO_TAG = "INFO\0";
-static const char* INFO_CLI_VALUE = "INFO\0";
-static const int INFO_LOG_LEVEL = 1;
-static const char* WARNING_TAG = "WARN\0";
-static const char* WARNING_CLI_VALUE = "WARNING\0";
-static const int WARNING_LOG_LEVEL = 2;
-static const char* DEBUG_TAG = "DEBG\0";
-static const char* DEBUG_CLI_VALUE = "DEBUG\0";
-static const int DEBUG_LOG_LEVEL = 3;
-static const char* DEBUG_SYSTEM_CLI_VALUE = "SYSTEM\0";
-static const char* DEBUG_SYSTEM_TAG = "DSYS\0";
-static const int DEBUG_SYSTEM_LOG_LEVEL = 4;
-static const char* ERROR_TAG = "ERR!\0";
-static const char* ERROR_CLI_VALUE = "ERROR\0";
-static const int ERROR_LOG_LEVEL = 0;
-
-//TODO move into init function
-static const int OBRW_LOGGER_HIGHEST_NUMBER_FOR_LOG_LEVEL = 4;
-//TODO move into init function
-static const int OBRW_LOGGER_STR_LEN_OF_LONGEST_CLI_PARAM = 7;
-
 static int obrwLogger_setLogLevelByCliValue(const char *cliLogLevelValue)
 {
     assert(cliLogLevelValue != NULL);
@@ -186,7 +160,7 @@ static void obrwLogger_logMultiLine(const char *tag, const char *messageLines)
     }
 }
 
-static const int obrwLogger_getLogLevelByLogTag(const char *tag)
+static int obrwLogger_getLogLevelByLogTag(const char *tag)
 {
     assert(tag != NULL);
     assert(strlen(tag) > 0);
