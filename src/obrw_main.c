@@ -26,7 +26,7 @@
 int
 main(int argc, char **argv)
 {
-    obrwMain_handleCommandLineArguments(argc, argv);
+    obrwMain_handleCommandLineArguments(argc, (const char **) argv);
 
     // start
 	obrwUtils_setRandomCounterToZero();
