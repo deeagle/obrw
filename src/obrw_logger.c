@@ -89,6 +89,9 @@ static void obrwLogger_setLogLevelByLevel(const int logLevel)
 
 static void obrwLogger_success(const char* message)
 {
+    assert(message != NULL);
+    assert(strlen(message) > 0);
+
     if(LOG_LEVEL >= SUCCESS_LOG_LEVEL)
     {
         obrwLogger_log(SUCCESS_TAG, message);
@@ -97,6 +100,9 @@ static void obrwLogger_success(const char* message)
 
 static void obrwLogger_info(const char* message)
 {
+    assert(message != NULL);
+    assert(strlen(message) > 0);
+
     if(LOG_LEVEL >= INFO_LOG_LEVEL)
     {
         obrwLogger_log(INFO_TAG, message);
@@ -105,6 +111,9 @@ static void obrwLogger_info(const char* message)
 
 static void obrwLogger_warning(const char* message)
 {
+    assert(message != NULL);
+    assert(strlen(message) > 0);
+
     if(LOG_LEVEL >= WARNING_LOG_LEVEL)
     {
         obrwLogger_log(WARNING_TAG, message);
@@ -113,6 +122,9 @@ static void obrwLogger_warning(const char* message)
 
 static void obrwLogger_debug(const char* message)
 {
+    assert(message != NULL);
+    assert(strlen(message) > 0);
+
     if(LOG_LEVEL >= DEBUG_LOG_LEVEL)
     {
         obrwLogger_log(DEBUG_TAG, message);
@@ -121,6 +133,9 @@ static void obrwLogger_debug(const char* message)
 
 static void obrwLogger_debugSystem(const char* message)
 {
+    assert(message != NULL);
+    assert(strlen(message) > 0);
+
     if(LOG_LEVEL >= DEBUG_SYSTEM_LOG_LEVEL)
     {
         obrwLogger_log(DEBUG_TAG, message);
@@ -129,6 +144,9 @@ static void obrwLogger_debugSystem(const char* message)
 
 static void obrwLogger_error(const char* message)
 {
+    assert(message != NULL);
+    assert(strlen(message) > 0);
+
     obrwLogger_log(ERROR_TAG, message);
 }
 
@@ -187,8 +205,8 @@ static int obrwLogger_isTagKnown(const char *tag)
 {
     assert(tag != NULL);
 
-    if (0 == strcmp(tag, SUCCESS_TAG) || 0 == strcmp(tag, INFO_TAG) || 0 == strcmp(tag, WARNING_TAG) ||
-        0 == strcmp(tag, DEBUG_TAG) || 0 == strcmp(tag, ERROR_TAG))
+    if(0 == strcmp(tag, SUCCESS_TAG) || 0 == strcmp(tag, INFO_TAG) || 0 == strcmp(tag, WARNING_TAG) ||
+       0 == strcmp(tag, DEBUG_TAG) || 0 == strcmp(tag, DEBUG_SYSTEM_CLI_VALUE) || 0 == strcmp(tag, ERROR_TAG))
     {
         return TRUE;
     }
