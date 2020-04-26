@@ -53,7 +53,6 @@ static int obrwLogger_setLogLevelByCliValue(const char *cliLogLevelValue)
         }
         else if(0 == strcmp(INFO_CLI_VALUE, cliLogLevelValue))
         {
-            printf("hier\n");
             obrwLogger_setLogLevelByLevel(INFO_LOG_LEVEL);
         }
         else if(0 == strcmp(WARNING_CLI_VALUE, cliLogLevelValue))
