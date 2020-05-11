@@ -287,6 +287,8 @@ obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath, struct wallpaper *w
 int
 obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath, struct wallpaper* wallpaperItem )
 {
+    obrwLogger_debug("Choose wallpaper and try to set.");
+
 	if( NULL == wallpaperNames || NULL == dirPath || strlen(dirPath) <= 0 )
 	{
 		if( NULL == wallpaperNames )
@@ -304,8 +306,18 @@ obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath, struct wallpap
 	}//if
 
     int usedWallpaperIndex;
-    if( obrwConfig_getWallpaperLastSet() == NULL )
+    if (obrwConfig_getWallpaperLastSet() == NULL || wallpaperNamesLength == 1)
     {
+        if (obrwConfig_getWallpaperLastSet() == NULL)
+        {
+            obrwLogger_debug("No last wallpaper found.");
+        }
+
+        if (wallpaperNamesLength == 1)
+        {
+            obrwLogger_debug("Last wallpaper will be ignored because it was only one wallpaper found to choose.");
+        }
+
         usedWallpaperIndex = obrwUtils_randomDigit() % wallpaperNamesLength;
     }
     else
