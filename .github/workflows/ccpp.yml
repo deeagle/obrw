@@ -14,9 +14,12 @@ jobs:
 
     steps:
     - name: Install tools
-      run: apk add cppcheck
-    - name: Collect versions
-      run: cppcheck --version
+      run: apk add make cppcheck g++
+    - name: Collect tool versions
+      run: |
+        cppcheck --version
+        make --version
+        g++ --version
     - name: Checkout code
       uses: actions/checkout@v2
     - name: make test
