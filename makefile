@@ -37,6 +37,7 @@ cppcheck: $(SRC) $(TEST_FILE_DIR)
 	@if [ ! -f "$(BIN_CPPCHECK)" ]; then \
 		echo "ERROR: $(BIN_CPPCHECK) not found."; \
 		echo "       you can install it via package manager."; \
+		exit 1; \
 	else \
 		$(BIN_CPPCHECK) $(SRC) $(TEST_FILE_DIR); \
 	fi
