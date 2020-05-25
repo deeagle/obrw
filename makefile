@@ -14,6 +14,7 @@ MAIN_C = src/obrw_main.c
 MAIN_TESTS = tests/obrw_tests.c
 DOCS_DIR = doc
 DOCS_APP = /usr/bin/doxygen
+BIN_CPPCHECK = /usr/bin/cppcheck
 
 # the compile 
 
@@ -31,6 +32,14 @@ debug: $(SRC)
 val: $(SRC)
 		$(CC) $(CFLAGS) -g -o $(TARGET_DIR)/$(NAME) $(MAIN_C)
 		valgrind -v --tool=memcheck --leak-check=full --show-reachable=yes --track-origins=yes --gen-suppressions=all ./$(TARGET_DIR)/$(NAME)
+
+cppcheck: $(SRC) $(TEST_FILE_DIR)
+	@if [ ! -f "$(BIN_CPPCHECK)" ]; then \
+		echo "ERROR: $(BIN_CPPCHECK) not found."; \
+		echo "       you can install it via package manager."; \
+	else \
+		$(BIN_CPPCHECK) $(SRC) $(TEST_FILE_DIR); \
+	fi
 
 test: $(SRC) $(TEST_FILE_DIR)
 		if [ ! -d "./$(TARGET_DIR)" ]; then \
