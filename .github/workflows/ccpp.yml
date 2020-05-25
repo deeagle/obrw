@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - name: Install CPPCheck
-      run: sudo apt-get update && apt-get install cppcheck && cppcheck --version
+      run: sudo apt-get update && sudo apt-get install cppcheck && cppcheck --version
     - name: Checkout code
       uses: actions/checkout@v2
     - name: make test
