@@ -12,7 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Install CPPCheck
+      run: sudo apt-get install cppcheck
+    - name: Checkout code
+      uses: actions/checkout@v2
     - name: make test
       run: make test
     - name: run-tests
