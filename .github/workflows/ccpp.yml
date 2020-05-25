@@ -10,9 +10,18 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    container: alpine
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Install tools
+      run: apk add make cppcheck g++
+    - name: Collect tool versions
+      run: |
+        cppcheck --version
+        make --version
+        g++ --version
+    - name: Checkout code
+      uses: actions/checkout@v2
     - name: make test
       run: make test
     - name: run-tests

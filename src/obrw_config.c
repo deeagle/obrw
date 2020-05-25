@@ -117,7 +117,7 @@ obrwConfig_isConfigFileReadWriteable( void )
 		return EXIT_FAILURE;
 	}//else
 
-    char *logMsgConfigAccess = (char *) malloc(58 * sizeof(char));
+    char *logMsgConfigAccess = (char *) malloc(59 * sizeof(char));
     sprintf(logMsgConfigAccess, "Configfile access (EXIST) is <%d> and Access (READ) is <%d>.",
             access(configPath, EXIST),
             access(configPath, READ));

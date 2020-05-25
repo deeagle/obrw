@@ -35,7 +35,8 @@ static size_t wallpaperNamesLength = 0;
 int
 obrwWallpaperOpt_filterWallpapersEndTag( const char* possibleWallpaperName )
 {
-	char buffer[len_file_end];
+    // size of file ending + 1 for termination, e.g. .png\0
+	char buffer[len_file_end + 1];
 	size_t strLen = 0;
 
 	if( possibleWallpaperName == NULL )
