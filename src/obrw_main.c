@@ -26,11 +26,18 @@ int
 main(int argc, char **argv)
 {
     obrwMain_handleCommandLineArguments(argc, (const char **) argv);
-    if(IS_USER_CALLED_HELP)
+    if (IS_USER_CALLED_HELP)
     {
         obrwMain_printHelp(argv[0]);
         return EXIT_SUCCESS;
     }
+
+    if (IS_USER_CALLED_VERSION)
+    {
+        obrwMain_printVersion();
+        return EXIT_SUCCESS;
+    }
+
     obrwLogger_printLogLevel();
 
     // start
@@ -74,21 +81,30 @@ void
 obrwMain_handleCommandLineArguments(const int argc, const char **argv)
 {
     // given arguments
-    for(int i = 0; i < argc; i++)
+    for (int i = 0; i < argc; i++)
     {
-        if(strlen(argv[i]) == strlen(CLI_HELP))
+        if (strlen(argv[i]) == strlen(CLI_HELP))
         {
-            if(0 == strcmp(argv[i], CLI_HELP))
+            if (0 == strcmp(argv[i], CLI_HELP))
             {
                 IS_USER_CALLED_HELP = TRUE;
                 break;
             }
         }
 
-        // value of argv must be greater than tag because of the delivered value!
-        if(strlen(argv[i]) > strlen(CLI_ARGUMENT_LOG_LEVEL))
+        if (strlen(argv[i]) == strlen(CLI_VERSION))
         {
-            if(0 == strncmp(argv[i], CLI_ARGUMENT_LOG_LEVEL, strlen(CLI_ARGUMENT_LOG_LEVEL)))
+            if (0 == strcmp(argv[i], CLI_VERSION))
+            {
+                IS_USER_CALLED_VERSION = TRUE;
+                break;
+            }
+        }
+
+        // value of argv must be greater than tag because of the delivered value!
+        if (strlen(argv[i]) > strlen(CLI_ARGUMENT_LOG_LEVEL))
+        {
+            if (0 == strncmp(argv[i], CLI_ARGUMENT_LOG_LEVEL, strlen(CLI_ARGUMENT_LOG_LEVEL)))
             {
                 // use longest entry for malloc size
                 char *levelString = (char *) malloc(OBRW_LOGGER_STR_LEN_OF_LONGEST_CLI_PARAM * sizeof(char));
@@ -99,9 +115,10 @@ obrwMain_handleCommandLineArguments(const int argc, const char **argv)
     }
 }
 
-void obrwMain_printHelp(const char* name)
+void
+obrwMain_printHelp(const char *name)
 {
-    printf("OBRW is OpenBoxRandomWallpaper\n");
+    printf("OBRW is OpenBoxRandomWallpaper, version %s\n", APP_VERSION);
     printf("Usage: %s [OPTION]\n", name);
     printf("Sets a randomized wallpaper from a given directory.\n");
     printf("\n");
@@ -111,7 +128,14 @@ void obrwMain_printHelp(const char* name)
     printf("  \t\t\t  WARNING\n");
     printf("  \t\t\t  DEBUG\n");
     printf("  \t\t\t  SYSTEM\n");
+    printf("  --version\t\tPrints the version.\n");
     printf("  --help\t\tPrints this help.\n");
+}
+
+void
+obrwMain_printVersion()
+{
+    printf("obrw version %s\n", APP_VERSION);
 }
 
 /** Free all used alocated heap-memory (if used) (to use before programm ends). */

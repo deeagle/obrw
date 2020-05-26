@@ -36,6 +36,12 @@ static const char *CLI_ARGUMENT_LOG_LEVEL = "--log-level=";
 static const char *CLI_HELP = "--help";
 /** Helper constant to show help only (if called). */
 static int IS_USER_CALLED_HELP = FALSE;
+/** Command line param to call the version. */
+static const char *CLI_VERSION = "--version";
+/** Helper constant to show version only (if called). */
+static int IS_USER_CALLED_VERSION = FALSE;
+/** App version */
+static const char* APP_VERSION = "0.2.0";
 
 /**
  * The main-method, which starts the obrw-process.
@@ -58,6 +64,11 @@ void obrwMain_handleCommandLineArguments(const int argc, const char **argv);
  * Prints the help to stdout.
  */
 void obrwMain_printHelp();
+
+/**
+ * Prints the version to stdout.
+ */
+void obrwMain_printVersion();
 
 /**
  * Free all used allocated heap-memory (if used, to use before program ends -> success and fail).
