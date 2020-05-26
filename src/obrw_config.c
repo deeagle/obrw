@@ -34,6 +34,42 @@ obrwConfig_getWallpaperDir( void )
 	return wallpaperDir;
 }//obrwConfig_getWallpaperDir()
 
+const char *
+obrwConfig_setWallpaperDir(const char *wpDir)
+{
+    if (NULL == wpDir || strlen(wpDir) < 1)
+    {
+        obrwLogger_warning("Given wallpaper directory path was empty.");
+        return NULL;
+    }
+
+    int wpDirHasTrailingSlash = FALSE;
+    // has given wpDir a trailing /
+    if (wpDir[strlen(wpDir) - 1] == '/')
+    {
+        obrwLogger_debug("Wallpaper path is with trailing slash, that's good.");
+        wpDirHasTrailingSlash = TRUE;
+        wallpaperDir = (char *) malloc(sizeof(char) * (strlen(wpDir) + 1));
+    } else
+    {
+        obrwLogger_debug("Wallpaper path is without trailing slash.");
+        wpDirHasTrailingSlash = FALSE;
+        wallpaperDir = (char *) malloc(sizeof(char) * (strlen(wpDir) + 2));
+    }
+
+    if (wallpaperDir)
+    {
+        strncpy(wallpaperDir, wpDir, strlen(wpDir));
+        if (wpDirHasTrailingSlash == FALSE)
+        {
+            obrwLogger_debug("We add a trailing slash to the wallpaper path.");
+            wallpaperDir[strlen(wpDir)] = '/';
+            wallpaperDir[strlen(wpDir) + 1] = '\0';
+        }
+    }
+
+    return obrwConfig_getWallpaperDir();
+}
 
 /** The getter-method of the last set wallpaper, included in the configfile. */
 const char*
@@ -41,7 +77,6 @@ obrwConfig_getWallpaperLastSet( void )
 {
 	return wallpaperLast;
 }//obrwConfig_getWallpaperLastSet()
-
 
 /** The setter-method to set the locale userhome. */
 void
@@ -212,12 +247,7 @@ obrwConfig_readConfigFile( void )
 							}//if
 							else
 							{
-                                wallpaperDir = (char *) malloc(sizeof(char) * strlen(wpDir) + 1);
-
-                                if(wallpaperDir)
-                                {
-                                    strncpy(wallpaperDir, wpDir, strlen(wpDir));
-                                }//if
+                                obrwConfig_setWallpaperDir(wpDir);
 							}//else
 						}//if
 

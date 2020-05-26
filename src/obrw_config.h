@@ -69,6 +69,16 @@ int obrwConfig_isConfigFileReadWriteable( void );
  */
 const char* obrwConfig_getWallpaperDir( void );
 
+/**
+ * Sets the wallpaper directory.
+ * <p>
+ * Adds a trailing slash if not exists.
+ *
+ * @param wpDir The wallpaper directory path to set.
+ * @return The wallpaper directory with trailing slash, otherwise <code>NULL</code>.
+ */
+const char *obrwConfig_setWallpaperDir(const char *);
+
 /** 
  * The getter-method of the last set wallpaper, included in the configfile.
  *

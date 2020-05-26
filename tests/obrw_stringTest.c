@@ -33,7 +33,6 @@ void obrw_stringTest_runAll()
     parseConfigFileFor_StringWithOneQuotationMarkStart_expectedNullResult();
     parseConfigFileFor_StringWithOneQuotationMarkEnd_expectedNullResult();
     parseConfigFileFor_possibleWallpaperDirectorySetStringOfUser_expectedPathStringResult();
-
 }
 
 void twoStringToOne_twoNullSrings_expectedNullResult()

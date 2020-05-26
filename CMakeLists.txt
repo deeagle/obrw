@@ -3,5 +3,5 @@ project(obrw)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(obrw src/obrw_main.c)
+add_executable(obrw src/obrw_main.c tests/obrw_configTest.h tests/obrw_configTest.c)
 set (SOURCE_FILES ./src/*.c)
