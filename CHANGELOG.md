@@ -6,6 +6,10 @@ All notable changes will be documented in this file.
 
 ## UNRELEASED
 
+### Fixed
+
+- Rename variables to prevent shadowing.
+
 ## 0.2.3 - 2022.10.27
 
 ### Fixed

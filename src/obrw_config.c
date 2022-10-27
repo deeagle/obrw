@@ -124,30 +124,30 @@ obrwConfig_isConfigFileReadWriteable( void )
 			}//if
 			else
 			{
-                char *logMsg = ( char* ) malloc ( ( 56 + strlen ( configPath ) ) * sizeof ( char ) );
-                sprintf ( logMsg, "Configfile <%s> exists and is readable, but not writeable.", configPath );
-                obrwLogger_error ( logMsg );
-                obrwUtils_freeCString ( logMsg );
+                char *message = ( char* ) malloc ((56 + strlen (configPath ) ) * sizeof ( char ) );
+                sprintf (message, "Configfile <%s> exists and is readable, but not writeable.", configPath );
+                obrwLogger_error (message );
+                obrwUtils_freeCString (message );
 
 				return EXIT_FAILURE;
 			}//else
 		}//if
 		else
 		{
-            char *logMsg = ( char* ) malloc ( ( 41 + strlen ( configPath ) ) * sizeof ( char ) );
-            sprintf ( logMsg, "Configfile <%s> exists but is not readable.", configPath );
-            obrwLogger_error ( logMsg );
-            obrwUtils_freeCString ( logMsg );
+            char *message = ( char* ) malloc ((41 + strlen (configPath ) ) * sizeof ( char ) );
+            sprintf (message, "Configfile <%s> exists but is not readable.", configPath );
+            obrwLogger_error (message );
+            obrwUtils_freeCString (message );
 
 			return EXIT_FAILURE;
 		}//else
 	}//if
 	else
 	{
-        char *logMsg = ( char* ) malloc ( ( 41 + strlen ( configPath ) ) * sizeof ( char ) );
-        sprintf ( logMsg, "Configfile <%s> doesn't exists.", configPath );
-        obrwLogger_error ( logMsg );
-        obrwUtils_freeCString ( logMsg );
+        char *message = ( char* ) malloc ((41 + strlen (configPath ) ) * sizeof ( char ) );
+        sprintf (message, "Configfile <%s> doesn't exists.", configPath );
+        obrwLogger_error (message );
+        obrwUtils_freeCString (message );
 
 		return EXIT_FAILURE;
 	}//else
