@@ -3,6 +3,18 @@ type: docker
 name: ci
 
 steps:
+  - name: linefeed-and-encoding
+    image: docdee/filecheck
+    commands:
+      - (! find . -maxdepth 1 -name "*.*" -not -type d -exec file "{}" ";" | grep "CRLF\|CR")
+      - (find . -maxdepth 1 -name "*.*" -not -type d -not -name "*.png" -not -type d -exec isutf8 "{}" "+")
+
+  - name: markdownlint-cli
+    image: node:current-alpine
+    commands:
+      - npm install -g markdownlint-cli
+      - markdownlint README.md CHANGELOG.md
+
   - name: cppcheck
     image: alpine
     commands:
