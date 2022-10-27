@@ -27,14 +27,6 @@
 static double DIGIT_BORDER_HIGH = 10.0;
 
 
-/** Set's the local multiplikator for random digits. */
-void
-obrwUtils_setHighDigitBorder( double highBorder )
-{
-	DIGIT_BORDER_HIGH = highBorder;
-}//obrwUtils_setHighDigitBorder( double )
-
-
 /** Resets and start the random-number-couter. */
 void
 obrwUtils_setRandomCounterToZero( void )
