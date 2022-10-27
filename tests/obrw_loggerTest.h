@@ -7,6 +7,7 @@
 
 #include <assert.h>
 #include <stdio.h>
+
 #include "../src/obrw_logger.h"
 
 static const char* OBRW_LOGGERTEST_CLASS_NAME = "obrw_loggerTest\0";
@@ -29,4 +30,4 @@ void setLogLevelByCliValue_debugTag_returnTrue();
 void setLogLevelByCliValue_debugSystemTag_returnTrue();
 void setLogLevelByCliValue_errorTag_returnTrue();
 
-#endif //OBRW_OBRW_LOGGERTEST_H
+#endif  // OBRW_OBRW_LOGGERTEST_H

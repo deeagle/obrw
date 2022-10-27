@@ -19,6 +19,6 @@ struct wallpaper {
  *
  * @return An empty wallpaper item.
  */
-struct wallpaper obrwFactory_getWallpaperItem(void );
+struct wallpaper obrwFactory_getWallpaperItem(void);
 
-#endif //OBRW_FACTORY_H
+#endif  // OBRW_FACTORY_H

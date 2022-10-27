@@ -7,6 +7,7 @@
 
 #include <assert.h>
 #include <stdio.h>
+
 #include "../src/obrw_string.h"
 
 static const char* OBRW_STRINGTEST_CLASS_NAME = "obrw_stringTest\0";
@@ -40,4 +41,4 @@ void parseConfigFileFor_StringWithOneQuotationMarkStart_expectedNullResult();
 void parseConfigFileFor_StringWithOneQuotationMarkEnd_expectedNullResult();
 void parseConfigFileFor_possibleWallpaperDirectorySetStringOfUser_expectedPathStringResult();
 
-#endif //OBRW_OBRW_STRINGTEST_H
+#endif  // OBRW_OBRW_STRINGTEST_H

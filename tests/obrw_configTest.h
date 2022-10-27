@@ -7,6 +7,7 @@
 
 #include <assert.h>
 #include <stdio.h>
+
 #include "../src/obrw_config.h"
 
 static const char* OBRW_CONFIGTEST_CLASS_NAME = "obrw_configTest\0";
@@ -17,4 +18,4 @@ void setWallpaperDir_setWallpaperDirectoryWithNull_expectedNullAsResult();
 void setWallpaperDir_setWallpaperDirectoryWithTrainlingSlash_expectedWallpaperDirectoryAsStringResult();
 void setWallpaperDir_setWallpaperDirectoryWithoutTrainlingSlash_expectedWallpaperDirectoryWithTrailingSlashAsStringResult();
 
-#endif //OBRW_OBRW_CONFIGTEST_H
+#endif  // OBRW_OBRW_CONFIGTEST_H

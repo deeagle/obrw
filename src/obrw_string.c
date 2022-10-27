@@ -21,92 +21,75 @@
 
 #include "obrw_string.h"
 
-
 /** Concatenates two cstrings to one cstring. */
-char*
-obrwString_2CStringsTo1( const char* str1, const char* str2 )
-{
-	char* ptr = NULL;
+char *obrwString_2CStringsTo1(const char *str1, const char *str2) {
+    char *ptr = NULL;
 
-	if( str1 != NULL && str2 != NULL )
-	{
-		size_t len = strlen( str1 ) + strlen( str2 ) + 1;
-		ptr = (char*) malloc( sizeof( char ) * len );
+    if (str1 != NULL && str2 != NULL) {
+        size_t len = strlen(str1) + strlen(str2) + 1;
+        ptr = (char *) malloc(sizeof(char) * len);
 
-		// check if ptr exist because malloc allocs on heap-space
-		// and it can fail.
-		if( ptr )
-		{
-		  	strncpy( ptr, str1, strlen( str1 ) + 1 );
-			strncat( ptr, str2, strlen( str2 ) + 1 );
-		}//if
-	}//if
+        // check if ptr exist because malloc allocs on heap-space
+        // and it can fail.
+        if (ptr) {
+            strncpy(ptr, str1, strlen(str1) + 1);
+            strncat(ptr, str2, strlen(str2) + 1);
+        }
+    }
 
-	return ptr;
-}//obrwString_2to1( const char*, const char* )
+    return ptr;
+}
 
-char*
-obrwString_parseConfigFileFor( const char* line )
-{
-	char *parsedStr = NULL;
-	char *strPtr = NULL;
-	const char valueSeparator = '"';
+char *obrwString_parseConfigFileFor(const char *line) {
+    char *parsedStr = NULL;
+    char *strPtr = NULL;
+    const char valueSeparator = '"';
 
-	if( line != NULL )
-	{
-	    if( obrwString_getCountOfChar(line, valueSeparator) >= 2 )
-        {
+    if (line != NULL) {
+        if (obrwString_getCountOfChar(line, valueSeparator) >= 2) {
             // find the first " (DEZ = 34) in the cstring,
             // do a copy and deletes the second " at the end of the line.
-            if( ( strPtr = strchr( line, (int) valueSeparator ) ) != NULL )
-            {
-                size_t len = strlen( strPtr );
-                parsedStr = (char*) malloc( sizeof( char ) * len );
-                
+            if ((strPtr = strchr(line, (int) valueSeparator)) != NULL) {
+                size_t len = strlen(strPtr);
+                parsedStr = (char *) malloc(sizeof(char) * len);
+
                 strPtr++;
-                if( parsedStr )
-                {
-                    const size_t lenToCopyWithoutClosingQuotationMark = ( strlen( strPtr ) - 1 );
-                    memset( parsedStr, '\0', sizeof( char ) * len);
-                    strncat( parsedStr, strPtr, lenToCopyWithoutClosingQuotationMark );
+                if (parsedStr) {
+                    const size_t lenToCopyWithoutClosingQuotationMark =
+                            (strlen(strPtr) - 1);
+                    memset(parsedStr, '\0', sizeof(char) * len);
+                    strncat(parsedStr, strPtr,
+                            lenToCopyWithoutClosingQuotationMark);
 
-                    char *logMsg = ( char* ) malloc ( ( 20 + strlen ( parsedStr ) ) * sizeof ( char ) );
-                    sprintf ( logMsg, "Parsed string is <%s>.", parsedStr );
-                    obrwLogger_info ( logMsg );
-                    obrwUtils_freeCString ( logMsg );
-                }//if
-                else
-                {
-                    obrwLogger_error ( "No memory (heap) avaiable!" );
-                    //return NULL;
-                }//else
-            }//if
-            else
-            {
-                char *logMsg = ( char* ) malloc ( ( 33 + strlen ( line ) ) * sizeof ( char ) );
-                sprintf ( logMsg, "Parsed string <%s> (return NULL).", line);
-                obrwLogger_debug ( logMsg );
-                obrwUtils_freeCString ( logMsg );
-                //return NULL;
-            }//else
+                    char *logMsg =
+                            (char *) malloc((20 + strlen(parsedStr)) * sizeof(char));
+                    sprintf(logMsg, "Parsed string is <%s>.", parsedStr);
+                    obrwLogger_info(logMsg);
+                    obrwUtils_freeCString(logMsg);
+                } else {
+                    obrwLogger_error("No memory (heap) avaiable!");
+                    // return NULL;
+                }
+            } else {
+                char *logMsg =
+                        (char *) malloc((33 + strlen(line)) * sizeof(char));
+                sprintf(logMsg, "Parsed string <%s> (return NULL).", line);
+                obrwLogger_debug(logMsg);
+                obrwUtils_freeCString(logMsg);
+                // return NULL;
+            }
         }
-	}//if
+    }
 
-	return parsedStr;
-}//obrwString_parseConfigFileFor( const char* )
+    return parsedStr;
+}
 
-
-int
-obrwString_getCountOfChar(const char* line, const char character)
-{
+int obrwString_getCountOfChar(const char *line, const char character) {
     int count = 0;
 
-    if(line != NULL && character != '\0')
-    {
-        for( int i = 0; line[i] != '\0'; ++i)
-        {
-            if( character == line[i])
-            {
+    if (line != NULL && character != '\0') {
+        for (int i = 0; line[i] != '\0'; ++i) {
+            if (character == line[i]) {
                 ++count;
             }
         }

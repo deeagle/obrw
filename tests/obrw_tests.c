@@ -3,15 +3,12 @@
 //
 #include "obrw_tests.h"
 
-
 /**
  * The main function.
  *
  * @return The runtime stage.
  */
-int
-main()
-{
+int main() {
     time_t startTime = time(NULL);
 
     printf("Start tests.\n\n");
@@ -28,11 +25,8 @@ main()
 /**
  * Add all class test caller methods here.
  */
-void runAll()
-{
+void runAll() {
     obrw_configTest_runAll();
     obrw_loggerTest_runAll();
     obrw_stringTest_runAll();
 }
-
-

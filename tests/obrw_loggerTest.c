@@ -11,8 +11,7 @@ const char* CLI_LOG_PARAM_DEBUG = "DEBUG\0";
 const char* CLI_LOG_PARAM_SYSTEM = "SYSTEM\0";
 const char* CLI_LOG_PARAM_ERROR = "ERROR\0";
 
-void obrw_loggerTest_runAll()
-{
+void obrw_loggerTest_runAll() {
     isCliParamValueKnown_emptyCliLogLevelValue_returnFalse();
     isCliParamValueKnown_successCliLogLevelValue_returnTrue();
     isCliParamValueKnown_infoCliLogLevelValue_returnTrue();
@@ -30,9 +29,9 @@ void obrw_loggerTest_runAll()
     setLogLevelByCliValue_errorTag_returnTrue();
 }
 
-void isCliParamValueKnown_emptyCliLogLevelValue_returnFalse()
-{
-    printf("%s - isCliParamValueKnown_emptyCliLogLevelValue_returnFalse\n", OBRW_LOGGERTEST_CLASS_NAME);
+void isCliParamValueKnown_emptyCliLogLevelValue_returnFalse() {
+    printf("%s - isCliParamValueKnown_emptyCliLogLevelValue_returnFalse\n",
+           OBRW_LOGGERTEST_CLASS_NAME);
 
     const char* cliLogLevelValue = "";
     const int expected = FALSE;
@@ -43,9 +42,9 @@ void isCliParamValueKnown_emptyCliLogLevelValue_returnFalse()
     assert(result == expected);
 }
 
-void isCliParamValueKnown_successCliLogLevelValue_returnTrue()
-{
-    printf("%s - isCliParamValueKnown_successCliLogLevelValue_returnFalse\n", OBRW_LOGGERTEST_CLASS_NAME);
+void isCliParamValueKnown_successCliLogLevelValue_returnTrue() {
+    printf("%s - isCliParamValueKnown_successCliLogLevelValue_returnFalse\n",
+           OBRW_LOGGERTEST_CLASS_NAME);
 
     const char* cliLogLevelValue = SUCCESS_CLI_VALUE;
     const int expected = TRUE;
@@ -56,9 +55,9 @@ void isCliParamValueKnown_successCliLogLevelValue_returnTrue()
     assert(result == expected);
 }
 
-void isCliParamValueKnown_infoCliLogLevelValue_returnTrue()
-{
-    printf("%s - isCliParamValueKnown_successCliLogLevelValue_returnFalse\n", OBRW_LOGGERTEST_CLASS_NAME);
+void isCliParamValueKnown_infoCliLogLevelValue_returnTrue() {
+    printf("%s - isCliParamValueKnown_successCliLogLevelValue_returnFalse\n",
+           OBRW_LOGGERTEST_CLASS_NAME);
 
     const char* cliLogLevelValue = INFO_CLI_VALUE;
     const int expected = TRUE;
@@ -69,9 +68,9 @@ void isCliParamValueKnown_infoCliLogLevelValue_returnTrue()
     assert(result == expected);
 }
 
-void isCliParamValueKnown_warningCliLogLevelValue_returnTrue()
-{
-    printf("%s - isCliParamValueKnown_successCliLogLevelValue_returnFalse\n", OBRW_LOGGERTEST_CLASS_NAME);
+void isCliParamValueKnown_warningCliLogLevelValue_returnTrue() {
+    printf("%s - isCliParamValueKnown_successCliLogLevelValue_returnFalse\n",
+           OBRW_LOGGERTEST_CLASS_NAME);
 
     const char* cliLogLevelValue = WARNING_CLI_VALUE;
     const int expected = TRUE;
@@ -82,9 +81,9 @@ void isCliParamValueKnown_warningCliLogLevelValue_returnTrue()
     assert(result == expected);
 }
 
-void isCliParamValueKnown_debugCliLogLevelValue_returnTrue()
-{
-    printf("%s - isCliParamValueKnown_successCliLogLevelValue_returnFalse\n", OBRW_LOGGERTEST_CLASS_NAME);
+void isCliParamValueKnown_debugCliLogLevelValue_returnTrue() {
+    printf("%s - isCliParamValueKnown_successCliLogLevelValue_returnFalse\n",
+           OBRW_LOGGERTEST_CLASS_NAME);
 
     const char* cliLogLevelValue = DEBUG_CLI_VALUE;
     const int expected = TRUE;
@@ -95,9 +94,9 @@ void isCliParamValueKnown_debugCliLogLevelValue_returnTrue()
     assert(result == expected);
 }
 
-void isCliParamValueKnown_debugSystemCliLogLevelValue_returnTrue()
-{
-    printf("%s - isCliParamValueKnown_successCliLogLevelValue_returnFalse\n", OBRW_LOGGERTEST_CLASS_NAME);
+void isCliParamValueKnown_debugSystemCliLogLevelValue_returnTrue() {
+    printf("%s - isCliParamValueKnown_successCliLogLevelValue_returnFalse\n",
+           OBRW_LOGGERTEST_CLASS_NAME);
 
     const char* cliLogLevelValue = DEBUG_SYSTEM_CLI_VALUE;
     const int expected = TRUE;
@@ -108,9 +107,9 @@ void isCliParamValueKnown_debugSystemCliLogLevelValue_returnTrue()
     assert(result == expected);
 }
 
-void isCliParamValueKnown_errorCliLogLevelValue_returnTrue()
-{
-    printf("%s - isCliParamValueKnown_successCliLogLevelValue_returnFalse\n", OBRW_LOGGERTEST_CLASS_NAME);
+void isCliParamValueKnown_errorCliLogLevelValue_returnTrue() {
+    printf("%s - isCliParamValueKnown_successCliLogLevelValue_returnFalse\n",
+           OBRW_LOGGERTEST_CLASS_NAME);
 
     const char* cliLogLevelValue = ERROR_CLI_VALUE;
     const int expected = TRUE;
@@ -121,11 +120,9 @@ void isCliParamValueKnown_errorCliLogLevelValue_returnTrue()
     assert(result == expected);
 }
 
-
-
-void setLogLevelByCliValue_emptyTag_returnFalse()
-{
-    printf("%s - setLogLevelByCliValue_emptyTag_returnFalse\n", OBRW_LOGGERTEST_CLASS_NAME);
+void setLogLevelByCliValue_emptyTag_returnFalse() {
+    printf("%s - setLogLevelByCliValue_emptyTag_returnFalse\n",
+           OBRW_LOGGERTEST_CLASS_NAME);
 
     const char* tag = "";
     const int expected = FALSE;
@@ -136,9 +133,9 @@ void setLogLevelByCliValue_emptyTag_returnFalse()
     assert(result == expected);
 }
 
-void setLogLevelByCliValue_successTag_returnTrue()
-{
-    printf("%s - setLogLevelByCliValue_successTag_returnTrue\n", OBRW_LOGGERTEST_CLASS_NAME);
+void setLogLevelByCliValue_successTag_returnTrue() {
+    printf("%s - setLogLevelByCliValue_successTag_returnTrue\n",
+           OBRW_LOGGERTEST_CLASS_NAME);
 
     const char* tag = CLI_LOG_PARAM_SUCCESS;
     const int expected = TRUE;
@@ -149,9 +146,9 @@ void setLogLevelByCliValue_successTag_returnTrue()
     assert(result == expected);
 }
 
-void setLogLevelByCliValue_infoTag_returnTrue()
-{
-    printf("%s - setLogLevelByCliValue_infoTag_returnTrue\n", OBRW_LOGGERTEST_CLASS_NAME);
+void setLogLevelByCliValue_infoTag_returnTrue() {
+    printf("%s - setLogLevelByCliValue_infoTag_returnTrue\n",
+           OBRW_LOGGERTEST_CLASS_NAME);
 
     const char* tag = CLI_LOG_PARAM_INFO;
     const int expected = TRUE;
@@ -162,9 +159,9 @@ void setLogLevelByCliValue_infoTag_returnTrue()
     assert(result == expected);
 }
 
-void setLogLevelByCliValue_warningTag_returnTrue()
-{
-    printf("%s - setLogLevelByCliValue_warningTag_returnTrue\n", OBRW_LOGGERTEST_CLASS_NAME);
+void setLogLevelByCliValue_warningTag_returnTrue() {
+    printf("%s - setLogLevelByCliValue_warningTag_returnTrue\n",
+           OBRW_LOGGERTEST_CLASS_NAME);
 
     const char* tag = CLI_LOG_PARAM_WARNING;
     const int expected = TRUE;
@@ -175,9 +172,9 @@ void setLogLevelByCliValue_warningTag_returnTrue()
     assert(result == expected);
 }
 
-void setLogLevelByCliValue_debugTag_returnTrue()
-{
-    printf("%s - setLogLevelByCliValue_debugTag_returnTrue\n", OBRW_LOGGERTEST_CLASS_NAME);
+void setLogLevelByCliValue_debugTag_returnTrue() {
+    printf("%s - setLogLevelByCliValue_debugTag_returnTrue\n",
+           OBRW_LOGGERTEST_CLASS_NAME);
 
     const char* tag = CLI_LOG_PARAM_DEBUG;
     const int expected = TRUE;
@@ -188,9 +185,9 @@ void setLogLevelByCliValue_debugTag_returnTrue()
     assert(result == expected);
 }
 
-void setLogLevelByCliValue_debugSystemTag_returnTrue()
-{
-    printf("%s - setLogLevelByCliValue_systemTag_returnTrue\n", OBRW_LOGGERTEST_CLASS_NAME);
+void setLogLevelByCliValue_debugSystemTag_returnTrue() {
+    printf("%s - setLogLevelByCliValue_systemTag_returnTrue\n",
+           OBRW_LOGGERTEST_CLASS_NAME);
 
     const char* tag = CLI_LOG_PARAM_SYSTEM;
     const int expected = TRUE;
@@ -201,9 +198,9 @@ void setLogLevelByCliValue_debugSystemTag_returnTrue()
     assert(result == expected);
 }
 
-void setLogLevelByCliValue_errorTag_returnTrue()
-{
-    printf("%s - setLogLevelByCliValue_errorTag_returnTrue\n", OBRW_LOGGERTEST_CLASS_NAME);
+void setLogLevelByCliValue_errorTag_returnTrue() {
+    printf("%s - setLogLevelByCliValue_errorTag_returnTrue\n",
+           OBRW_LOGGERTEST_CLASS_NAME);
 
     const char* tag = CLI_LOG_PARAM_ERROR;
     const int expected = TRUE;
