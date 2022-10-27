@@ -6,6 +6,8 @@ All notable changes will be documented in this file.
 
 ## UNRELEASED
 
+## 0.2.4 - 2022.10.27
+
 ### Fixed
 
 - Add success messages for runtime steps to fix unused message warning.
