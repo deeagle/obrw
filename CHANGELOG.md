@@ -9,7 +9,8 @@ All notable changes will be documented in this file.
 ### Fixed
 
 - Reduced the scope of some variables.
-- Removed multiple identical conditions. 
+- Removed multiple identical conditions.
+- Make range checks better readable. 
 
 ## 0.2.2 - 2022.10.27
 

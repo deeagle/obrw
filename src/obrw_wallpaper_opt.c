@@ -198,7 +198,7 @@ obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath, struct wallpaper *w
     struct dirent *entry = NULL;
     int wpCounter = 0;
 
-    if(NULL == dirPath || strlen(dirPath) <= 0)
+    if(NULL == dirPath || strlen(dirPath) < 1)
     {
         obrwLogger_error("No dirPath set.");
 
@@ -287,14 +287,14 @@ obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath, struct wallpap
 {
     obrwLogger_debug("Choose wallpaper and try to set.");
 
-	if( NULL == wallpaperNames || NULL == dirPath || strlen(dirPath) <= 0 )
+	if( NULL == wallpaperNames || NULL == dirPath || strlen(dirPath) < 1 )
 	{
 		if( NULL == wallpaperNames )
 		{
 			obrwLogger_error ( "Problem with stored wallpapers." );
 		}//if
 
-		if( NULL == dirPath || strlen(dirPath) <= 0 )
+		if( NULL == dirPath || strlen(dirPath) < 1 )
 		{
 			obrwLogger_error ( "No dirPath set." );
 		}//if
