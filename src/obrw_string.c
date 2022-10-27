@@ -26,12 +26,11 @@
 char*
 obrwString_2CStringsTo1( const char* str1, const char* str2 )
 {
-	size_t len = 0;
 	char* ptr = NULL;
 
 	if( str1 != NULL && str2 != NULL )
 	{
-		len = strlen( str1 ) + strlen( str2 ) + 1;
+		size_t len = strlen( str1 ) + strlen( str2 ) + 1;
 		ptr = (char*) malloc( sizeof( char ) * len );
 
 		// check if ptr exist because malloc allocs on heap-space
@@ -51,7 +50,6 @@ obrwString_parseConfigFileFor( const char* line )
 {
 	char *parsedStr = NULL;
 	char *strPtr = NULL;
-	size_t len = 0;
 	const char valueSeparator = '"';
 
 	if( line != NULL )
@@ -62,7 +60,7 @@ obrwString_parseConfigFileFor( const char* line )
             // do a copy and deletes the second " at the end of the line.
             if( ( strPtr = strchr( line, (int) valueSeparator ) ) != NULL )
             {
-                len = strlen( strPtr );
+                size_t len = strlen( strPtr );
                 parsedStr = (char*) malloc( sizeof( char ) * len );
                 
                 strPtr++;

@@ -197,10 +197,8 @@ obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath, struct wallpaper *w
     DIR *wpDir = NULL;
     struct dirent *entry = NULL;
     int wpCounter = 0;
-    int wpEntry = 0;
 
-
-    if(NULL == dirPath || strlen(dirPath) <= 0)
+    if(NULL == dirPath || strlen(dirPath) < 1)
     {
         obrwLogger_error("No dirPath set.");
 
@@ -231,6 +229,7 @@ obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath, struct wallpaper *w
 
     if(0 < wpCounter)
     {
+        int wpEntry = 0;
         //sets dirPointer back to start setting
         rewinddir(wpDir);
 
@@ -288,14 +287,14 @@ obrwWallpaperOpt_chooseWallpaperAndTryToSet( const char* dirPath, struct wallpap
 {
     obrwLogger_debug("Choose wallpaper and try to set.");
 
-	if( NULL == wallpaperNames || NULL == dirPath || strlen(dirPath) <= 0 )
+	if( NULL == wallpaperNames || NULL == dirPath || strlen(dirPath) < 1 )
 	{
 		if( NULL == wallpaperNames )
 		{
 			obrwLogger_error ( "Problem with stored wallpapers." );
 		}//if
 
-		if( NULL == dirPath || strlen(dirPath) <= 0 )
+		if( NULL == dirPath || strlen(dirPath) < 1 )
 		{
 			obrwLogger_error ( "No dirPath set." );
 		}//if
@@ -353,12 +352,8 @@ obrwWallpaperOpt_setWallpaperWithFeh( const char* dirPath, const char* wpToSet )
 
 	if( NULL == wpToSet )
 	{
-		if( NULL == wpToSet )
-		{
-			obrwLogger_error ( "No wallpaper to set." );
-		}//if
+        obrwLogger_error ( "No wallpaper given to set." );
 
-		//failure
 		return -1;
 	}//if
 
@@ -404,10 +399,10 @@ obrwWallpaperOpt_setWallpaperWithFeh( const char* dirPath, const char* wpToSet )
 void
 obrwWallpaperOpt_freeLocalsToClose( void )
 {
-	size_t i = 0;
-
 	if( wallpaperNames )
 	{
+        size_t i = 0;
+
 		while( i < wallpaperNamesLength )
 		{
 			//TODO
