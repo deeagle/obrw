@@ -4,6 +4,8 @@ All notable changes will be documented in this file.
 
 <!-- markdownlint-disable MD013 MD024 -->
 
+## UNRELEASED
+
 ## 0.2.1 - 2022.10.27
 
 ### Fixed
