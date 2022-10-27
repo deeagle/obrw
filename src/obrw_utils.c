@@ -28,35 +28,35 @@ static double DIGIT_BORDER_HIGH = 10.0;
 
 /** Resets and start the random-number-couter. */
 void obrwUtils_setRandomCounterToZero(void) {
-  srand(time(NULL) * time(NULL));
+    srand(time(NULL) * time(NULL));
 }  // obrwUtils_setRandomCounterToZero()
 
 /** Get a random number. */
 int obrwUtils_randomDigit(void) {
-  return ((int)((double)rand() / ((double)(RAND_MAX)) * DIGIT_BORDER_HIGH));
+    return ((int)((double)rand() / ((double)(RAND_MAX)) * DIGIT_BORDER_HIGH));
 }  // obrwUtils_randomDigit()
 
 /** Get the users home path. */
 char *obrwUtils_getUserHomeDir(void) {
-  return getenv("HOME");
+    return getenv("HOME");
 }  // obrwUtils_getUserHomeDir()
 
 /** OBRW Version of free(). */
 void obrwUtils_freeCString(char *cstr) {
-  if (cstr != NULL) {
-    char *logMsg = (char *)malloc((16 + strlen(cstr)) * sizeof(char));
-    sprintf(logMsg, "free string <%s>.", cstr);
-    obrwLogger_debugSystem(logMsg);
+    if (cstr != NULL) {
+        char *logMsg = (char *)malloc((16 + strlen(cstr)) * sizeof(char));
+        sprintf(logMsg, "free string <%s>.", cstr);
+        obrwLogger_debugSystem(logMsg);
 
-    // TODO
-    // valgrinderror ?
-    // memset( cstr, '0', strlen( cstr ) );
-    free(logMsg);
-    free(cstr);
+        // TODO
+        // valgrinderror ?
+        // memset( cstr, '0', strlen( cstr ) );
+        free(logMsg);
+        free(cstr);
 
-    // free:
-    // - it marks the memory as free, that means the value can still exist!
-    // - so I set it manually to NULL.
-    cstr = NULL;
-  }  // if
+        // free:
+        // - it marks the memory as free, that means the value can still exist!
+        // - so I set it manually to NULL.
+        cstr = NULL;
+    }  // if
 }  // obrwUtils_freeCString( char* )

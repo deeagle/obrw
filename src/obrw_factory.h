@@ -8,10 +8,10 @@
  * Simple wallpaper item.
  */
 struct wallpaper {
-  /** array index for debug */
-  int arrayIndex;
-  /** name of the wallpaper */
-  char name[1024];
+    /** array index for debug */
+    int arrayIndex;
+    /** name of the wallpaper */
+    char name[1024];
 };
 
 /**

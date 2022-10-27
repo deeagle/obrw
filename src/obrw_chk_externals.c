@@ -24,17 +24,17 @@
 /** The function checks if extern tool 'feh' is installed (bin at /usr/bin/feh).
  */
 int obrwChkExt_isFehOnSystem(void) {
-  int fehIsInstalled = 0;
+    int fehIsInstalled = 0;
 
-  //* searching /usr/bin/feh
-  const char *fehPath = "/usr/bin/feh\0";
+    //* searching /usr/bin/feh
+    const char *fehPath = "/usr/bin/feh\0";
 
-  //* feh exists?
-  if (access(fehPath, EXIST) != -1) {
-    if (access(fehPath, EXEC) != -1) {
-      fehIsInstalled = 1;
-    }  // if
-  }    // if
+    //* feh exists?
+    if (access(fehPath, EXIST) != -1) {
+        if (access(fehPath, EXEC) != -1) {
+            fehIsInstalled = 1;
+        }  // if
+    }      // if
 
-  return fehIsInstalled;
+    return fehIsInstalled;
 }  // obrwChkExt_isFehOnSystem()

@@ -23,9 +23,9 @@
 #include "obrw_logger.h"
 
 struct obrwFileMBytes_fileFormat {
-  BYTE b0;
-  BYTE b1;
-  BYTE b2;
+    BYTE b0;
+    BYTE b1;
+    BYTE b2;
 } jfif;
 
 void obrwFileMBytes_fileFormatInit();
