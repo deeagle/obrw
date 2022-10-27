@@ -3,11 +3,6 @@ type: docker
 name: ci
 
 steps:
-  - name: hw
-    image: alpine
-    commands:
-      - echo "hello world"
-
   - name: cppcheck
     image: alpine
     commands:
