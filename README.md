@@ -36,7 +36,7 @@ Supported options are:
   - Runs the executable `test-all`
 - `docs`
 - `clean`
-- `clean-docs` 
+- `clean-docs`
 
 ## Weblinks
 
