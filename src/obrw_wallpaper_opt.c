@@ -197,8 +197,6 @@ obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath, struct wallpaper *w
     DIR *wpDir = NULL;
     struct dirent *entry = NULL;
     int wpCounter = 0;
-    int wpEntry = 0;
-
 
     if(NULL == dirPath || strlen(dirPath) <= 0)
     {
@@ -231,6 +229,7 @@ obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath, struct wallpaper *w
 
     if(0 < wpCounter)
     {
+        int wpEntry = 0;
         //sets dirPointer back to start setting
         rewinddir(wpDir);
 
@@ -404,10 +403,10 @@ obrwWallpaperOpt_setWallpaperWithFeh( const char* dirPath, const char* wpToSet )
 void
 obrwWallpaperOpt_freeLocalsToClose( void )
 {
-	size_t i = 0;
-
 	if( wallpaperNames )
 	{
+        size_t i = 0;
+
 		while( i < wallpaperNamesLength )
 		{
 			//TODO

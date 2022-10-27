@@ -179,7 +179,6 @@ obrwConfig_readConfigFile( void )
 	char* filename; 
 	char* wpDir;
 	char* lastSet;
-	char *bufP;
 	int bufferSize = 256;
 
 	if( obrwConfig_isConfigFileReadWriteable() == EXIT_FAILURE )
@@ -208,7 +207,7 @@ obrwConfig_readConfigFile( void )
 		// (2) work with file
 		while( fgets( lineBuffer, bufferSize, fp ) != NULL )
 		{
-			bufP = strchr( lineBuffer, '\n' );
+			char* bufP = strchr( lineBuffer, '\n' );
 			
 			//fgets succeeds -> scan for \n and set to \0
 			if( bufP )
@@ -217,8 +216,6 @@ obrwConfig_readConfigFile( void )
 			}//if
 
             char *logMsgFoundComment;
-            char *logMsgFoundWallpaperKey;
-            char *logMsgFoundLastWallpaperKey;
 
 			switch( lineBuffer[0] )
 			{
@@ -235,7 +232,7 @@ obrwConfig_readConfigFile( void )
 				case 'w':
 						if( strncmp( lineBuffer, "wpDir =", 7 ) == 0 )
 						{
-						    logMsgFoundWallpaperKey = ( char* ) malloc ( ( 36 + strlen ( lineBuffer ) ) * sizeof ( char ) );
+						    char* logMsgFoundWallpaperKey = ( char* ) malloc ( ( 36 + strlen ( lineBuffer ) ) * sizeof ( char ) );
                             sprintf ( logMsgFoundWallpaperKey, "Found key 'wpDir =' in config file: <%s>", lineBuffer);
                             obrwLogger_debug ( logMsgFoundWallpaperKey );
                             obrwUtils_freeCString ( logMsgFoundWallpaperKey );
@@ -256,7 +253,7 @@ obrwConfig_readConfigFile( void )
 				case 'l':
 						if( strncmp( lineBuffer, "lastSet =", 9 ) == 0 )
 						{
-						    logMsgFoundLastWallpaperKey = ( char* ) malloc ( ( 40 + strlen ( lineBuffer ) ) * sizeof ( char ) );
+						    char* logMsgFoundLastWallpaperKey = ( char* ) malloc ( ( 40 + strlen ( lineBuffer ) ) * sizeof ( char ) );
                             sprintf ( logMsgFoundLastWallpaperKey, "Found key 'lastSet =' in config file: <%s>", lineBuffer);
                             obrwLogger_debug ( logMsgFoundLastWallpaperKey );
                             obrwUtils_freeCString ( logMsgFoundLastWallpaperKey );
@@ -311,11 +308,8 @@ int
 obrwConfig_writeSettingsToConfigFile( struct wallpaper* wallpaperItem )
 {
 	FILE *fp;
-	char* lineBuffer;
 	char* filename;
 	char* configNow;
-	char* toSet;
-	char* bufP;
 	int bufferSize = 256;
 
 	//is checked at startup
@@ -328,18 +322,16 @@ obrwConfig_writeSettingsToConfigFile( struct wallpaper* wallpaperItem )
     obrwLogger_debug ( msg );
     obrwUtils_freeCString(msg);
 
-	// (1) open file
 	if( ( fp = fopen( filename, "r+" ) ) != NULL )
 	{
-		lineBuffer = (char*) malloc( sizeof( char ) * bufferSize );
+        char* lineBuffer = (char*) malloc( sizeof( char ) * bufferSize );
 		lineBuffer[0] = '\0';
 		configNow = (char*) malloc( sizeof( char ) * 4096 );
 		configNow[0] = '\0';
 
-		// (2) work file
 		while( fgets( lineBuffer, bufferSize, fp ) != NULL )
 		{
-			bufP = strchr( lineBuffer, '\n' );
+			char* bufP = strchr( lineBuffer, '\n' );
 
 			//fgets succeeds -> scan for \n and set to \0
 			if( bufP )
@@ -356,7 +348,7 @@ obrwConfig_writeSettingsToConfigFile( struct wallpaper* wallpaperItem )
 				{
 				    obrwLogger_debug ( "Found line with 'lastSet' information" );
 					strcat( configNow, "lastSet = \"" );
-					toSet = wallpaperItem->name;
+					char* toSet = wallpaperItem->name;
 					strncat( configNow, toSet, strlen( toSet ) );
 					strcat( configNow, "\"\n" );
 				}//if

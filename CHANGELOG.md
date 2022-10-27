@@ -6,6 +6,10 @@ All notable changes will be documented in this file.
 
 ## UNRELEASED
 
+### Fixed
+
+- Reduced the scope of some variables.
+
 ## 0.2.2 - 2022.10.27
 
 ### Fixed
