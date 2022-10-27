@@ -2,8 +2,9 @@
 # run make obrw
 
 CC = gcc
+C_LANG_STD = c99
 
-CFLAGS = -std=c99 -Wall -Wextra -pedantic
+CFLAGS = -std=$(C_LANG_STD) -Wall -Wextra -pedantic
 
 SRC = src/*
 TEST_FILE_DIR = tests/*
@@ -39,7 +40,7 @@ cppcheck: $(SRC) $(TEST_FILE_DIR)
 		echo "       you can install it via package manager."; \
 		exit 1; \
 	else \
-		$(BIN_CPPCHECK) $(SRC) $(TEST_FILE_DIR); \
+		$(BIN_CPPCHECK) --std=$(C_LANG_STD) --language=c $(SRC) $(TEST_FILE_DIR); \
 	fi
 
 test: $(SRC) $(TEST_FILE_DIR)
