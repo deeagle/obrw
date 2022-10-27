@@ -43,6 +43,15 @@ cppcheck: $(SRC) $(TEST_FILE_DIR)
 		$(BIN_CPPCHECK) --std=$(C_LANG_STD) --language=c $(SRC) $(TEST_FILE_DIR); \
 	fi
 
+cppcheck-all: $(SRC) $(TEST_FILE_DIR)
+	@if [ ! -f "$(BIN_CPPCHECK)" ]; then \
+		echo "ERROR: $(BIN_CPPCHECK) not found."; \
+		echo "       you can install it via package manager."; \
+		exit 1; \
+	else \
+		$(BIN_CPPCHECK) --std=$(C_LANG_STD) --language=c --enable=all $(SRC) $(TEST_FILE_DIR); \
+	fi
+
 test: $(SRC) $(TEST_FILE_DIR)
 		@if [ ! -d "./$(TARGET_DIR)" ]; then \
 			mkdir $(TARGET_DIR); \
