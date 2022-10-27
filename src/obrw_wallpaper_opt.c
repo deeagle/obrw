@@ -206,13 +206,11 @@ obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath, struct wallpaper *w
 
         return EXIT_FAILURE;
     }//if
-    else
-    {
-        char *logMsg = (char *) malloc((22 + strlen(dirPath)) * sizeof(char));
-        sprintf(logMsg, "Wallpaperpath is <%s>.", dirPath);
-        obrwLogger_debug(logMsg);
-        obrwUtils_freeCString(logMsg);
-    }//else
+
+    char *logMsg = (char *) malloc((22 + strlen(dirPath)) * sizeof(char));
+    sprintf(logMsg, "Wallpaperpath is <%s>.", dirPath);
+    obrwLogger_debug(logMsg);
+    obrwUtils_freeCString(logMsg);
 
     //Open DIR /.../wallpaper/
     wpDir = opendir(dirPath);
