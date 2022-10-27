@@ -352,12 +352,8 @@ obrwWallpaperOpt_setWallpaperWithFeh( const char* dirPath, const char* wpToSet )
 
 	if( NULL == wpToSet )
 	{
-		if( NULL == wpToSet )
-		{
-			obrwLogger_error ( "No wallpaper to set." );
-		}//if
+        obrwLogger_error ( "No wallpaper given to set." );
 
-		//failure
 		return -1;
 	}//if
 

@@ -9,6 +9,7 @@ All notable changes will be documented in this file.
 ### Fixed
 
 - Reduced the scope of some variables.
+- Removed multiple identical conditions. 
 
 ## 0.2.2 - 2022.10.27
 
