@@ -29,7 +29,7 @@ static char *wallpaperLast = NULL;
 /** Returns the actually wallpaperpath (DIR which includes the wallpapers). */
 const char *obrwConfig_getWallpaperDir(void) {
     return wallpaperDir;
-}  // obrwConfig_getWallpaperDir()
+}
 
 const char *obrwConfig_setWallpaperDir(const char *wpDir) {
     if (NULL == wpDir || strlen(wpDir) < 1) {
@@ -64,12 +64,12 @@ const char *obrwConfig_setWallpaperDir(const char *wpDir) {
 /** The getter-method of the last set wallpaper, included in the configfile. */
 const char *obrwConfig_getWallpaperLastSet(void) {
     return wallpaperLast;
-}  // obrwConfig_getWallpaperLastSet()
+}
 
 /** The setter-method to set the locale userhome. */
 void obrwConfig_setUserHomeDir(void) {
     userHome = obrwUtils_getUserHomeDir();
-}  // obrwConfig_setUserHomeDir()
+}
 
 /** Tests the configfile, if it's exists, is readable and writeable. */
 int obrwConfig_isConfigFileReadWriteable(void) {
@@ -80,13 +80,13 @@ int obrwConfig_isConfigFileReadWriteable(void) {
     if (userHome == NULL) {
         obrwLogger_error("No user homedir avaiable");
         return EXIT_FAILURE;
-    }  // if
+    }
 
     // if( userHome == "NOHOME" )
     if (strncmp(userHome, "NOHOME", 6) == 0) {
         obrwLogger_error("No user home available: User home = NOHOME !?");
         return EXIT_FAILURE;
-    }  // if
+    }
 
     char *logMsg = (char *) malloc((16 + strlen(userHome)) * sizeof(char));
     sprintf(logMsg, "User home is <%s>.", userHome);
@@ -99,8 +99,7 @@ int obrwConfig_isConfigFileReadWriteable(void) {
     if (access(configPath, EXIST) != -1) {
         if (access(configPath, READ) != -1) {
             if (access(configPath, WRITE) != -1) {
-            }  // if
-            else {
+            } else {
                 char *message =
                         (char *) malloc((56 + strlen(configPath)) * sizeof(char));
                 sprintf(message,
@@ -111,9 +110,8 @@ int obrwConfig_isConfigFileReadWriteable(void) {
                 obrwUtils_freeCString(message);
 
                 return EXIT_FAILURE;
-            }  // else
-        }      // if
-        else {
+            }
+        } else {
             char *message =
                     (char *) malloc((41 + strlen(configPath)) * sizeof(char));
             sprintf(message, "Configfile <%s> exists but is not readable.",
@@ -122,9 +120,8 @@ int obrwConfig_isConfigFileReadWriteable(void) {
             obrwUtils_freeCString(message);
 
             return EXIT_FAILURE;
-        }  // else
-    }      // if
-    else {
+        }
+    } else {
         char *message =
                 (char *) malloc((41 + strlen(configPath)) * sizeof(char));
         sprintf(message, "Configfile <%s> doesn't exists.", configPath);
@@ -132,7 +129,7 @@ int obrwConfig_isConfigFileReadWriteable(void) {
         obrwUtils_freeCString(message);
 
         return EXIT_FAILURE;
-    }  // else
+    }
 
     char *logMsgConfigAccess = (char *) malloc(59 * sizeof(char));
     sprintf(logMsgConfigAccess,
@@ -151,7 +148,7 @@ int obrwConfig_isConfigFileReadWriteable(void) {
     obrwUtils_freeCString(configPath);
 
     return EXIT_SUCCESS;
-}  // obrwConfig_isConfigFileReadable()
+}
 
 /** Read the configfile and parse included wallpaperpath and last set wallpaper.
  */
@@ -166,13 +163,13 @@ int obrwConfig_readConfigFile(void) {
     if (obrwConfig_isConfigFileReadWriteable() == EXIT_FAILURE) {
         obrwLogger_error("Configfile problems detect.");
         return EXIT_FAILURE;
-    }  // if
+    }
 
     obrwLogger_debug("Configfile is read and writeable.");
 
     if (userHome == NULL) {
         return EXIT_FAILURE;
-    }  // if
+    }
 
     obrwLogger_debug("User home is not NULL");
 
@@ -190,7 +187,7 @@ int obrwConfig_readConfigFile(void) {
             // fgets succeeds -> scan for \n and set to \0
             if (bufP) {
                 *bufP = '\0';
-            }  // if
+            }
 
             char *logMsgFoundComment;
 
@@ -207,6 +204,7 @@ int obrwConfig_readConfigFile(void) {
 
                     break;
                     // checks if the line starts with 'w' --> wpDir
+
                 case 'w':
                     if (strncmp(lineBuffer, "wpDir =", 7) == 0) {
                         char *logMsgFoundWallpaperKey = (char *) malloc(
@@ -221,14 +219,14 @@ int obrwConfig_readConfigFile(void) {
                                 lineBuffer)) == NULL) {
                             obrwLogger_error("WallpaperDir is NULL.");
                             return EXIT_FAILURE;
-                        }  // if
-                        else {
+                        } else {
                             obrwConfig_setWallpaperDir(wpDir);
-                        }  // else
-                    }      // if
+                        }
+                    }
 
                     break;
                     // checks if the line starts with 'l' --> lastSet
+
                 case 'l':
                     if (strncmp(lineBuffer, "lastSet =", 9) == 0) {
                         char *logMsgFoundLastWallpaperKey = (char *) malloc(
@@ -243,42 +241,39 @@ int obrwConfig_readConfigFile(void) {
                                 lineBuffer)) == NULL) {
                             obrwLogger_error("Last set wallpaper is NULL.");
                             return EXIT_FAILURE;
-                        }  // if
-                        else {
+                        } else {
                             wallpaperLast = (char *) malloc(
                                     sizeof(char) * strlen(lastSet) + 1);
 
                             if (wallpaperLast) {
                                 strncpy(wallpaperLast, lastSet,
                                         strlen(lastSet));
-                            }  // if
-                        }      // else
-                    }          // if
+                            }
+                        }
+                    }
 
                     break;
                     // checks if the line starts with ' '
                 default:
                     // next line
                     obrwLogger_debug("Empty line in configfile found.");
-            }  // switch
-        }      // while
+            }
+        }
 
         // (3) close file
         fclose(fp);
-    }  // if
-    else {
+    } else {
         obrwLogger_error("Configfile could't not opened (but checked?).");
         return EXIT_FAILURE;
-    }  // else
+    }
 
     obrwUtils_freeCString(lineBuffer);
     obrwUtils_freeCString(filename);
     obrwUtils_freeCString(wpDir);
     obrwUtils_freeCString(lastSet);
 
-    // success
     return EXIT_SUCCESS;
-}  // obrwConfig_readConfigFile()
+}
 
 /** Write the now used settings into the configfile. */
 int obrwConfig_writeSettingsToConfigFile(struct wallpaper *wallpaperItem) {
@@ -309,7 +304,7 @@ int obrwConfig_writeSettingsToConfigFile(struct wallpaper *wallpaperItem) {
             // fgets succeeds -> scan for \n and set to \0
             if (bufP) {
                 *bufP = '\0';
-            }  // if
+            }
 
             // if( strncmp( lineBuffer[0], 'w', 1 ) == 0 )
             if (lineBuffer[0] == 'l') {
@@ -321,8 +316,7 @@ int obrwConfig_writeSettingsToConfigFile(struct wallpaper *wallpaperItem) {
                     char *toSet = wallpaperItem->name;
                     strncat(configNow, toSet, strlen(toSet));
                     strcat(configNow, "\"\n");
-                }  // if
-                else {
+                } else {
                     char *logMsg = (char *) malloc((28 + strlen(lineBuffer)) *
                                                    sizeof(char));
                     sprintf(logMsg, "Was no config value key: <%s>.",
@@ -332,13 +326,12 @@ int obrwConfig_writeSettingsToConfigFile(struct wallpaper *wallpaperItem) {
 
                     strncat(configNow, lineBuffer, strlen(lineBuffer));
                     strcat(configNow, "\n");
-                }  // else
-            }      // if
-            else {
+                }
+            } else {
                 strncat(configNow, lineBuffer, strlen(lineBuffer));
                 strcat(configNow, "\n");
-            }  // else
-        }      // while
+            }
+        }
 
         // (3) close file
         fclose(fp);
@@ -349,11 +342,10 @@ int obrwConfig_writeSettingsToConfigFile(struct wallpaper *wallpaperItem) {
         obrwLogger_logMultiLine(DEBUG_TAG, configNow);
         obrwLogger_debug(
                 "----------------------------------------------------");
-    }  // if
-    else {
+    } else {
         obrwLogger_error("Couldn't open configfile to read old config.");
         return EXIT_FAILURE;
-    }  // else
+    }
 
     // (1) open file
     if ((fp = fopen(filename, "w")) != NULL) {
@@ -362,22 +354,21 @@ int obrwConfig_writeSettingsToConfigFile(struct wallpaper *wallpaperItem) {
 
         // (3) close file
         fclose(fp);
-    }  // if
-    else {
+    } else {
         obrwLogger_error("Couldn't open configfile to write new config.");
-    }  // else
+    }
 
     // success
     return EXIT_SUCCESS;
-}  // obrwConfig_writeSettingsToConfigFile()
+}
 
 /** Free memory of used locale variables. */
 void obrwConfig_freeLocalsToClose(void) {
     if (wallpaperDir) {
         obrwUtils_freeCString(wallpaperDir);
-    }  // if
+    }
 
     if (wallpaperLast) {
         obrwUtils_freeCString(wallpaperLast);
-    }  // if
-}  // obrwConfig_freeLocalsToClose()
+    }
+}

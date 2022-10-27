@@ -38,7 +38,7 @@ int obrwWallpaperOpt_filterWallpapersEndTag(const char *possibleWallpaperName) {
 
     if (possibleWallpaperName == NULL) {
         return -1;
-    }  // if
+    }
 
     buffer[0] = '\0';
     strLen = strlen(possibleWallpaperName);
@@ -50,10 +50,9 @@ int obrwWallpaperOpt_filterWallpapersEndTag(const char *possibleWallpaperName) {
         buffer[2] = (char) tolower((int) possibleWallpaperName[strLen - 2]);
         buffer[3] = (char) tolower((int) possibleWallpaperName[strLen - 1]);
         buffer[4] = '\0';
-    }  // if
-    else {
+    } else {
         return -1;
-    }  // else
+    }
 
     char *logMsg = (char *) malloc((13 + strlen(buffer)) * sizeof(char));
     sprintf(logMsg, "Buffer is <%s>.", buffer);
@@ -66,39 +65,38 @@ int obrwWallpaperOpt_filterWallpapersEndTag(const char *possibleWallpaperName) {
         case 'j':
             if (0 == memcmp(buffer, file_end_jpg, len_file_end)) {
                 obrwLogger_debug("Possible Wallpaper (.jpg) found.");
-            }  // if
-            else {
+            } else {
                 return -2;
-            }  // else
+            }
 
             break;
             // checks the start of endtag 'p' for 'png'
+
         case 'p':
             if (0 == memcmp(buffer, file_end_png, len_file_end)) {
                 obrwLogger_debug("Possible Wallpaper (.png) found.");
-            }  // if
-            else {
+            } else {
                 return -2;
-            }  // else
+            }
 
             break;
             // checks the start of endtag 'b' for 'bmp'
+
         case 'b':
             if (0 == memcmp(buffer, file_end_bmp, len_file_end)) {
                 obrwLogger_debug("Possible Wallpaper (.bmp) found.");
-            }  // if
-            else {
+            } else {
                 return -2;
-            }  // else
+            }
 
             break;
             // the endtag is not in mind or implemented
         default:
             obrwLogger_debug("Endtag not in mind or implemented.");
-    }  // switch
+    }
 
     return 0;
-}  // obrwWallpaperOpt_filterWallpapersEndTag( const char* )
+}
 
 // TODO
 /** Checks a filename if it's a possible wallpaper. */
@@ -106,17 +104,17 @@ int obrwWallpaperOpt_filterWallpapersMagicByte(
         const char *possibleWallpaperName) {
     if (possibleWallpaperName == NULL) {
         return -1;
-    }  // if
+    }
 
     return 0;
-}  // obrwWallpaperOpt_filterWallpapersMagicByte( const char* )
+}
 
 // TODO
 /** Add a wallpaper to the wallpaper array. */
 int obrwWallpaperOpt_addWallpaper(const char *wallpaper) {
     if (NULL == wallpaper) {
         return -1;
-    }  // if
+    }
 
     char *logMsg = (char *) malloc(27 * sizeof(char) * strlen(wallpaper));
     sprintf(logMsg, "Add possible wallpaper: <%s>.", wallpaper);
@@ -128,7 +126,7 @@ int obrwWallpaperOpt_addWallpaper(const char *wallpaper) {
     if (MAX_WALLPAPERS < wallpaperNamesLength) {
         obrwLogger_info("Max count of wallpapers reach.");
         return -2;
-    }  // if
+    }
 
     // if wallpaperarray doesn't exist, get memory (4096) for
     if (!wallpaperNames) {
@@ -138,17 +136,17 @@ int obrwWallpaperOpt_addWallpaper(const char *wallpaper) {
         if (!wallpaperNames) {
             wallpaperNames =
                     (char **) calloc((WP_MEMORY_SIZE / 2), sizeof(char *));
-        }  // if
+        }
 
         if (!wallpaperNames) {
             // error no memory avaiable
             obrwLogger_error("Could't allocate Memory!");
             return -3;
-        }  // if
+        }
 
         // after allocate set length of array to 0
         wallpaperNamesLength = 0;
-    }  // if
+    }
 
     // TODO
     // Enough memory avaiable to store next wallpaper?
@@ -166,7 +164,7 @@ int obrwWallpaperOpt_addWallpaper(const char *wallpaper) {
     wallpaperNamesLength++;
 
     return 0;
-}  // obrwWallpaperOpt_addWallpaper( const char* )
+}
 
 /** Reads the wallpaperdir, add wallpaper and set it. */
 int obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath,
@@ -179,7 +177,7 @@ int obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath,
         obrwLogger_error("No dirPath set.");
 
         return EXIT_FAILURE;
-    }  // if
+    }
 
     char *logMsg = (char *) malloc((22 + strlen(dirPath)) * sizeof(char));
     sprintf(logMsg, "Wallpaperpath is <%s>.", dirPath);
@@ -199,7 +197,7 @@ int obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath,
     while (entry) {
         wpCounter++;
         entry = readdir(wpDir);
-    }  // while
+    }
 
     if (0 < wpCounter) {
         int wpEntry = 0;
@@ -221,34 +219,32 @@ int obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath,
                         // d_name );
                         wpEntry++;
                         if (0 == obrwWallpaperOpt_addWallpaper(entry->d_name)) {
-                        }  // if
-                        else {
+                        } else {
                             return EXIT_FAILURE;
-                        }  // else
-                    }      // if
-                }          // if
-            }              // if
-            else {
+                        }
+                    }
+                }
+            } else {
                 // dirname here is '.' and '..'
-            }  // else
+            }
 
             // forward pointer in DIR
             entry = readdir(wpDir);
-        }  // while
+        }
 
         // char length for wallpaper count: 1.000.000.000 = 10
         char *message = (char *) malloc((32 + 10) * sizeof(char));
         sprintf(message, "Count of found wallpapers is <%d>.", wpEntry);
         obrwLogger_info(message);
         obrwUtils_freeCString(message);
-    }  // if
+    }
 
     closedir(wpDir);
 
     obrwWallpaperOpt_chooseWallpaperAndTryToSet(dirPath, wallpaperItem);
 
     return EXIT_SUCCESS;
-}  // obrwWallpaperOpt_readWallpaperDir( const char* )
+}
 
 /** Choose some wallpaper and tries to set a random wallpaper. */
 int obrwWallpaperOpt_chooseWallpaperAndTryToSet(
@@ -258,15 +254,14 @@ int obrwWallpaperOpt_chooseWallpaperAndTryToSet(
     if (NULL == wallpaperNames || NULL == dirPath || strlen(dirPath) < 1) {
         if (NULL == wallpaperNames) {
             obrwLogger_error("Problem with stored wallpapers.");
-        }  // if
+        }
 
         if (NULL == dirPath || strlen(dirPath) < 1) {
             obrwLogger_error("No dirPath set.");
-        }  // if
+        }
 
-        // failure
         return -1;
-    }  // if
+    }
 
     int usedWallpaperIndex;
     if (obrwConfig_getWallpaperLastSet() == NULL || wallpaperNamesLength == 1) {
@@ -284,9 +279,8 @@ int obrwWallpaperOpt_chooseWallpaperAndTryToSet(
     } else {
         do {
             usedWallpaperIndex = obrwUtils_randomDigit() % wallpaperNamesLength;
-        }  // do
-        while (0 == strcmp(obrwConfig_getWallpaperLastSet(),
-                           wallpaperNames[usedWallpaperIndex]));  // while
+        } while (0 == strcmp(obrwConfig_getWallpaperLastSet(),
+                             wallpaperNames[usedWallpaperIndex]));  // while
     }
 
     wallpaperItem->arrayIndex = usedWallpaperIndex;
@@ -294,13 +288,12 @@ int obrwWallpaperOpt_chooseWallpaperAndTryToSet(
 
     if (0 != obrwWallpaperOpt_setWallpaperWithFeh(
             dirPath, wallpaperNames[usedWallpaperIndex])) {
-        // failure
-        return -2;
-    }  // if
 
-    // success
+        return -2;
+    }
+
     return EXIT_SUCCESS;
-}  // obrwWallpaperOpt_chooseWallpaperAndTryToSet()
+}
 
 // TODO
 /** Set a wallpaper with the external tool feh. */
@@ -314,7 +307,7 @@ int obrwWallpaperOpt_setWallpaperWithFeh(const char *dirPath,
         obrwLogger_error("No wallpaper given to set.");
 
         return -1;
-    }  // if
+    }
 
     // feh command to set a wallpaper over full displaysize
     //'feh --bg-scale /wonderfull/canonical/file.name'
@@ -328,7 +321,7 @@ int obrwWallpaperOpt_setWallpaperWithFeh(const char *dirPath,
     if (NULL == sysCmd) {
         obrwLogger_error("Got no heap-space for feh-string.");
         return -2;
-    }  // if
+    }
 
     // TODO if one failure, free it!
     strncpy(sysCmd, fehCmd, strlen(fehCmd));
@@ -345,9 +338,8 @@ int obrwWallpaperOpt_setWallpaperWithFeh(const char *dirPath,
 
     obrwUtils_freeCString(sysCmd);
 
-    // success
-    return 0;
-}  // obrwWallpaperOpt_setWallpaperWithFeh( const char* )
+    return EXIT_SUCCESS;
+}
 
 // TODO
 // do it nice, not so dirty
@@ -361,7 +353,7 @@ void obrwWallpaperOpt_freeLocalsToClose(void) {
             free(wallpaperNames[i]);
             wallpaperNames[i] = NULL;
             i++;
-        }  // while
+        }
 
         // TODO
         // free char** wallpaperNames
@@ -370,5 +362,5 @@ void obrwWallpaperOpt_freeLocalsToClose(void) {
         // wallpaperNames = NULL;
 
         wallpaperNamesLength = -1;
-    }  // if
-}  // obrwWallpaperOpt_freeLocalsToClose()
+    }
+}
