@@ -267,10 +267,10 @@ obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath, struct wallpaper *w
         }//while
 
         // char length for wallpaper count: 1.000.000.000 = 10
-        char *logMsg = (char *) malloc((32 + 10) * sizeof(char));
-        sprintf(logMsg, "Count of found wallpapers is <%d>.", wpEntry);
-        obrwLogger_info(logMsg);
-        obrwUtils_freeCString(logMsg);
+        char *message = (char *) malloc((32 + 10) * sizeof(char));
+        sprintf(message, "Count of found wallpapers is <%d>.", wpEntry);
+        obrwLogger_info(message);
+        obrwUtils_freeCString(message);
     }//if
 
     closedir(wpDir);

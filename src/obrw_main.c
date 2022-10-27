@@ -50,12 +50,16 @@ main(int argc, char **argv)
 		return EXIT_FAILURE;
 	}//if
 
+    obrwLogger_success("Dependencies successfully checked.");
+
 	if( obrwConfig_readConfigFile() /* == EXIT_FAILURE */)
 	{
 		freeAllToClose();
-		obrwLogger_error("Found error in obrw.conf!");
+		obrwLogger_error("Found error in config file!");
 		return EXIT_FAILURE;
 	}//if
+
+    obrwLogger_success("Config file successfully checked.");
 
 	struct wallpaper usedWallpaperItem = obrwFactory_getWallpaperItem();
 
@@ -65,14 +69,20 @@ main(int argc, char **argv)
 		obrwLogger_error("Wallpaperoptions error!");
 	}//if
 
+    obrwLogger_success("Setting wallpaper successfully handled.");
+
 	if( obrwConfig_writeSettingsToConfigFile(&usedWallpaperItem) /* == EXIT_FAILURE */ )
 	{
 		freeAllToClose();
 		obrwLogger_error("Wallpaper write error!");
 	}//if
 
+    obrwLogger_success("Writing history successfully to file.");
+
 	//before exit free() local globs
 	freeAllToClose();
+
+    obrwLogger_success("OBRW successfully finished.");
 
 	return EXIT_SUCCESS;
 }//main( int, char** )
