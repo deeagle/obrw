@@ -3,6 +3,8 @@
 bin/*
 doc/*
 .settings
+.idea
+*.kdev*
 *.swp
 Doxyfile.bak
 cmake-build-debug/
