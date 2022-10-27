@@ -15,18 +15,18 @@
  *
  * \file obrw_utils.h
  *
- * \brief The file includes some methods which work like utils for the tool OBRW.
- * So you may find some methods to get random-digits, or a version of free with some security options.
+ * \brief The file includes some methods which work like utils for the tool
+ * OBRW. So you may find some methods to get random-digits, or a version of free
+ * with some security options.
  *
  */
 
 #ifndef OBRW_UTILS_H
 #define OBRW_UTILS_H
 
-
-#include <time.h>
-#include <stdlib.h>
 #include "obrw_logger.h"
+#include <stdlib.h>
+#include <time.h>
 
 /**
  * Local var describes the multiplikator for random digits. For example:
@@ -34,26 +34,26 @@
  */
 static double DIGIT_BORDER_HIGH;
 
-/** 
+/**
  * Set's the local multiplikator for random digits.
  *
  * \returns Nothing, it's void.
  */
-void obrwUtils_setHighDigitBorder( double );
+void obrwUtils_setHighDigitBorder(double);
 
 /**
  * Resets and starts the random-number-generator.
  *
  * \returns Nothing, it's void.
  */
-void obrwUtils_setRandomCounterToZero( void );
+void obrwUtils_setRandomCounterToZero(void);
 
 /**
  * Get a random number (remember to start counter before get a random).
  *
  * \returns A random number as an integer.
  */
-int obrwUtils_randomDigit( void );
+int obrwUtils_randomDigit(void);
 
 /**
  * Get the users homepath.
@@ -62,7 +62,7 @@ int obrwUtils_randomDigit( void );
  * \retval /home/user/ success.
  * \retval NULL fail.
  */
-char* obrwUtils_getUserHomeDir( void );
+char *obrwUtils_getUserHomeDir(void);
 
 /**
  * OBRW-Version of free(). It's a four-way-working-function:\n
@@ -73,7 +73,6 @@ char* obrwUtils_getUserHomeDir( void );
  *
  * \returns Nothing, it's void.
  */
-void obrwUtils_freeCString( char* );
+void obrwUtils_freeCString(char *);
 
-
-#endif //OBRW_UTILS_H
+#endif // OBRW_UTILS_H

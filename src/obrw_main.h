@@ -15,20 +15,21 @@
  *
  * \file obrw_main.h
  *
- * \brief The file includes the main-method of the tool obrw. Also there is an method to free all used alocated variables.
+ * \brief The file includes the main-method of the tool obrw. Also there is an
+ * method to free all used alocated variables.
  *
  */
 
 #ifndef OBRW_MAIN_H
 #define OBRW_MAIN_H
 
-#include <stdlib.h>
-#include <stdio.h>
 #include "obrw_chk_externals.c"
 #include "obrw_config.c"
 #include "obrw_factory.c"
 #include "obrw_logger.c"
 #include "obrw_wallpaper_opt.c"
+#include <stdio.h>
+#include <stdlib.h>
 
 /** Command line param to set the log level. */
 static const char *CLI_ARGUMENT_LOG_LEVEL = "--log-level=";
@@ -41,14 +42,14 @@ static const char *CLI_VERSION = "--version";
 /** Helper constant to show version only (if called). */
 static int IS_USER_CALLED_VERSION = FALSE;
 /** App version */
-static const char* APP_VERSION = "0.2.4";
+static const char *APP_VERSION = "0.2.4";
 
 /**
  * The main-method, which starts the obrw-process.
  *
- * \return If all is good, the process ends with EXIT_SUCCESS. Any kind of error the programm returns EXIT_FAILURE.
- * \retval EXIT_SUCCESS all good.
- * \retval EXIT_FAILURE any kind of error.
+ * \return If all is good, the process ends with EXIT_SUCCESS. Any kind of error
+ * the programm returns EXIT_FAILURE. \retval EXIT_SUCCESS all good. \retval
+ * EXIT_FAILURE any kind of error.
  */
 int main();
 
@@ -71,8 +72,9 @@ void obrwMain_printHelp();
 void obrwMain_printVersion();
 
 /**
- * Free all used allocated heap-memory (if used, to use before program ends -> success and fail).
+ * Free all used allocated heap-memory (if used, to use before program ends ->
+ * success and fail).
  */
-void freeAllToClose( void );
+void freeAllToClose(void);
 
-#endif //OBRW_MAIN_H
+#endif // OBRW_MAIN_H

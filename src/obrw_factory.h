@@ -8,10 +8,10 @@
  * Simple wallpaper item.
  */
 struct wallpaper {
-    /** array index for debug */
-    int arrayIndex;
-    /** name of the wallpaper */
-    char name[1024];
+  /** array index for debug */
+  int arrayIndex;
+  /** name of the wallpaper */
+  char name[1024];
 };
 
 /**
@@ -19,6 +19,6 @@ struct wallpaper {
  *
  * @return An empty wallpaper item.
  */
-struct wallpaper obrwFactory_getWallpaperItem(void );
+struct wallpaper obrwFactory_getWallpaperItem(void);
 
-#endif //OBRW_FACTORY_H
+#endif // OBRW_FACTORY_H

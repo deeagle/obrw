@@ -11,409 +11,361 @@
  * that both that copyright notice and this permission notice appear
  * in supporting documentation.
  * It is provided "as is" without express or implied warranty.\n\n\n
- * 
- * 
+ *
+ *
  * \file obrw_config.c
  *
- * \brief The file includes the definitons of functions which are associated with the configfile '~/.obrw.conf'.
+ * \brief The file includes the definitons of functions which are associated
+ * with the configfile '~/.obrw.conf'.
  *
  */
 #include "obrw_config.h"
 
-
-static const char* obrwConf = "/.obrw.conf\0";
-static char* userHome = NULL;
-static char* wallpaperDir = NULL;
-static char* wallpaperLast = NULL;
-
+static const char *obrwConf = "/.obrw.conf\0";
+static char *userHome = NULL;
+static char *wallpaperDir = NULL;
+static char *wallpaperLast = NULL;
 
 /** Returns the actually wallpaperpath (DIR which includes the wallpapers). */
-const char* 
-obrwConfig_getWallpaperDir( void )
-{
-	return wallpaperDir;
-}//obrwConfig_getWallpaperDir()
+const char *obrwConfig_getWallpaperDir(void) {
+  return wallpaperDir;
+} // obrwConfig_getWallpaperDir()
 
-const char *
-obrwConfig_setWallpaperDir(const char *wpDir)
-{
-    if (NULL == wpDir || strlen(wpDir) < 1)
-    {
-        obrwLogger_warning("Given wallpaper directory path was empty.");
-        return NULL;
+const char *obrwConfig_setWallpaperDir(const char *wpDir) {
+  if (NULL == wpDir || strlen(wpDir) < 1) {
+    obrwLogger_warning("Given wallpaper directory path was empty.");
+    return NULL;
+  }
+
+  int wpDirHasTrailingSlash = FALSE;
+  // has given wpDir a trailing /
+  if (wpDir[strlen(wpDir) - 1] == '/') {
+    obrwLogger_debug("Wallpaper path is with trailing slash, that's good.");
+    wpDirHasTrailingSlash = TRUE;
+    wallpaperDir = (char *)malloc(sizeof(char) * (strlen(wpDir) + 1));
+  } else {
+    obrwLogger_debug("Wallpaper path is without trailing slash.");
+    wpDirHasTrailingSlash = FALSE;
+    wallpaperDir = (char *)malloc(sizeof(char) * (strlen(wpDir) + 2));
+  }
+
+  if (wallpaperDir) {
+    strncpy(wallpaperDir, wpDir, strlen(wpDir));
+    if (wpDirHasTrailingSlash == FALSE) {
+      obrwLogger_debug("We add a trailing slash to the wallpaper path.");
+      wallpaperDir[strlen(wpDir)] = '/';
+      wallpaperDir[strlen(wpDir) + 1] = '\0';
     }
+  }
 
-    int wpDirHasTrailingSlash = FALSE;
-    // has given wpDir a trailing /
-    if (wpDir[strlen(wpDir) - 1] == '/')
-    {
-        obrwLogger_debug("Wallpaper path is with trailing slash, that's good.");
-        wpDirHasTrailingSlash = TRUE;
-        wallpaperDir = (char *) malloc(sizeof(char) * (strlen(wpDir) + 1));
-    } else
-    {
-        obrwLogger_debug("Wallpaper path is without trailing slash.");
-        wpDirHasTrailingSlash = FALSE;
-        wallpaperDir = (char *) malloc(sizeof(char) * (strlen(wpDir) + 2));
-    }
-
-    if (wallpaperDir)
-    {
-        strncpy(wallpaperDir, wpDir, strlen(wpDir));
-        if (wpDirHasTrailingSlash == FALSE)
-        {
-            obrwLogger_debug("We add a trailing slash to the wallpaper path.");
-            wallpaperDir[strlen(wpDir)] = '/';
-            wallpaperDir[strlen(wpDir) + 1] = '\0';
-        }
-    }
-
-    return obrwConfig_getWallpaperDir();
+  return obrwConfig_getWallpaperDir();
 }
 
 /** The getter-method of the last set wallpaper, included in the configfile. */
-const char*
-obrwConfig_getWallpaperLastSet( void )
-{
-	return wallpaperLast;
-}//obrwConfig_getWallpaperLastSet()
+const char *obrwConfig_getWallpaperLastSet(void) {
+  return wallpaperLast;
+} // obrwConfig_getWallpaperLastSet()
 
 /** The setter-method to set the locale userhome. */
-void
-obrwConfig_setUserHomeDir( void )
-{
-	userHome = obrwUtils_getUserHomeDir();
-}//obrwConfig_setUserHomeDir()
-
+void obrwConfig_setUserHomeDir(void) {
+  userHome = obrwUtils_getUserHomeDir();
+} // obrwConfig_setUserHomeDir()
 
 /** Tests the configfile, if it's exists, is readable and writeable. */
-int
-obrwConfig_isConfigFileReadWriteable( void )
-{ 
-	char* configPath;
+int obrwConfig_isConfigFileReadWriteable(void) {
+  char *configPath;
 
-	obrwConfig_setUserHomeDir();
+  obrwConfig_setUserHomeDir();
 
-	if( userHome == NULL )
-	{
-		obrwLogger_error ( "No user homedir avaiable" );
-		return EXIT_FAILURE;
-	}//if
+  if (userHome == NULL) {
+    obrwLogger_error("No user homedir avaiable");
+    return EXIT_FAILURE;
+  } // if
 
-	//if( userHome == "NOHOME" )
-	if( strncmp( userHome, "NOHOME", 6 ) == 0 )
-	{
-		obrwLogger_error ( "No user home available: User home = NOHOME !?" );
-		return EXIT_FAILURE;
-	}//if 
+  // if( userHome == "NOHOME" )
+  if (strncmp(userHome, "NOHOME", 6) == 0) {
+    obrwLogger_error("No user home available: User home = NOHOME !?");
+    return EXIT_FAILURE;
+  } // if
 
-    char *logMsg = (char *) malloc((16 + strlen(userHome)) * sizeof(char));
-    sprintf(logMsg, "User home is <%s>.", userHome);
-    obrwLogger_debug(logMsg);
-    obrwUtils_freeCString(logMsg);
+  char *logMsg = (char *)malloc((16 + strlen(userHome)) * sizeof(char));
+  sprintf(logMsg, "User home is <%s>.", userHome);
+  obrwLogger_debug(logMsg);
+  obrwUtils_freeCString(logMsg);
 
-	configPath = obrwString_2CStringsTo1( userHome, obrwConf );
+  configPath = obrwString_2CStringsTo1(userHome, obrwConf);
 
-	// $USERHOME/.obrw.config exists and accessable?
-	if( access( configPath, EXIST ) != -1 )
-	{
-		if( access( configPath, READ ) != -1 )
-		{
-			if( access( configPath, WRITE ) != -1 )
-			{
-			}//if
-			else
-			{
-                char *message = ( char* ) malloc ((56 + strlen (configPath ) ) * sizeof ( char ) );
-                sprintf (message, "Configfile <%s> exists and is readable, but not writeable.", configPath );
-                obrwLogger_error (message );
-                obrwUtils_freeCString (message );
+  // $USERHOME/.obrw.config exists and accessable?
+  if (access(configPath, EXIST) != -1) {
+    if (access(configPath, READ) != -1) {
+      if (access(configPath, WRITE) != -1) {
+      } // if
+      else {
+        char *message =
+            (char *)malloc((56 + strlen(configPath)) * sizeof(char));
+        sprintf(message,
+                "Configfile <%s> exists and is readable, but not writeable.",
+                configPath);
+        obrwLogger_error(message);
+        obrwUtils_freeCString(message);
 
-				return EXIT_FAILURE;
-			}//else
-		}//if
-		else
-		{
-            char *message = ( char* ) malloc ((41 + strlen (configPath ) ) * sizeof ( char ) );
-            sprintf (message, "Configfile <%s> exists but is not readable.", configPath );
-            obrwLogger_error (message );
-            obrwUtils_freeCString (message );
+        return EXIT_FAILURE;
+      } // else
+    }   // if
+    else {
+      char *message = (char *)malloc((41 + strlen(configPath)) * sizeof(char));
+      sprintf(message, "Configfile <%s> exists but is not readable.",
+              configPath);
+      obrwLogger_error(message);
+      obrwUtils_freeCString(message);
 
-			return EXIT_FAILURE;
-		}//else
-	}//if
-	else
-	{
-        char *message = ( char* ) malloc ((41 + strlen (configPath ) ) * sizeof ( char ) );
-        sprintf (message, "Configfile <%s> doesn't exists.", configPath );
-        obrwLogger_error (message );
-        obrwUtils_freeCString (message );
+      return EXIT_FAILURE;
+    } // else
+  }   // if
+  else {
+    char *message = (char *)malloc((41 + strlen(configPath)) * sizeof(char));
+    sprintf(message, "Configfile <%s> doesn't exists.", configPath);
+    obrwLogger_error(message);
+    obrwUtils_freeCString(message);
 
-		return EXIT_FAILURE;
-	}//else
+    return EXIT_FAILURE;
+  } // else
 
-    char *logMsgConfigAccess = (char *) malloc(59 * sizeof(char));
-    sprintf(logMsgConfigAccess, "Configfile access (EXIST) is <%d> and Access (READ) is <%d>.",
-            access(configPath, EXIST),
-            access(configPath, READ));
-    obrwLogger_debug(logMsgConfigAccess);
-    obrwUtils_freeCString(logMsgConfigAccess);
+  char *logMsgConfigAccess = (char *)malloc(59 * sizeof(char));
+  sprintf(logMsgConfigAccess,
+          "Configfile access (EXIST) is <%d> and Access (READ) is <%d>.",
+          access(configPath, EXIST), access(configPath, READ));
+  obrwLogger_debug(logMsgConfigAccess);
+  obrwUtils_freeCString(logMsgConfigAccess);
 
-    char *logMsgConfigReadable = (char *) malloc((38 + strlen(configPath)) * sizeof(char));
-    sprintf(logMsgConfigReadable, "Configfile is <%s> (EXISTS and READABLE)", configPath);
-    obrwLogger_debug(logMsgConfigReadable);
-    obrwUtils_freeCString(logMsgConfigReadable);
+  char *logMsgConfigReadable =
+      (char *)malloc((38 + strlen(configPath)) * sizeof(char));
+  sprintf(logMsgConfigReadable, "Configfile is <%s> (EXISTS and READABLE)",
+          configPath);
+  obrwLogger_debug(logMsgConfigReadable);
+  obrwUtils_freeCString(logMsgConfigReadable);
 
-	obrwUtils_freeCString( configPath );
+  obrwUtils_freeCString(configPath);
 
-	return EXIT_SUCCESS;
-}//obrwConfig_isConfigFileReadable()
+  return EXIT_SUCCESS;
+} // obrwConfig_isConfigFileReadable()
 
+/** Read the configfile and parse included wallpaperpath and last set wallpaper.
+ */
+int obrwConfig_readConfigFile(void) {
+  FILE *fp;
+  char *lineBuffer;
+  char *filename;
+  char *wpDir;
+  char *lastSet;
+  int bufferSize = 256;
 
-/** Read the configfile and parse included wallpaperpath and last set wallpaper. */
-int
-obrwConfig_readConfigFile( void )
-{
-	FILE *fp;
-	char* lineBuffer;
-	char* filename; 
-	char* wpDir;
-	char* lastSet;
-	int bufferSize = 256;
+  if (obrwConfig_isConfigFileReadWriteable() == EXIT_FAILURE) {
+    obrwLogger_error("Configfile problems detect.");
+    return EXIT_FAILURE;
+  } // if
 
-	if( obrwConfig_isConfigFileReadWriteable() == EXIT_FAILURE )
-	{
-		obrwLogger_error ( "Configfile problems detect." );
-		return EXIT_FAILURE;
-	}//if
+  obrwLogger_debug("Configfile is read and writeable.");
 
-	obrwLogger_debug ( "Configfile is read and writeable." );
-	
-	if( userHome == NULL )
-	{
-		return EXIT_FAILURE;
-	}//if
+  if (userHome == NULL) {
+    return EXIT_FAILURE;
+  } // if
 
-	obrwLogger_debug( "User home is not NULL" );
-	
-	filename = obrwString_2CStringsTo1( userHome, obrwConf );
+  obrwLogger_debug("User home is not NULL");
 
-	// (1) open file
-	if( ( fp = fopen( filename, "r" ) ) != NULL ) 
-	{
-		lineBuffer = (char*) malloc( sizeof( char ) * bufferSize );
-		lineBuffer[0] = '\0';
+  filename = obrwString_2CStringsTo1(userHome, obrwConf);
 
-		// (2) work with file
-		while( fgets( lineBuffer, bufferSize, fp ) != NULL )
-		{
-			char* bufP = strchr( lineBuffer, '\n' );
-			
-			//fgets succeeds -> scan for \n and set to \0
-			if( bufP )
-			{
-				*bufP = '\0';
-			}//if
+  // (1) open file
+  if ((fp = fopen(filename, "r")) != NULL) {
+    lineBuffer = (char *)malloc(sizeof(char) * bufferSize);
+    lineBuffer[0] = '\0';
 
-            char *logMsgFoundComment;
+    // (2) work with file
+    while (fgets(lineBuffer, bufferSize, fp) != NULL) {
+      char *bufP = strchr(lineBuffer, '\n');
 
-			switch( lineBuffer[0] )
-			{
-				//checks if the line starts with '#'
-				case '#':
-						//next line
-						logMsgFoundComment = ( char* ) malloc ( ( 32 + strlen ( lineBuffer ) ) * sizeof ( char ) );
-                        sprintf ( logMsgFoundComment, "Found comment in config file: <%s>", lineBuffer);
-                        obrwLogger_debug ( logMsgFoundComment );
-                        obrwUtils_freeCString ( logMsgFoundComment );
+      // fgets succeeds -> scan for \n and set to \0
+      if (bufP) {
+        *bufP = '\0';
+      } // if
 
-						break;
-				//checks if the line starts with 'w' --> wpDir
-				case 'w':
-						if( strncmp( lineBuffer, "wpDir =", 7 ) == 0 )
-						{
-						    char* logMsgFoundWallpaperKey = ( char* ) malloc ( ( 36 + strlen ( lineBuffer ) ) * sizeof ( char ) );
-                            sprintf ( logMsgFoundWallpaperKey, "Found key 'wpDir =' in config file: <%s>", lineBuffer);
-                            obrwLogger_debug ( logMsgFoundWallpaperKey );
-                            obrwUtils_freeCString ( logMsgFoundWallpaperKey );
+      char *logMsgFoundComment;
 
-							if( ( wpDir = obrwString_parseConfigFileFor( lineBuffer ) ) == NULL )
-							{
-								obrwLogger_error ( "WallpaperDir is NULL." );
-								return EXIT_FAILURE;
-							}//if
-							else
-							{
-                                obrwConfig_setWallpaperDir(wpDir);
-							}//else
-						}//if
+      switch (lineBuffer[0]) {
+      // checks if the line starts with '#'
+      case '#':
+        // next line
+        logMsgFoundComment =
+            (char *)malloc((32 + strlen(lineBuffer)) * sizeof(char));
+        sprintf(logMsgFoundComment, "Found comment in config file: <%s>",
+                lineBuffer);
+        obrwLogger_debug(logMsgFoundComment);
+        obrwUtils_freeCString(logMsgFoundComment);
 
-						break;
-				//checks if the line starts with 'l' --> lastSet
-				case 'l':
-						if( strncmp( lineBuffer, "lastSet =", 9 ) == 0 )
-						{
-						    char* logMsgFoundLastWallpaperKey = ( char* ) malloc ( ( 40 + strlen ( lineBuffer ) ) * sizeof ( char ) );
-                            sprintf ( logMsgFoundLastWallpaperKey, "Found key 'lastSet =' in config file: <%s>", lineBuffer);
-                            obrwLogger_debug ( logMsgFoundLastWallpaperKey );
-                            obrwUtils_freeCString ( logMsgFoundLastWallpaperKey );
-							
-							if( ( lastSet = obrwString_parseConfigFileFor( lineBuffer ) ) == NULL )
-							{
-								obrwLogger_error ( "Last set wallpaper is NULL." );
-								return EXIT_FAILURE;
-							}//if
-							else
-							{
-								wallpaperLast = (char*) malloc( sizeof( char ) * strlen( lastSet ) + 1 );
+        break;
+      // checks if the line starts with 'w' --> wpDir
+      case 'w':
+        if (strncmp(lineBuffer, "wpDir =", 7) == 0) {
+          char *logMsgFoundWallpaperKey =
+              (char *)malloc((36 + strlen(lineBuffer)) * sizeof(char));
+          sprintf(logMsgFoundWallpaperKey,
+                  "Found key 'wpDir =' in config file: <%s>", lineBuffer);
+          obrwLogger_debug(logMsgFoundWallpaperKey);
+          obrwUtils_freeCString(logMsgFoundWallpaperKey);
 
-								if( wallpaperLast )
-								{
-									strncpy( wallpaperLast, lastSet, strlen( lastSet ) );
-								}//if
-							}//else
-						}//if
+          if ((wpDir = obrwString_parseConfigFileFor(lineBuffer)) == NULL) {
+            obrwLogger_error("WallpaperDir is NULL.");
+            return EXIT_FAILURE;
+          } // if
+          else {
+            obrwConfig_setWallpaperDir(wpDir);
+          } // else
+        }   // if
 
-						break;
-				//checks if the line starts with ' '
-				default :
-						//next line
-						obrwLogger_debug ( "Empty line in configfile found." );
-				}//switch
-		}//while
+        break;
+      // checks if the line starts with 'l' --> lastSet
+      case 'l':
+        if (strncmp(lineBuffer, "lastSet =", 9) == 0) {
+          char *logMsgFoundLastWallpaperKey =
+              (char *)malloc((40 + strlen(lineBuffer)) * sizeof(char));
+          sprintf(logMsgFoundLastWallpaperKey,
+                  "Found key 'lastSet =' in config file: <%s>", lineBuffer);
+          obrwLogger_debug(logMsgFoundLastWallpaperKey);
+          obrwUtils_freeCString(logMsgFoundLastWallpaperKey);
 
-		// (3) close file
-		fclose( fp );
-	}//if
-	else
-	{
-		obrwLogger_error ( "Configfile could't not opened (but checked?)." );
-		return EXIT_FAILURE;
-	}//else
+          if ((lastSet = obrwString_parseConfigFileFor(lineBuffer)) == NULL) {
+            obrwLogger_error("Last set wallpaper is NULL.");
+            return EXIT_FAILURE;
+          } // if
+          else {
+            wallpaperLast = (char *)malloc(sizeof(char) * strlen(lastSet) + 1);
 
+            if (wallpaperLast) {
+              strncpy(wallpaperLast, lastSet, strlen(lastSet));
+            } // if
+          }   // else
+        }     // if
 
+        break;
+      // checks if the line starts with ' '
+      default:
+        // next line
+        obrwLogger_debug("Empty line in configfile found.");
+      } // switch
+    }   // while
 
-	obrwUtils_freeCString( lineBuffer );
-	obrwUtils_freeCString( filename );
-	obrwUtils_freeCString( wpDir );
-	obrwUtils_freeCString( lastSet );
+    // (3) close file
+    fclose(fp);
+  } // if
+  else {
+    obrwLogger_error("Configfile could't not opened (but checked?).");
+    return EXIT_FAILURE;
+  } // else
 
-	//success
-	return EXIT_SUCCESS;
-}//obrwConfig_readConfigFile()
+  obrwUtils_freeCString(lineBuffer);
+  obrwUtils_freeCString(filename);
+  obrwUtils_freeCString(wpDir);
+  obrwUtils_freeCString(lastSet);
 
+  // success
+  return EXIT_SUCCESS;
+} // obrwConfig_readConfigFile()
 
 /** Write the now used settings into the configfile. */
-int
-obrwConfig_writeSettingsToConfigFile( struct wallpaper* wallpaperItem )
-{
-	FILE *fp;
-	char* filename;
-	char* configNow;
-	int bufferSize = 256;
+int obrwConfig_writeSettingsToConfigFile(struct wallpaper *wallpaperItem) {
+  FILE *fp;
+  char *filename;
+  char *configNow;
+  int bufferSize = 256;
 
-	//is checked at startup
-	//obrwConfig_isConfigFileReadWriteable()
-	
-	filename = obrwString_2CStringsTo1( userHome, obrwConf );
+  // is checked at startup
+  // obrwConfig_isConfigFileReadWriteable()
 
-    char *msg = (char*) malloc(17 + strlen(filename));
-    sprintf( msg, "Config file is <%s>.", filename );
-    obrwLogger_debug ( msg );
-    obrwUtils_freeCString(msg);
+  filename = obrwString_2CStringsTo1(userHome, obrwConf);
 
-	if( ( fp = fopen( filename, "r+" ) ) != NULL )
-	{
-        char* lineBuffer = (char*) malloc( sizeof( char ) * bufferSize );
-		lineBuffer[0] = '\0';
-		configNow = (char*) malloc( sizeof( char ) * 4096 );
-		configNow[0] = '\0';
+  char *msg = (char *)malloc(17 + strlen(filename));
+  sprintf(msg, "Config file is <%s>.", filename);
+  obrwLogger_debug(msg);
+  obrwUtils_freeCString(msg);
 
-		while( fgets( lineBuffer, bufferSize, fp ) != NULL )
-		{
-			char* bufP = strchr( lineBuffer, '\n' );
+  if ((fp = fopen(filename, "r+")) != NULL) {
+    char *lineBuffer = (char *)malloc(sizeof(char) * bufferSize);
+    lineBuffer[0] = '\0';
+    configNow = (char *)malloc(sizeof(char) * 4096);
+    configNow[0] = '\0';
 
-			//fgets succeeds -> scan for \n and set to \0
-			if( bufP )
-			{
-				*bufP = '\0';
-			}//if
-			
-			//if( strncmp( lineBuffer[0], 'w', 1 ) == 0 )
-			if( lineBuffer[0] == 'l' )
-			{
-			    obrwLogger_debug ( "Found line which starts with char 'l'" );
+    while (fgets(lineBuffer, bufferSize, fp) != NULL) {
+      char *bufP = strchr(lineBuffer, '\n');
 
-				if( strncmp( lineBuffer, "lastSet = ", 10 ) == 0 )
-				{
-				    obrwLogger_debug ( "Found line with 'lastSet' information" );
-					strcat( configNow, "lastSet = \"" );
-					char* toSet = wallpaperItem->name;
-					strncat( configNow, toSet, strlen( toSet ) );
-					strcat( configNow, "\"\n" );
-				}//if
-				else
-				{
-                    char *logMsg = ( char* ) malloc ( ( 28 + strlen ( lineBuffer ) ) * sizeof ( char ) );
-                    sprintf ( logMsg, "Was no config value key: <%s>.", lineBuffer );
-                    obrwLogger_debug ( logMsg );
-                    obrwUtils_freeCString ( logMsg );
+      // fgets succeeds -> scan for \n and set to \0
+      if (bufP) {
+        *bufP = '\0';
+      } // if
 
-					strncat( configNow, lineBuffer, strlen( lineBuffer ) );
-					strcat( configNow, "\n" );
-				}//else
-			}//if
-			else
-			{
-				strncat( configNow, lineBuffer, strlen( lineBuffer ) );
-				strcat( configNow, "\n" );
-			}//else
-		}//while
+      // if( strncmp( lineBuffer[0], 'w', 1 ) == 0 )
+      if (lineBuffer[0] == 'l') {
+        obrwLogger_debug("Found line which starts with char 'l'");
 
-		// (3) close file
-		fclose( fp );
+        if (strncmp(lineBuffer, "lastSet = ", 10) == 0) {
+          obrwLogger_debug("Found line with 'lastSet' information");
+          strcat(configNow, "lastSet = \"");
+          char *toSet = wallpaperItem->name;
+          strncat(configNow, toSet, strlen(toSet));
+          strcat(configNow, "\"\n");
+        } // if
+        else {
+          char *logMsg =
+              (char *)malloc((28 + strlen(lineBuffer)) * sizeof(char));
+          sprintf(logMsg, "Was no config value key: <%s>.", lineBuffer);
+          obrwLogger_debug(logMsg);
+          obrwUtils_freeCString(logMsg);
 
-		obrwLogger_debug ( "New configfile to write:" );
-		obrwLogger_debug ( "----------------------------------------------------" );
-		obrwLogger_logMultiLine(DEBUG_TAG, configNow);
-		obrwLogger_debug ( "----------------------------------------------------" );
-	}//if
-	else
-	{
-		obrwLogger_error ( "Couldn't open configfile to read old config." );
-		return EXIT_FAILURE;
-	}//else
+          strncat(configNow, lineBuffer, strlen(lineBuffer));
+          strcat(configNow, "\n");
+        } // else
+      }   // if
+      else {
+        strncat(configNow, lineBuffer, strlen(lineBuffer));
+        strcat(configNow, "\n");
+      } // else
+    }   // while
 
-	// (1) open file
-	if( ( fp = fopen( filename, "w" ) ) != NULL )
-	{
-		// (2) work file
-		fputs( configNow, fp );
+    // (3) close file
+    fclose(fp);
 
-		// (3) close file
-		fclose( fp );	
-	}//if
-	else
-	{
-		obrwLogger_error ( "Couldn't open configfile to write new config." );
-	}//else
+    obrwLogger_debug("New configfile to write:");
+    obrwLogger_debug("----------------------------------------------------");
+    obrwLogger_logMultiLine(DEBUG_TAG, configNow);
+    obrwLogger_debug("----------------------------------------------------");
+  } // if
+  else {
+    obrwLogger_error("Couldn't open configfile to read old config.");
+    return EXIT_FAILURE;
+  } // else
 
-	//success
-	return EXIT_SUCCESS;
-}//obrwConfig_writeSettingsToConfigFile()
+  // (1) open file
+  if ((fp = fopen(filename, "w")) != NULL) {
+    // (2) work file
+    fputs(configNow, fp);
 
+    // (3) close file
+    fclose(fp);
+  } // if
+  else {
+    obrwLogger_error("Couldn't open configfile to write new config.");
+  } // else
+
+  // success
+  return EXIT_SUCCESS;
+} // obrwConfig_writeSettingsToConfigFile()
 
 /** Free memory of used locale variables. */
-void 
-obrwConfig_freeLocalsToClose( void )
-{
-	if( wallpaperDir )
-	{		
-		obrwUtils_freeCString( wallpaperDir );
-	}//if
+void obrwConfig_freeLocalsToClose(void) {
+  if (wallpaperDir) {
+    obrwUtils_freeCString(wallpaperDir);
+  } // if
 
-	if( wallpaperLast )
-	{
-		obrwUtils_freeCString( wallpaperLast );
-	}//if
-}//obrwConfig_freeLocalsToClose()
+  if (wallpaperLast) {
+    obrwUtils_freeCString(wallpaperLast);
+  } // if
+} // obrwConfig_freeLocalsToClose()
