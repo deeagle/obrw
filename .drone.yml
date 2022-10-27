@@ -7,3 +7,9 @@ steps:
     image: alpine
     commands:
       - echo "hello world"
+
+  - name: cppcheck
+    image: alpine
+    commands:
+      - apk --no-cache add make cppcheck g++
+      - make test
