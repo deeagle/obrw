@@ -6,6 +6,12 @@ All notable changes will be documented in this file.
 
 ## UNRELEASED
 
+## 0.2.2 - 2022.10.27
+
+### Fixed
+
+- Version tag in cli.
+
 ## 0.2.1 - 2022.10.27
 
 ### Fixed
