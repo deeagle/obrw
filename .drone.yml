@@ -1,0 +1,10 @@
+kind: pipeline
+type: docker
+name: ci
+
+steps:
+  - name: cppcheck
+    image: alpine
+    commands:
+      - apk --no-cache add make cppcheck g++
+      - make test
