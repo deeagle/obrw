@@ -48,7 +48,7 @@ test: $(SRC) $(TEST_FILE_DIR)
 			mkdir $(TARGET_DIR); \
 		fi
 		$(CC) -o $(TARGET_DIR)/$(TEST_CLASS_NAME) $(MAIN_TESTS)
-		$(BIN_CPPCHECK) --error-exitcode=1 $(SRC) $(TEST_FILE_DIR)
+		$(BIN_CPPCHECK) --std=$(C_LANG_STD) --language=c --error-exitcode=1 $(SRC) $(TEST_FILE_DIR)
 
 test-ndebug: $(SRC) $(TEST_FILE_DIR)
 		if [ ! -d "./$(TARGET_DIR)" ]; then \
