@@ -25,13 +25,17 @@
 #include <string.h>
 #include <sys/stat.h>  /* LINUX / UNIX */
 #include <sys/types.h> /* LINUX / UNIX */
+
 #ifdef __unix__
+
 #include <unistd.h>
+
 #define EXIST F_OK
 #define EXEC X_OK
 #define WRITE W_OK
 #define READ R_OK
 #endif
+
 #include <stdio.h>
 
 #include "obrw_logger.h"

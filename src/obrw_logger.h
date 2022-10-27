@@ -71,16 +71,22 @@ static const int OBRW_LOGGER_STR_LEN_OF_LONGEST_CLI_PARAM = 7;
 
 /** Logs successful messages, depends on <code>LOG_LEVEL</code>. */
 static void obrwLogger_success(const char *message);
+
 /** Logs info messages, depends on <code>LOG_LEVEL</code>. */
 static void obrwLogger_info(const char *message);
+
 /** Logs warning messages, depends on <code>LOG_LEVEL</code>. */
 static void obrwLogger_warning(const char *message);
+
 /** Logs debug messages, depends on <code>LOG_LEVEL</code>. */
 static void obrwLogger_debug(const char *message);
+
 /** Logs system debugs, depends on <code>LOG_LEVEL</code>. */
 static void obrwLogger_debugSystem(const char *message);
+
 /** Logs error messages. */
 static void obrwLogger_error(const char *message);
+
 /**
  * Returns the internal log level identified by given tag.
  *
@@ -88,10 +94,12 @@ static void obrwLogger_error(const char *message);
  * @return The depending internal log level.
  */
 static int obrwLogger_getLogLevelByLogTag(const char *tag);
+
 /**
  * Logs the internal used <code>LOG_LEVEL</code> depending on the log level.
  */
 static void obrwLogger_printLogLevel();
+
 /**
  * Sets the internal <code>LOG_LEVEL</code> by the given command line value.
  *
@@ -100,6 +108,7 @@ static void obrwLogger_printLogLevel();
  * <code>FALSE</code>.
  */
 static int obrwLogger_setLogLevelByCliValue(const char *cliLogLevelValue);
+
 /**
  * Set the internal <code>LOG_LEVEL</code> by given log level.
  *
@@ -123,6 +132,7 @@ static void obrwLogger_logMultiLine(const char *tag, const char *messageLines);
  * <code>FALSE</code>.
  */
 static int obrwLogger_isCliParamValueKnown(const char *cliLogLevelArgument);
+
 /**
  * Returns if the given tag is known.
  *

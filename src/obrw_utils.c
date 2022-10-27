@@ -33,7 +33,7 @@ void obrwUtils_setRandomCounterToZero(void) {
 
 /** Get a random number. */
 int obrwUtils_randomDigit(void) {
-    return ((int)((double)rand() / ((double)(RAND_MAX)) * DIGIT_BORDER_HIGH));
+    return ((int) ((double) rand() / ((double) (RAND_MAX)) * DIGIT_BORDER_HIGH));
 }  // obrwUtils_randomDigit()
 
 /** Get the users home path. */
@@ -44,7 +44,7 @@ char *obrwUtils_getUserHomeDir(void) {
 /** OBRW Version of free(). */
 void obrwUtils_freeCString(char *cstr) {
     if (cstr != NULL) {
-        char *logMsg = (char *)malloc((16 + strlen(cstr)) * sizeof(char));
+        char *logMsg = (char *) malloc((16 + strlen(cstr)) * sizeof(char));
         sprintf(logMsg, "free string <%s>.", cstr);
         obrwLogger_debugSystem(logMsg);
 

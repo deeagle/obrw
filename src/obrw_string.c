@@ -27,7 +27,7 @@ char *obrwString_2CStringsTo1(const char *str1, const char *str2) {
 
     if (str1 != NULL && str2 != NULL) {
         size_t len = strlen(str1) + strlen(str2) + 1;
-        ptr = (char *)malloc(sizeof(char) * len);
+        ptr = (char *) malloc(sizeof(char) * len);
 
         // check if ptr exist because malloc allocs on heap-space
         // and it can fail.
@@ -49,20 +49,20 @@ char *obrwString_parseConfigFileFor(const char *line) {
         if (obrwString_getCountOfChar(line, valueSeparator) >= 2) {
             // find the first " (DEZ = 34) in the cstring,
             // do a copy and deletes the second " at the end of the line.
-            if ((strPtr = strchr(line, (int)valueSeparator)) != NULL) {
+            if ((strPtr = strchr(line, (int) valueSeparator)) != NULL) {
                 size_t len = strlen(strPtr);
-                parsedStr = (char *)malloc(sizeof(char) * len);
+                parsedStr = (char *) malloc(sizeof(char) * len);
 
                 strPtr++;
                 if (parsedStr) {
                     const size_t lenToCopyWithoutClosingQuotationMark =
-                        (strlen(strPtr) - 1);
+                            (strlen(strPtr) - 1);
                     memset(parsedStr, '\0', sizeof(char) * len);
                     strncat(parsedStr, strPtr,
                             lenToCopyWithoutClosingQuotationMark);
 
                     char *logMsg =
-                        (char *)malloc((20 + strlen(parsedStr)) * sizeof(char));
+                            (char *) malloc((20 + strlen(parsedStr)) * sizeof(char));
                     sprintf(logMsg, "Parsed string is <%s>.", parsedStr);
                     obrwLogger_info(logMsg);
                     obrwUtils_freeCString(logMsg);
@@ -74,7 +74,7 @@ char *obrwString_parseConfigFileFor(const char *line) {
             }      // if
             else {
                 char *logMsg =
-                    (char *)malloc((33 + strlen(line)) * sizeof(char));
+                        (char *) malloc((33 + strlen(line)) * sizeof(char));
                 sprintf(logMsg, "Parsed string <%s> (return NULL).", line);
                 obrwLogger_debug(logMsg);
                 obrwUtils_freeCString(logMsg);

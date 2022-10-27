@@ -24,7 +24,7 @@
 
 /** The main-method, which starts the obrw-process. */
 int main(int argc, char **argv) {
-    obrwMain_handleCommandLineArguments(argc, (const char **)argv);
+    obrwMain_handleCommandLineArguments(argc, (const char **) argv);
     if (IS_USER_CALLED_HELP) {
         obrwMain_printHelp(argv[0]);
         return EXIT_SUCCESS;
@@ -106,8 +106,8 @@ void obrwMain_handleCommandLineArguments(const int argc, const char **argv) {
             if (0 == strncmp(argv[i], CLI_ARGUMENT_LOG_LEVEL,
                              strlen(CLI_ARGUMENT_LOG_LEVEL))) {
                 // use longest entry for malloc size
-                char *levelString = (char *)malloc(
-                    OBRW_LOGGER_STR_LEN_OF_LONGEST_CLI_PARAM * sizeof(char));
+                char *levelString = (char *) malloc(
+                        OBRW_LOGGER_STR_LEN_OF_LONGEST_CLI_PARAM * sizeof(char));
                 strncpy(levelString, argv[i] + strlen("--log-level="),
                         OBRW_LOGGER_STR_LEN_OF_LONGEST_CLI_PARAM);
                 obrwLogger_setLogLevelByCliValue(levelString);

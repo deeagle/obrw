@@ -30,6 +30,7 @@
 #include <sys/stat.h> /* LINUX / UNIX */
 #include <sys/types.h>
 #include <sys/types.h> /* LINUX / UNIX */
+
 #ifdef __UNIX__
 #include <unistd.h>
 #define FILE_EXIST F_OK
@@ -37,6 +38,7 @@
 #define FILE_WRITE W_OK
 #define FILE_READ R_OK
 #endif
+
 #include "obrw_config.h"
 #include "obrw_factory.h"
 #include "obrw_logger.h"
