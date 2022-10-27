@@ -73,6 +73,10 @@ obrwUtils_freeCString( char* cstr )
         //memset( cstr, '0', strlen( cstr ) );
         free ( logMsg );
         free ( cstr );
+
+        // free:
+        // - it marks the memory as free, that means the value can still exist!
+        // - so I set it manually to NULL.
         cstr = NULL;
     }//if
 }//obrwUtils_freeCString( char* )
