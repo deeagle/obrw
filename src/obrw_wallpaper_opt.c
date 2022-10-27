@@ -1,18 +1,9 @@
 /**
- * << OBRW - OpenBoxRandomWallpaper >> -- obrw_wallpaper_opt.c
+ * << OBRW - OpenBoxRandomWallpaper >> -- obrw_chk_externals.h
  *
  * URL: http://deeagle.de
  *
- * Copyright (c) 2007-2010 Martin Kock <root@deeagle.de>
- *
- * Permission to use, copy, modify, distribute and sell this software
- * and its documentation for any purpose is hereby granted without fee,
- * provided that the above copyright notice appear in all copies and
- * that both that copyright notice and this permission notice appear
- * in supporting documentation.
- * It is provided "as is" without express or implied warranty.\n\n\n
- *
- *
+ * \author Martin Kock <code@deeagle.de>
  * \file obrw_wallpaper_opt.c
  *
  * \brief The file includes all methods and functions which are in context to
