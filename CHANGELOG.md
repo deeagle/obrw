@@ -6,6 +6,10 @@ All notable changes will be documented in this file.
 
 ## UNRELEASED
 
+### Changed
+
+- Code style.
+
 ## 0.2.4 - 2022.10.27
 
 ### Fixed
