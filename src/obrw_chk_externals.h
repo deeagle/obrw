@@ -40,4 +40,4 @@
  */
 int obrwChkExt_isFehOnSystem(void);
 
-#endif // OBRW_EXT_EXTERNALS_H
+#endif  // OBRW_EXT_EXTERNALS_H

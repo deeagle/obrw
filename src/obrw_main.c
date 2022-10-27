@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
     freeAllToClose();
     obrwLogger_error("Feh is not installed!");
     return EXIT_FAILURE;
-  } // if
+  }  // if
 
   obrwLogger_success("Dependencies successfully checked.");
 
@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
     freeAllToClose();
     obrwLogger_error("Found error in config file!");
     return EXIT_FAILURE;
-  } // if
+  }  // if
 
   obrwLogger_success("Config file successfully checked.");
 
@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
           &usedWallpaperItem) /* == EXIT_FAILURE */) {
     freeAllToClose();
     obrwLogger_error("Wallpaperoptions error!");
-  } // if
+  }  // if
 
   obrwLogger_success("Setting wallpaper successfully handled.");
 
@@ -71,7 +71,7 @@ int main(int argc, char **argv) {
           &usedWallpaperItem) /* == EXIT_FAILURE */) {
     freeAllToClose();
     obrwLogger_error("Wallpaper write error!");
-  } // if
+  }  // if
 
   obrwLogger_success("Writing history successfully to file.");
 
@@ -81,7 +81,7 @@ int main(int argc, char **argv) {
   obrwLogger_success("OBRW successfully finished.");
 
   return EXIT_SUCCESS;
-} // main( int, char** )
+}  // main( int, char** )
 
 void obrwMain_handleCommandLineArguments(const int argc, const char **argv) {
   // given arguments
@@ -137,4 +137,4 @@ void obrwMain_printVersion() { printf("obrw version %s\n", APP_VERSION); }
 void freeAllToClose(void) {
   obrwConfig_freeLocalsToClose();
   obrwWallpaperOpt_freeLocalsToClose();
-} // freeAllToClose()
+}  // freeAllToClose()

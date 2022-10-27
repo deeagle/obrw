@@ -33,8 +33,8 @@ int obrwChkExt_isFehOnSystem(void) {
   if (access(fehPath, EXIST) != -1) {
     if (access(fehPath, EXEC) != -1) {
       fehIsInstalled = 1;
-    } // if
-  }   // if
+    }  // if
+  }    // if
 
   return fehIsInstalled;
-} // obrwChkExt_isFehOnSystem()
+}  // obrwChkExt_isFehOnSystem()

@@ -22,10 +22,11 @@
 #ifndef OBRW_STRING_H
 #define OBRW_STRING_H
 
-#include "obrw_logger.h"
-#include "obrw_utils.h"
 #include <stdio.h>
 #include <string.h>
+
+#include "obrw_logger.h"
+#include "obrw_utils.h"
 
 /**
  * Concatenates two cstrings to one cstring.
@@ -62,4 +63,4 @@ char *obrwString_parseConfigFileFor(const char *);
  */
 int obrwString_getCountOfChar(const char *, char);
 
-#endif // OBRW_STRING_H
+#endif  // OBRW_STRING_H

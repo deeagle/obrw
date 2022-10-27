@@ -24,9 +24,10 @@
 #ifndef OBRW_UTILS_H
 #define OBRW_UTILS_H
 
-#include "obrw_logger.h"
 #include <stdlib.h>
 #include <time.h>
+
+#include "obrw_logger.h"
 
 /**
  * Local var describes the multiplikator for random digits. For example:
@@ -75,4 +76,4 @@ char *obrwUtils_getUserHomeDir(void);
  */
 void obrwUtils_freeCString(char *);
 
-#endif // OBRW_UTILS_H
+#endif  // OBRW_UTILS_H

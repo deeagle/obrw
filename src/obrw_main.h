@@ -23,13 +23,14 @@
 #ifndef OBRW_MAIN_H
 #define OBRW_MAIN_H
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "obrw_chk_externals.c"
 #include "obrw_config.c"
 #include "obrw_factory.c"
 #include "obrw_logger.c"
 #include "obrw_wallpaper_opt.c"
-#include <stdio.h>
-#include <stdlib.h>
 
 /** Command line param to set the log level. */
 static const char *CLI_ARGUMENT_LOG_LEVEL = "--log-level=";
@@ -77,4 +78,4 @@ void obrwMain_printVersion();
  */
 void freeAllToClose(void);
 
-#endif // OBRW_MAIN_H
+#endif  // OBRW_MAIN_H

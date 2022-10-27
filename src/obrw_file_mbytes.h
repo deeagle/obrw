@@ -30,4 +30,4 @@ struct obrwFileMBytes_fileFormat {
 
 void obrwFileMBytes_fileFormatInit();
 
-#endif // OBRW_MBYTES_H
+#endif  // OBRW_MBYTES_H

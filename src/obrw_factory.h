@@ -21,4 +21,4 @@ struct wallpaper {
  */
 struct wallpaper obrwFactory_getWallpaperItem(void);
 
-#endif // OBRW_FACTORY_H
+#endif  // OBRW_FACTORY_H

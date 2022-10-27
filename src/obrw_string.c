@@ -34,11 +34,11 @@ char *obrwString_2CStringsTo1(const char *str1, const char *str2) {
     if (ptr) {
       strncpy(ptr, str1, strlen(str1) + 1);
       strncat(ptr, str2, strlen(str2) + 1);
-    } // if
-  }   // if
+    }  // if
+  }    // if
 
   return ptr;
-} // obrwString_2to1( const char*, const char* )
+}  // obrwString_2to1( const char*, const char* )
 
 char *obrwString_parseConfigFileFor(const char *line) {
   char *parsedStr = NULL;
@@ -65,24 +65,24 @@ char *obrwString_parseConfigFileFor(const char *line) {
           sprintf(logMsg, "Parsed string is <%s>.", parsedStr);
           obrwLogger_info(logMsg);
           obrwUtils_freeCString(logMsg);
-        } // if
+        }  // if
         else {
           obrwLogger_error("No memory (heap) avaiable!");
           // return NULL;
-        } // else
-      }   // if
+        }  // else
+      }    // if
       else {
         char *logMsg = (char *)malloc((33 + strlen(line)) * sizeof(char));
         sprintf(logMsg, "Parsed string <%s> (return NULL).", line);
         obrwLogger_debug(logMsg);
         obrwUtils_freeCString(logMsg);
         // return NULL;
-      } // else
+      }  // else
     }
-  } // if
+  }  // if
 
   return parsedStr;
-} // obrwString_parseConfigFileFor( const char* )
+}  // obrwString_parseConfigFileFor( const char* )
 
 int obrwString_getCountOfChar(const char *line, const char character) {
   int count = 0;

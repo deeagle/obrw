@@ -131,4 +131,4 @@ int obrwWallpaperOpt_setWallpaperWithFeh(const char *, const char *);
  */
 void obrwWallpaperOpt_freeLocalsToClose(void);
 
-#endif // OBRW_WALLPAPER_OPT_H
+#endif  // OBRW_WALLPAPER_OPT_H

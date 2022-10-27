@@ -17,4 +17,4 @@
 #ifndef OBRW__H
 #define OBRW__H
 
-#endif // OBRW__H
+#endif  // OBRW__H

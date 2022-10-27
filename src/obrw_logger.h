@@ -139,4 +139,4 @@ static int obrwLogger_isTagKnown(const char *tag);
  */
 static void obrwLogger_log(const char *tag, const char *message);
 
-#endif // OBRW_LOGGER_H
+#endif  // OBRW_LOGGER_H

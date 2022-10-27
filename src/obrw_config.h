@@ -32,11 +32,12 @@
 #define WRITE W_OK
 #define READ R_OK
 #endif
+#include <stdio.h>
+
 #include "obrw_logger.h"
 #include "obrw_string.c"
 #include "obrw_utils.c"
 #include "obrw_wallpaper_opt.h"
-#include <stdio.h>
 
 static const char *obrwConf; /** Configfilename (/.obrw.conf)*/
 static char *userHome;       /** Holder of userhomepath */
@@ -118,4 +119,4 @@ int obrwConfig_writeSettingsToConfigFile(struct wallpaper *);
  */
 void obrwConfig_freeLocalsToClose(void);
 
-#endif // OBRW_CONFIG_H
+#endif  // OBRW_CONFIG_H
