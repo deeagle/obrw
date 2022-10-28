@@ -117,19 +117,19 @@ int obrwWallpaperOpt_addWallpaper(const char *wallpaper) {
         return -2;
     }
 
-    // if wallpaperarray doesn't exist, get memory (4096) for
+    // if wallpaper array doesn't exist, get memory (4096) for
     if (!wallpaperNames) {
         wallpaperNames = (char **) calloc(WP_MEMORY_SIZE, sizeof(char *));
 
-        // if wallpaperarray doesn't exist yet, get half memory (2048) for
+        // if wallpaper array doesn't exist yet, get half memory (2048) for
         if (!wallpaperNames) {
             wallpaperNames =
                     (char **) calloc((WP_MEMORY_SIZE / 2), sizeof(char *));
         }
 
         if (!wallpaperNames) {
-            // error no memory avaiable
-            obrwLogger_error("Could't allocate Memory!");
+            // error no memory available
+            obrwLogger_error("Couldn't allocate Memory!");
             return -3;
         }
 
@@ -138,7 +138,7 @@ int obrwWallpaperOpt_addWallpaper(const char *wallpaper) {
     }
 
     // TODO
-    // Enough memory avaiable to store next wallpaper?
+    // Enough memory available to store next wallpaper?
     wallpaperNames[wallpaperNamesLength] =
             (char *) malloc(sizeof(char) * strlen(wallpaper) + 1);
     strncpy(wallpaperNames[wallpaperNamesLength], wallpaper,
@@ -155,7 +155,7 @@ int obrwWallpaperOpt_addWallpaper(const char *wallpaper) {
     return 0;
 }
 
-/** Reads the wallpaperdir, add wallpaper and set it. */
+/** Reads the wallpaper dir, add wallpaper and set it. */
 int obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath,
                                             struct wallpaper *wallpaperItem) {
     DIR *wpDir = NULL;
@@ -169,7 +169,7 @@ int obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath,
     }
 
     char *logMsg = (char *) malloc((22 + strlen(dirPath)) * sizeof(char));
-    sprintf(logMsg, "Wallpaperpath is <%s>.", dirPath);
+    sprintf(logMsg, "Wallpaper path is <%s>.", dirPath);
     obrwLogger_debug(logMsg);
     obrwUtils_freeCString(logMsg);
 
@@ -298,8 +298,8 @@ int obrwWallpaperOpt_setWallpaperWithFeh(const char *dirPath,
         return -1;
     }
 
-    // feh command to set a wallpaper over full displaysize
-    //'feh --bg-scale /wonderfull/canonical/file.name'
+    // feh command to set a wallpaper over full display size
+    //'feh --bg-scale /wonderfully/canonical/file.name'
     // Chars   01234567890 1234     --> 14 chars
     // sysCmd = feh --bg-sc ale		--> 14 chars
     fehCmd = "feh --bg-scale \0";

@@ -12,10 +12,10 @@
  */
 #include "obrw_utils.h"
 
-/** Local multiplikator for random digits */
+/** Local multiplier for random digits */
 static double DIGIT_BORDER_HIGH = 10.0;
 
-/** Resets and start the random-number-couter. */
+/** Resets and start the random-number-counter. */
 void obrwUtils_setRandomCounterToZero(void) {
     srand(time(NULL) * time(NULL));
 }
@@ -38,7 +38,7 @@ void obrwUtils_freeCString(char *cstr) {
         obrwLogger_debugSystem(logMsg);
 
         // TODO
-        // valgrinderror ?
+        // valgrind-error ?
         // memset( cstr, '0', strlen( cstr ) );
         free(logMsg);
         free(cstr);

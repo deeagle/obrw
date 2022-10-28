@@ -18,9 +18,9 @@
 #include "obrw_utils.h"
 
 /**
- * Concatenates two cstrings to one cstring.
+ * Concatenates two cstrings to one c-string.
  *
- * \returns The concatenate cstring with termination '\\0'.
+ * \returns The concatenate c-string with termination '\\0'.
  * \retval char* success.
  * \retval NULL fail.
  */
@@ -45,7 +45,7 @@ char *obrwString_parseConfigFileFor(const char *);
  * @see https://www.programiz.com/c-programming/examples/frequency-character
  *
  * \param line The line we search the character.
- * \param character The caracter to search (if <code>NULL</code>, result will be
+ * \param character The character to search (if <code>NULL</code>, result will be
  * <code>NULL</code>).
  *
  * \return The count of the char in the string.

@@ -19,17 +19,10 @@
 #include "obrw_logger.h"
 
 /**
- * Local var describes the multiplikator for random digits. For example:
+ * Local var describes the multiplier for random digits. For example:
  * if it's 10.0 the max count is 10 - 1 = 9;
  */
 static double DIGIT_BORDER_HIGH;
-
-/**
- * Set's the local multiplikator for random digits.
- *
- * \returns Nothing, it's void.
- */
-void obrwUtils_setHighDigitBorder(double);
 
 /**
  * Resets and starts the random-number-generator.
@@ -46,9 +39,9 @@ void obrwUtils_setRandomCounterToZero(void);
 int obrwUtils_randomDigit(void);
 
 /**
- * Get the users homepath.
+ * Get the users home-path.
  *
- * \returns The users-homepath (set in the environment).
+ * \returns The users-home-path (set in the environment).
  * \retval /home/user/ success.
  * \retval NULL fail.
  */
