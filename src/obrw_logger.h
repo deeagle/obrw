@@ -6,7 +6,6 @@
  * \author Martin Kock <code@deeagle.de>
  * \file obrw_logger.h
  */
-
 #ifndef OBRW_LOGGER_H
 #define OBRW_LOGGER_H
 

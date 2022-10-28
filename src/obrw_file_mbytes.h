@@ -6,7 +6,6 @@
  * \author Martin Kock <code@deeagle.de>
  * \file obrw_file_mbytes.h
  */
-
 #ifndef OBRW_FILE_MBYTES_H
 #define OBRW_FILE_MBYTES_H
 #define BYTE unsigned char

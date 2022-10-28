@@ -1,4 +1,11 @@
-
+/**
+ * << OBRW - OpenBoxRandomWallpaper >> -- obrw_chk_externals.h
+ *
+ * URL: http://deeagle.de
+ *
+ * \author Martin Kock <code@deeagle.de>
+ * \file obrw_factory.h
+ */
 #ifndef OBRW_FACTORY_H
 #define OBRW_FACTORY_H
 

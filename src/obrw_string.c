@@ -7,9 +7,7 @@
  * \file obrw_string.c
  *
  * \brief The file includes the special cstring-methods for the tool obrw.
- *
  */
-
 #include "obrw_string.h"
 
 /** Concatenates two cstrings to one cstring. */

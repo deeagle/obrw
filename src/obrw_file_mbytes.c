@@ -6,7 +6,6 @@
  * \author Martin Kock <code@deeagle.de>
  * \file obrw_file_mbytes.c
  */
-
 #include "obrw_file_mbytes.h"
 
 void obrwFileMBytes_fileFormatInit() {

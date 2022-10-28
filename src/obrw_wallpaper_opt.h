@@ -8,9 +8,7 @@
  *
  * \brief The file includes all methods and functions which are in context to
  * all things about a wallpaper.
- *
  */
-
 #ifndef OBRW_WALLPAPER_OPT_H
 #define OBRW_WALLPAPER_OPT_H
 

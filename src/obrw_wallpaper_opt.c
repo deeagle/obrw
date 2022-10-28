@@ -8,9 +8,7 @@
  *
  * \brief The file includes all methods and functions which are in context to
  * all things about a wallpaper.
- *
  */
-
 #include "obrw_wallpaper_opt.h"
 
 static const size_t len_file_end = 4;

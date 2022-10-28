@@ -9,9 +9,7 @@
  * \brief The file includes some methods which work like utils for the tool
  * OBRW. So you may find some methods to get random-digits, or a version of free
  * with some security options.
- *
  */
-
 #ifndef OBRW_UTILS_H
 #define OBRW_UTILS_H
 

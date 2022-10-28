@@ -8,7 +8,6 @@
  *
  * \brief The file includes the definitons of functions which are associated
  * with the configfile '~/.obrw.conf'.
- *
  */
 #ifndef OBRW_CONFIG_H
 #define OBRW_CONFIG_H

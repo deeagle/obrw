@@ -8,9 +8,7 @@
  *
  * \brief The file includes the main-method of the tool obrw. Also there is an
  * method to free all used alocated variables.
- *
  */
-
 #include "obrw_main.h"
 
 /** The main-method, which starts the obrw-process. */

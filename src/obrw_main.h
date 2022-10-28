@@ -8,9 +8,7 @@
  *
  * \brief The file includes the main-method of the tool obrw. Also there is an
  * method to free all used alocated variables.
- *
  */
-
 #ifndef OBRW_MAIN_H
 #define OBRW_MAIN_H
 

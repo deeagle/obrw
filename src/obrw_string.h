@@ -7,9 +7,7 @@
  * \file obrw_string.h
  *
  * \brief The file includes the special cstring-methods for the tool obrw.
- *
  */
-
 #ifndef OBRW_STRING_H
 #define OBRW_STRING_H
 

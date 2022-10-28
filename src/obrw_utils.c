@@ -9,9 +9,7 @@
  * \brief The file includes some methods which work like utils for the tool
  * OBRW. So you may find some methods to get random-digits, or a version of free
  * with some security options.
- *
  */
-
 #include "obrw_utils.h"
 
 /** Local multiplikator for random digits */
