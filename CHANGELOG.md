@@ -6,6 +6,10 @@ All notable changes will be documented in this file.
 
 ## UNRELEASED
 
+## Feature
+
+- Provide sample config file.
+
 ### Changed
 
 - Add license file (adapt file headers).
