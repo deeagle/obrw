@@ -6,8 +6,8 @@
  * \author Martin Kock <code@deeagle.de>
  * \file obrw_main.h
  *
- * \brief The file includes the main-method of the tool obrw. Also there is an
- * method to free all used alocated variables.
+ * \brief The file includes the main-method of the tool. Also there is an
+ * method to free all used allocated variables.
  */
 #ifndef OBRW_MAIN_H
 #define OBRW_MAIN_H

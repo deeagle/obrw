@@ -6,7 +6,7 @@
  * \author Martin Kock <code@deeagle.de>
  * \file obrw_string.h
  *
- * \brief The file includes the special cstring-methods for the tool obrw.
+ * \brief The file includes the implemented c-string helper functions.
  */
 #ifndef OBRW_STRING_H
 #define OBRW_STRING_H

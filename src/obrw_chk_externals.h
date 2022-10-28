@@ -6,8 +6,8 @@
  * \author Martin Kock <code@deeagle.de>
  * \file obrw_chk_externals.h
  *
- * \brief The file includes the definitons of functions which checks, if needed
- * external dependencies are avaiable.
+ * \brief The file includes the definitions of functions which checks, if needed
+ * external dependencies are available.
  */
 #ifndef OBRW_CHK_EXTERNALS_H
 #define OBRW_CHK_EXTERNALS_H

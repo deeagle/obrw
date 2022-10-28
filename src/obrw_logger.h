@@ -5,6 +5,8 @@
  *
  * \author Martin Kock <code@deeagle.de>
  * \file obrw_logger.h
+ *
+ * \brief The file includes the implementation to handle logging resources.
  */
 #ifndef OBRW_LOGGER_H
 #define OBRW_LOGGER_H

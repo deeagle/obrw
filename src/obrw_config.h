@@ -6,8 +6,8 @@
  * \author Martin Kock <code@deeagle.de>
  * \file obrw_config.h
  *
- * \brief The file includes the definitons of functions which are associated
- * with the configfile '~/.obrw.conf'.
+ * \brief The file includes the definitions of functions which are associated
+ * with the configfile `~/.obrw.conf`.
  */
 #ifndef OBRW_CONFIG_H
 #define OBRW_CONFIG_H

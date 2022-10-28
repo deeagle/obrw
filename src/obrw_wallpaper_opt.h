@@ -7,7 +7,7 @@
  * \file obrw_wallpaper_opt.h
  *
  * \brief The file includes all methods and functions which are in context to
- * all things about a wallpaper.
+ * handle wallpaper resources.
  */
 #ifndef OBRW_WALLPAPER_OPT_H
 #define OBRW_WALLPAPER_OPT_H
