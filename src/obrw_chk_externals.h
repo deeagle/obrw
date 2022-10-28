@@ -1,23 +1,13 @@
 /**
- * << OBRW - OpenBoxRandomWallpaper >> -- obrw_chk_externals.h
+ * << OBRW - OpenBoxRandomWallpaper >>
  *
  * URL: http://deeagle.de
  *
- * Copyright (c) 2007-2010 Martin Kock <code@deeagle.de>
- *
- * Permission to use, copy, modify, distribute and sell this software
- * and its documentation for any purpose is hereby granted without fee,
- * provided that the above copyright notice appear in all copies and
- * that both that copyright notice and this permission notice appear
- * in supporting documentation.
- * It is provided "as is" without express or implied warranty.\n\n\n
- *
- *
+ * \author Martin Kock <code@deeagle.de>
  * \file obrw_chk_externals.h
  *
- * \brief The file includes the definitons of functions which checks, if needed
- * external dependencies are avaiable.
- *
+ * \brief The file includes the definitions of functions which checks, if needed
+ * external dependencies are available.
  */
 #ifndef OBRW_CHK_EXTERNALS_H
 #define OBRW_CHK_EXTERNALS_H

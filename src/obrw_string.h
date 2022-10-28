@@ -1,24 +1,13 @@
 /**
- * << OBRW - OpenBoxRandomWallpaper >> -- obrw_string.h
+ * << OBRW - OpenBoxRandomWallpaper >>
  *
  * URL: http://deeagle.de
  *
- * Copyright (c) 2007-2010 Martin Kock <root@deeagle.de>
- *
- * Permission to use, copy, modify, distribute and sell this software
- * and its documentation for any purpose is hereby granted without fee,
- * provided that the above copyright notice appear in all copies and
- * that both that copyright notice and this permission notice appear
- * in supporting documentation.
- * It is provided "as is" without express or implied warranty.\n\n\n
- *
- *
+ * \author Martin Kock <code@deeagle.de>
  * \file obrw_string.h
  *
- * \brief The file includes the special cstring-methods for the tool obrw.
- *
+ * \brief The file includes the implemented c-string helper functions.
  */
-
 #ifndef OBRW_STRING_H
 #define OBRW_STRING_H
 

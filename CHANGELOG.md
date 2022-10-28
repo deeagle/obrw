@@ -8,7 +8,12 @@ All notable changes will be documented in this file.
 
 ### Changed
 
-- Code style.
+- Add license file (adapt file headers).
+- Code style and clean up resources.
+
+### Removed
+
+- Unfinished code snippets for picture file detection via "MagicBytes".
 
 ## 0.2.4 - 2022.10.27
 

@@ -1,4 +1,11 @@
-
+/**
+ * << OBRW - OpenBoxRandomWallpaper >>
+ *
+ * URL: http://deeagle.de
+ *
+ * \author Martin Kock <code@deeagle.de>
+ * \file obrw_factory.c
+ */
 #include "obrw_factory.h"
 
 struct wallpaper obrwFactory_getWallpaperItem() {

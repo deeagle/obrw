@@ -1,26 +1,15 @@
 /**
- * << OBRW - OpenBoxRandomWallpaper >> -- obrw_utils.c
+ * << OBRW - OpenBoxRandomWallpaper >>
  *
  * URL: http://deeagle.de
  *
- * Copyright (c) 2007-2010 Martin Kock <root@deeagle.de>
- *
- * Permission to use, copy, modify, distribute and sell this software
- * and its documentation for any purpose is hereby granted without fee,
- * provided that the above copyright notice appear in all copies and
- * that both that copyright notice and this permission notice appear
- * in supporting documentation.
- * It is provided "as is" without express or implied warranty.\n\n\n
- *
- *
+ * \author Martin Kock <code@deeagle.de>
  * \file obrw_utils.c
  *
  * \brief The file includes some methods which work like utils for the tool
  * OBRW. So you may find some methods to get random-digits, or a version of free
  * with some security options.
- *
  */
-
 #include "obrw_utils.h"
 
 /** Local multiplikator for random digits */
