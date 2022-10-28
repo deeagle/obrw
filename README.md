@@ -29,6 +29,12 @@ I test the code with:
 
 - **feh** a fast and light `lmlib2`-based image viewer
 
+## Example resources
+
+- [Config file](resources/obrw.conf)
+  Copy the file to your home-dir (spot the dot!) and adapt the wallpaper dir.
+  You can use the following command `cp resources/obrw.conf ~/.obrw.conf`.
+
 ## Weblinks
 
 - [CHANGELOG](CHANGELOG.md)
