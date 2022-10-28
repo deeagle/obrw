@@ -1,5 +1,5 @@
 /**
- * << OBRW - OpenBoxRandomWallpaper >> -- obrw_chk_externals.h
+ * << OBRW - OpenBoxRandomWallpaper >>
  *
  * URL: http://deeagle.de
  *
