@@ -6,6 +6,8 @@ All notable changes will be documented in this file.
 
 ## UNRELEASED
 
+## 0.3.0 - 2022.10.28
+
 ## Feature
 
 - Provide sample config file.
