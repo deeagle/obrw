@@ -33,13 +33,13 @@
 #include "obrw_utils.c"
 #include "obrw_wallpaper_opt.h"
 
-static const char *obrwConf; /** Configfilename (/.obrw.conf)*/
-static char *userHome;       /** Holder of userhomepath */
+static const char *obrwConf; /** Config-filename (/.obrw.conf)*/
+static char *userHome;       /** Holder of user home-path */
 static char *wallpaperDir;   /** Canonical path of wallpaper DIR */
-static char *wallpaperLast;  /** Last seted wallpaper */
+static char *wallpaperLast;  /** Last set wallpaper */
 
 /**
- * The setter-method to set the locale userhome.
+ * The setter-method to set the locale user home.
  * Set the local userHome with help of the getUserHomeDir-method in obrw_utils.c
  *
  * \return Nothing, it's void.
@@ -50,16 +50,16 @@ void obrwConfig_setUserHomeDir(void);
  * Tests the configfile, if it's exists, is readable and writeable.
  *
  * \return If the file is read and writeable the method finishes with
- * EXIT_SUCCESS, if any error occures EXIT_FAILURE returns. \retval EXIT_SUCCESS
+ * EXIT_SUCCESS, if any error occur EXIT_FAILURE returns. \retval EXIT_SUCCESS
  * success. \retval EXIT_FAILURE failed.
  */
 int obrwConfig_isConfigFileReadWriteable(void);
 
 /**
- * The getter-method of the wallpaperdir, included in the configfile.
+ * The getter-method of the wallpaper dir, included in the configfile.
  *
- * \return The actually wallpaperpath (DIR which includes the wallpapers) as
- * const char*. \retval Wallpaperpath Canonical path of the seted wallpaperpath
+ * \return The actually wallpaper path (DIR which includes the wallpapers) as
+ * const char*. \retval Wallpaper path Canonical path of the set wallpaper path
  * (Exp. /foo/bar/ ). \retval NULL Entry doesn't exist.
  */
 const char *obrwConfig_getWallpaperDir(void);
@@ -79,18 +79,18 @@ const char *obrwConfig_setWallpaperDir(const char *);
  * The getter-method of the last set wallpaper, included in the configfile.
  *
  * \return The last set wallpaper (lastWP-entry in configfile) as const char*.
- * \retval Last-Wallpaper  Name of the last seted wallpaper (Exp. file.jpg ).
+ * \retval Last-Wallpaper  Name of the last set wallpaper (Exp. file.jpg ).
  * \retval "FIRST-SESSION" First session that OBRW runs.
  * \retval NULL Entry doesn't exist.
  */
 const char *obrwConfig_getWallpaperLastSet(void);
 
 /**
- * Read the configfile and parse included wallpaperpath and last set wallpaper
+ * Read the configfile and parse included wallpaper path and last set wallpaper
  *
  * \return If the file (~/.obrw.conf) is read and writeable, includes correct
  * entries for wpDir and lastWP, the method finishes with EXIT_SUCCESS, if any
- * error occures EXIT_FAILURE returns. \retval EXIT_SUCCESS success. \retval
+ * error occur EXIT_FAILURE returns. \retval EXIT_SUCCESS success. \retval
  * EXIT_FAILURE failed.
  */
 int obrwConfig_readConfigFile(void);
@@ -100,7 +100,7 @@ int obrwConfig_readConfigFile(void);
  *
  * \return If the file (~/.obrw.conf) is read and writeable (checked at
  * ,obrwConfig_getWallpaperDir()) the method finishes with EXIT_SUCCESS, if any
- * error occures EXIT_FAILURE returns. \retval EXIT_SUCCESS success. \retval
+ * error occur EXIT_FAILURE returns. \retval EXIT_SUCCESS success. \retval
  * EXIT_FAILURE failed.
  */
 int obrwConfig_writeSettingsToConfigFile(struct wallpaper *);

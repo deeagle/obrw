@@ -6,11 +6,11 @@
  * \author Martin Kock <code@deeagle.de>
  * \file obrw_string.c
  *
- * \brief The file includes the special cstring-methods for the tool obrw.
+ * \brief The file includes the special c-string-methods for the tool obrw.
  */
 #include "obrw_string.h"
 
-/** Concatenates two cstrings to one cstring. */
+/** Concatenates two cstrings to one c-string. */
 char *obrwString_2CStringsTo1(const char *str1, const char *str2) {
     char *ptr = NULL;
 
@@ -18,7 +18,7 @@ char *obrwString_2CStringsTo1(const char *str1, const char *str2) {
         size_t len = strlen(str1) + strlen(str2) + 1;
         ptr = (char *) malloc(sizeof(char) * len);
 
-        // check if ptr exist because malloc allocs on heap-space
+        // check if ptr exist because malloc allocates on heap-space,
         // and it can fail.
         if (ptr) {
             strncpy(ptr, str1, strlen(str1) + 1);
@@ -36,7 +36,7 @@ char *obrwString_parseConfigFileFor(const char *line) {
 
     if (line != NULL) {
         if (obrwString_getCountOfChar(line, valueSeparator) >= 2) {
-            // find the first " (DEZ = 34) in the cstring,
+            // find the first " (DEZ = 34) in the c-string,
             // do a copy and deletes the second " at the end of the line.
             if ((strPtr = strchr(line, (int) valueSeparator)) != NULL) {
                 size_t len = strlen(strPtr);
@@ -56,7 +56,7 @@ char *obrwString_parseConfigFileFor(const char *line) {
                     obrwLogger_info(logMsg);
                     obrwUtils_freeCString(logMsg);
                 } else {
-                    obrwLogger_error("No memory (heap) avaiable!");
+                    obrwLogger_error("No memory (heap) available!");
                     // return NULL;
                 }
             } else {
@@ -83,7 +83,7 @@ int obrwString_getCountOfChar(const char *line, const char character) {
             }
         }
     }
-    // else: NULL is 0 and so it is the same like the result zero, but readable
+    // else: NULL is 0 and so it is the same as the result zero, but readable
 
     return count;
 }

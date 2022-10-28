@@ -7,7 +7,7 @@
  * \file obrw_main.c
  *
  * \brief The file includes the main-method of the tool obrw. Also there is an
- * method to free all used alocated variables.
+ * method to free all used allocated variables.
  */
 #include "obrw_main.h"
 
@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
             obrwConfig_getWallpaperDir(),
             &usedWallpaperItem) /* == EXIT_FAILURE */) {
         freeAllToClose();
-        obrwLogger_error("Wallpaperoptions error!");
+        obrwLogger_error("Wallpaper options error!");
     }
 
     obrwLogger_success("Setting wallpaper successfully handled.");
@@ -94,7 +94,7 @@ void obrwMain_handleCommandLineArguments(const int argc, const char **argv) {
         if (strlen(argv[i]) > strlen(CLI_ARGUMENT_LOG_LEVEL)) {
             if (0 == strncmp(argv[i], CLI_ARGUMENT_LOG_LEVEL,
                              strlen(CLI_ARGUMENT_LOG_LEVEL))) {
-                // use longest entry for malloc size
+                // use the longest entry for malloc size
                 char *levelString = (char *) malloc(
                         OBRW_LOGGER_STR_LEN_OF_LONGEST_CLI_PARAM * sizeof(char));
                 strncpy(levelString, argv[i] + strlen("--log-level="),
@@ -122,7 +122,7 @@ void obrwMain_printHelp(const char *name) {
 
 void obrwMain_printVersion() { printf("obrw version %s\n", APP_VERSION); }
 
-/** Free all used alocated heap-memory (if used) (to use before programm ends).
+/** Free all used allocated heap-memory (if used) (to use before program ends).
  */
 void freeAllToClose(void) {
     obrwConfig_freeLocalsToClose();

@@ -6,7 +6,7 @@
  * \author Martin Kock <code@deeagle.de>
  * \file obrw_config.c
  *
- * \brief The file includes the definitons of functions which are associated
+ * \brief The file includes the definitions of functions which are associated
  * with the configfile '~/.obrw.conf'.
  */
 #include "obrw_config.h"
@@ -16,7 +16,7 @@ static char *userHome = NULL;
 static char *wallpaperDir = NULL;
 static char *wallpaperLast = NULL;
 
-/** Returns the actually wallpaperpath (DIR which includes the wallpapers). */
+/** Returns the actually wallpaper path (DIR which includes the wallpapers). */
 const char *obrwConfig_getWallpaperDir(void) {
     return wallpaperDir;
 }
@@ -56,7 +56,7 @@ const char *obrwConfig_getWallpaperLastSet(void) {
     return wallpaperLast;
 }
 
-/** The setter-method to set the locale userhome. */
+/** The setter-method to set the locale user home. */
 void obrwConfig_setUserHomeDir(void) {
     userHome = obrwUtils_getUserHomeDir();
 }
@@ -68,7 +68,7 @@ int obrwConfig_isConfigFileReadWriteable(void) {
     obrwConfig_setUserHomeDir();
 
     if (userHome == NULL) {
-        obrwLogger_error("No user homedir avaiable");
+        obrwLogger_error("No user homedir available");
         return EXIT_FAILURE;
     }
 
@@ -85,7 +85,7 @@ int obrwConfig_isConfigFileReadWriteable(void) {
 
     configPath = obrwString_2CStringsTo1(userHome, obrwConf);
 
-    // $USERHOME/.obrw.config exists and accessable?
+    // $USERHOME/.obrw.config exists and accessible?
     if (access(configPath, EXIST) != -1) {
         if (access(configPath, READ) != -1) {
             if (access(configPath, WRITE) != -1) {
@@ -140,7 +140,7 @@ int obrwConfig_isConfigFileReadWriteable(void) {
     return EXIT_SUCCESS;
 }
 
-/** Read the configfile and parse included wallpaperpath and last set wallpaper.
+/** Read the configfile and parse included wallpaper path and last set wallpaper.
  */
 int obrwConfig_readConfigFile(void) {
     FILE *fp;
@@ -253,7 +253,7 @@ int obrwConfig_readConfigFile(void) {
         // (3) close file
         fclose(fp);
     } else {
-        obrwLogger_error("Configfile could't not opened (but checked?).");
+        obrwLogger_error("Configfile couldn't not opened (but checked?).");
         return EXIT_FAILURE;
     }
 
