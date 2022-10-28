@@ -14,6 +14,15 @@ but the tool is working for years in my environments and I have some fun.
 
 My most used commands are implemented via `make`.
 
+## Tests and analysis
+
+I test the code with:
+
+- some own implemented unit-tests (atm no framework)
+- dynamic/static code analysis frameworks:
+  - [cppcheck](https://cppcheck.sourceforge.io/)
+  - [valgrind](https://valgrind.org/)
+
 ## Externals
 
 **OBRW** depends on:
