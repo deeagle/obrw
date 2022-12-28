@@ -29,9 +29,18 @@ int main(int argc, char **argv) {
     // start
     obrwUtils_setRandomCounterToZero();
 
-    if (obrwChkExt_isFehOnSystem() == 0) {
+    int isFehInstalled = obrwChkExt_isFehOnSystem();
+    if (isFehInstalled != FEH_EXIST_AND_EXEC) {
+        if (isFehInstalled == FEH_NOT_EXIST) {
+            obrwLogger_error("Feh is not installed!");
+        }
+
+        if (isFehInstalled == FEH_NOT_EXEC) {
+            obrwLogger_error("Feh is not executable!");
+        }
+
         freeAllToClose();
-        obrwLogger_error("Feh is not installed!");
+
         return EXIT_FAILURE;
     }
 
