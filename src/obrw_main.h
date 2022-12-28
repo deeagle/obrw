@@ -54,7 +54,7 @@ int main(int argc, char **argv);
  * @param argc The given argument count.
  * @param argv An char array with the given arguments.
  */
-void obrwMain_handleCommandLineArguments(const int argc, const char **argv);
+void obrwMain_handleCommandLineArguments(int argc, const char **argv);
 
 /**
  * Prints the help to stdout.
