@@ -6,9 +6,17 @@ All notable changes will be documented in this file.
 
 ## UNRELEASED
 
+### Changed
+
+- External tool validation.
+
+### Fixed
+
+- Wrong heading in changelog.
+
 ## 0.3.0 - 2022.10.28
 
-## Feature
+### Feature
 
 - Provide sample config file.
 
