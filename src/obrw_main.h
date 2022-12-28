@@ -41,10 +41,12 @@ static const char *APP_VERSION = "0.3.1";
  * The main-method, which starts the obrw-process.
  *
  * \return If all is good, the process ends with EXIT_SUCCESS. Any kind of error
- * the program returns EXIT_FAILURE. \retval EXIT_SUCCESS all good. \retval
- * EXIT_FAILURE any kind of error.
+ *         the program returns EXIT_FAILURE.
+ *
+ * \retval EXIT_SUCCESS all good.
+ * \retval EXIT_FAILURE any kind of error.
  */
-int main();
+int main(int argc, char **argv);
 
 /**
  * Method to handle the command line arguments centralized.
