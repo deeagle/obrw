@@ -25,7 +25,7 @@
 #define READ R_OK
 #define FEH_EXIST_AND_EXEC 0
 #define FEH_NOT_EXEC 1
-#define FEH_NOT_EXIST -1
+#define FEH_NOT_EXIST (-1)
 #endif
 
 /**
