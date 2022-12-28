@@ -23,13 +23,20 @@
 #define EXEC X_OK
 #define WRITE W_OK
 #define READ R_OK
+#define FEH_EXIST_AND_EXEC 0
+#define FEH_NOT_EXEC 1
+#define FEH_NOT_EXIST (-1)
 #endif
 
 /**
  * The function checks if extern tool 'feh' is installed (bin at /usr/bin/feh).
  *
- * \return The function returns 1 if feh is installed (bin at /usr/bin/feh) and
- * 0 if it's not installed. \retval 1 true \retval 0 false
+ * \return The function returns FEH_EXIST_AND_EXEC if feh is installed (bin at /usr/bin/feh) and
+ * FEH_NOT_EXIST if it's not installed.
+ *
+ * \retval FEH_EXIST_AND_EXEC
+ * \retval FEH_NOT_EXEC
+ * \retval FEH_NOT_EXIST
  */
 int obrwChkExt_isFehOnSystem(void);
 
