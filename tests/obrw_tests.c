@@ -8,7 +8,7 @@
  *
  * @return The runtime stage.
  */
-int obrwTests_main() {
+int obrwTests_main(int argc, char **argv) {
     time_t startTime = time(NULL);
 
     printf("Start tests.\n\n");

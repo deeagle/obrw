@@ -12,7 +12,7 @@
 
 #define obrwTests_main main
 
-int obrwTests_main();
+int obrwTests_main(int argc, char **argv);
 void obrwTests_runAll();
 
 #endif  // OBRW_OBRW_TESTS_H
