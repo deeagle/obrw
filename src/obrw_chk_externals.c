@@ -19,11 +19,11 @@
 int obrwChkExt_isFehOnSystem(void) {
     const char *fehPath = "/usr/bin/feh\0";
 
-    if (access(fehPath, EXIST) != EXIST) {
+    if (access(fehPath, EXIST) != EXIST_OK) {
         return FEH_NOT_EXIST;
     }
 
-    if (access(fehPath, EXEC) != EXEC) {
+    if (access(fehPath, EXEC) != EXEC_OK) {
         return FEH_NOT_EXEC;
     }
 

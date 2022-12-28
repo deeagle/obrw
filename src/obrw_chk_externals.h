@@ -19,10 +19,14 @@
 
 #include <unistd.h>
 
+// redefine access tokens
 #define EXIST F_OK
 #define EXEC X_OK
 #define WRITE W_OK
 #define READ R_OK
+// define calls and returns
+#define EXIST_OK 0
+#define EXEC_OK 0
 #define FEH_EXIST_AND_EXEC 0
 #define FEH_NOT_EXEC 1
 #define FEH_NOT_EXIST (-1)
