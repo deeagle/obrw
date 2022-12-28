@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
 
     if (obrwWallpaperOpt_readDirAndSetWallpaper(
             obrwConfig_getWallpaperDir(),
-            &usedWallpaperItem) /* == EXIT_FAILURE */) {
+            &usedWallpaperItem) != SET_WALLPAPER_OK) {
         freeAllToClose();
         obrwLogger_error("Wallpaper options error!");
     }
