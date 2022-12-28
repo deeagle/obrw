@@ -6,6 +6,8 @@ All notable changes will be documented in this file.
 
 ## UNRELEASED
 
+## 0.3.1 - 2022.12.28
+
 ### Changed
 
 - External tool validation.
