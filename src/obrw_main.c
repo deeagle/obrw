@@ -11,6 +11,8 @@
  */
 #include "obrw_main.h"
 
+int obrwMain_validateExternalTools();
+
 /** The main-method, which starts the obrw-process. */
 int main(int argc, char **argv) {
     obrwMain_handleCommandLineArguments(argc, (const char **) argv);
@@ -29,16 +31,7 @@ int main(int argc, char **argv) {
     // start
     obrwUtils_setRandomCounterToZero();
 
-    int isFehInstalled = obrwChkExt_isFehOnSystem();
-    if (isFehInstalled != FEH_EXIST_AND_EXEC) {
-        if (isFehInstalled == FEH_NOT_EXIST) {
-            obrwLogger_error("Feh is not installed!");
-        }
-
-        if (isFehInstalled == FEH_NOT_EXEC) {
-            obrwLogger_error("Feh is not executable!");
-        }
-
+    if (obrwMain_validateExternalTools() == OBRW_EXTERNAL_TOOLS_ERROR) {
         freeAllToClose();
 
         return EXIT_FAILURE;
@@ -79,6 +72,29 @@ int main(int argc, char **argv) {
     obrwLogger_success("OBRW successfully finished.");
 
     return EXIT_SUCCESS;
+}
+
+/**
+ * Validates the runtime of expected tools.
+ *
+ * @return <code>OBRW_EXTERNAL_TOOLS_OK</code> if all checks are like expected,
+ *         otherwise <code>OBRW_EXTERNAL_TOOLS_ERROR</code>.
+ */
+int obrwMain_validateExternalTools(void) {
+    int isFehInstalled = obrwChkExt_isFehOnSystem();
+    if (isFehInstalled != FEH_EXIST_AND_EXEC) {
+        if (isFehInstalled == FEH_NOT_EXIST) {
+            obrwLogger_error("Feh is not installed!");
+        }
+
+        if (isFehInstalled == FEH_NOT_EXEC) {
+            obrwLogger_error("Feh is not executable!");
+        }
+
+        return OBRW_EXTERNAL_TOOLS_ERROR;
+    }
+
+    return OBRW_EXTERNAL_TOOLS_OK;
 }
 
 void obrwMain_handleCommandLineArguments(const int argc, const char **argv) {

@@ -12,6 +12,9 @@
 #ifndef OBRW_MAIN_H
 #define OBRW_MAIN_H
 
+#define OBRW_EXTERNAL_TOOLS_OK 0
+#define OBRW_EXTERNAL_TOOLS_ERROR (-1)
+
 #include <stdio.h>
 #include <stdlib.h>
 
