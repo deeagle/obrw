@@ -56,8 +56,10 @@ void obrwMain_handleCommandLineArguments(const int argc, const char **argv);
 
 /**
  * Prints the help to stdout.
+ *
+ * @param name A char array with the name of the called app (default argv[0])
  */
-void obrwMain_printHelp();
+void obrwMain_printHelp(const char *name);
 
 /**
  * Prints the version to stdout.
