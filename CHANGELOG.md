@@ -6,6 +6,12 @@ All notable changes will be documented in this file.
 
 ## UNRELEASED
 
+## 0.3.2 - 2022.12.28
+
+### Fixed
+
+- Don't hide wallpaper config errors.
+
 ## 0.3.1 - 2022.12.28
 
 ### Changed
