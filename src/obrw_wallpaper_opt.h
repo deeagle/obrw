@@ -44,6 +44,11 @@
 /** file is DIR but didn't readable */
 #define DIR_DNR 3
 
+#define SET_WALLPAPER_ERROR_NO_WALLPAPER_GIVEN (-1)
+#define SET_WALLPAPER_ERROR_NO_HEAP_SPACE (-2)
+#define SET_WALLPAPER_OK 0
+
+
 static const size_t len_file_end;
 static const char *file_end_jpg;
 static const char *file_end_png;
