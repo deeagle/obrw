@@ -35,16 +35,18 @@ static const char *CLI_VERSION = "--version";
 /** Helper constant to show version only (if called). */
 static int IS_USER_CALLED_VERSION = FALSE;
 /** App version */
-static const char *APP_VERSION = "0.3.1";
+static const char *APP_VERSION = "0.3.2";
 
 /**
  * The main-method, which starts the obrw-process.
  *
  * \return If all is good, the process ends with EXIT_SUCCESS. Any kind of error
- * the program returns EXIT_FAILURE. \retval EXIT_SUCCESS all good. \retval
- * EXIT_FAILURE any kind of error.
+ *         the program returns EXIT_FAILURE.
+ *
+ * \retval EXIT_SUCCESS all good.
+ * \retval EXIT_FAILURE any kind of error.
  */
-int main();
+int main(int argc, char **argv);
 
 /**
  * Method to handle the command line arguments centralized.
@@ -52,12 +54,14 @@ int main();
  * @param argc The given argument count.
  * @param argv An char array with the given arguments.
  */
-void obrwMain_handleCommandLineArguments(const int argc, const char **argv);
+void obrwMain_handleCommandLineArguments(int argc, const char **argv);
 
 /**
  * Prints the help to stdout.
+ *
+ * @param name A char array with the name of the called app (default argv[0])
  */
-void obrwMain_printHelp();
+void obrwMain_printHelp(const char *name);
 
 /**
  * Prints the version to stdout.

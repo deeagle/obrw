@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
 
     if (obrwWallpaperOpt_readDirAndSetWallpaper(
             obrwConfig_getWallpaperDir(),
-            &usedWallpaperItem) /* == EXIT_FAILURE */) {
+            &usedWallpaperItem) != SET_WALLPAPER_OK) {
         freeAllToClose();
         obrwLogger_error("Wallpaper options error!");
     }
@@ -97,7 +97,7 @@ int obrwMain_validateExternalTools(void) {
     return OBRW_EXTERNAL_TOOLS_OK;
 }
 
-void obrwMain_handleCommandLineArguments(const int argc, const char **argv) {
+void obrwMain_handleCommandLineArguments(int argc, const char **argv) {
     // given arguments
     for (int i = 0; i < argc; i++) {
         if (strlen(argv[i]) == strlen(CLI_HELP)) {

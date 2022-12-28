@@ -8,11 +8,11 @@
  *
  * @return The runtime stage.
  */
-int main() {
+int obrwTests_main(int argc, char **argv) {
     time_t startTime = time(NULL);
 
     printf("Start tests.\n\n");
-    runAll();
+    obrwTests_runAll();
 
     time_t finishTime = time(NULL);
 
@@ -25,7 +25,7 @@ int main() {
 /**
  * Add all class test caller methods here.
  */
-void runAll() {
+void obrwTests_runAll() {
     obrw_configTest_runAll();
     obrw_loggerTest_runAll();
     obrw_stringTest_runAll();

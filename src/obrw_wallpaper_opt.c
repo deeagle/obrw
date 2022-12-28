@@ -230,9 +230,7 @@ int obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath,
 
     closedir(wpDir);
 
-    obrwWallpaperOpt_chooseWallpaperAndTryToSet(dirPath, wallpaperItem);
-
-    return EXIT_SUCCESS;
+    return obrwWallpaperOpt_chooseWallpaperAndTryToSet(dirPath, wallpaperItem);
 }
 
 /** Choose some wallpaper and tries to set a random wallpaper. */
@@ -275,13 +273,7 @@ int obrwWallpaperOpt_chooseWallpaperAndTryToSet(
     wallpaperItem->arrayIndex = usedWallpaperIndex;
     strcpy(wallpaperItem->name, wallpaperNames[usedWallpaperIndex]);
 
-    if (0 != obrwWallpaperOpt_setWallpaperWithFeh(
-            dirPath, wallpaperNames[usedWallpaperIndex])) {
-
-        return -2;
-    }
-
-    return EXIT_SUCCESS;
+    return obrwWallpaperOpt_setWallpaperWithFeh(dirPath, wallpaperNames[usedWallpaperIndex]);
 }
 
 // TODO
@@ -295,7 +287,7 @@ int obrwWallpaperOpt_setWallpaperWithFeh(const char *dirPath,
     if (NULL == wpToSet) {
         obrwLogger_error("No wallpaper given to set.");
 
-        return -1;
+        return SET_WALLPAPER_ERROR_NO_WALLPAPER_GIVEN;
     }
 
     // feh command to set a wallpaper over full display size
@@ -309,7 +301,7 @@ int obrwWallpaperOpt_setWallpaperWithFeh(const char *dirPath,
 
     if (NULL == sysCmd) {
         obrwLogger_error("Got no heap-space for feh-string.");
-        return -2;
+        return SET_WALLPAPER_ERROR_NO_HEAP_SPACE;
     }
 
     // TODO if one failure, free it!
@@ -327,7 +319,7 @@ int obrwWallpaperOpt_setWallpaperWithFeh(const char *dirPath,
 
     obrwUtils_freeCString(sysCmd);
 
-    return EXIT_SUCCESS;
+    return SET_WALLPAPER_OK;
 }
 
 // TODO
