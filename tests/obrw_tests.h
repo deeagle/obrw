@@ -10,7 +10,9 @@
 #include "obrw_loggerTest.c"
 #include "obrw_stringTest.c"
 
-int main();
-void runAll();
+#define obrwTests_main main
+
+int obrwTests_main();
+void obrwTests_runAll();
 
 #endif  // OBRW_OBRW_TESTS_H
