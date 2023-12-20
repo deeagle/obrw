@@ -78,8 +78,10 @@ int obrwConfig_isConfigFileReadWriteable(void) {
         return EXIT_FAILURE;
     }
 
-    char *logMsg = (char *) malloc((16 + strlen(userHome)) * sizeof(char));
-    sprintf(logMsg, "User home is <%s>.", userHome);
+    size_t needed = snprintf(NULL, 0, "User home is <%s>", userHome);
+    char *logMsg = malloc(needed + 1);
+    sprintf(logMsg, "User home is <%s>", userHome);
+
     obrwLogger_debug(logMsg);
     obrwUtils_freeCString(logMsg);
 
