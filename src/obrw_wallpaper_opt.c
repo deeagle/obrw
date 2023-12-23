@@ -150,7 +150,6 @@ int obrwWallpaperOpt_addWallpaper(const char *wallpaper) {
             (char *) malloc(sizeof(char) * strlen(wallpaper) + 1);
     strncpy(wallpaperNames[wallpaperNamesLength], wallpaper,
             strlen(wallpaper) + 1);
-    wallpaperNames[wallpaperNamesLength][strlen(wallpaper) + 1] = '\0';
 
     charSizeNeeded = snprintf(NULL,
                               0,
