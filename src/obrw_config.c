@@ -214,8 +214,11 @@ int obrwConfig_readConfigFile(void) {
 
                 case 'w':
                     if (strncmp(lineBuffer, "wpDir =", 7) == 0) {
-                        char *logMsgFoundWallpaperKey = (char *) malloc(
-                                (36 + strlen(lineBuffer)) * sizeof(char));
+                        charSizeNeeded = snprintf(NULL,
+                                                  0,
+                                                  "Found key 'wpDir =' in config file: <%s>",
+                                                  lineBuffer);
+                        char *logMsgFoundWallpaperKey = malloc(charSizeNeeded + 1);
                         sprintf(logMsgFoundWallpaperKey,
                                 "Found key 'wpDir =' in config file: <%s>",
                                 lineBuffer);
@@ -236,8 +239,11 @@ int obrwConfig_readConfigFile(void) {
 
                 case 'l':
                     if (strncmp(lineBuffer, "lastSet =", 9) == 0) {
-                        char *logMsgFoundLastWallpaperKey = (char *) malloc(
-                                (40 + strlen(lineBuffer)) * sizeof(char));
+                        charSizeNeeded = snprintf(NULL,
+                                                  0,
+                                                  "Found key 'lastSet =' in config file: <%s>",
+                                                  lineBuffer);
+                        char *logMsgFoundLastWallpaperKey = malloc(charSizeNeeded + 1);
                         sprintf(logMsgFoundLastWallpaperKey,
                                 "Found key 'lastSet =' in config file: <%s>",
                                 lineBuffer);
