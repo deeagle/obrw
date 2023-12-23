@@ -164,6 +164,8 @@ int obrwConfig_readConfigFile(void) {
     char *wpDir;
     char *lastSet;
     int bufferSize = 256;
+    const char *wpDirSetKeyword = "wpDir =";
+    const char *lastSetKeyword = "lastSet =";
 
     if (obrwConfig_isConfigFileReadWriteable() == EXIT_FAILURE) {
         obrwLogger_error("Configfile problems detect.");
@@ -204,7 +206,7 @@ int obrwConfig_readConfigFile(void) {
 
                 // checks if the line starts with 'w' --> wpDir
                 case 'w':
-                    if (strncmp(lineBuffer, "wpDir =", 7) == 0) {
+                    if (strncmp(lineBuffer, wpDirSetKeyword, strlen(wpDirSetKeyword)) == 0) {
                         charSizeNeeded = snprintf(NULL,
                                                   0,
                                                   "Found key 'wpDir =' in config file: <%s>",
@@ -216,19 +218,19 @@ int obrwConfig_readConfigFile(void) {
                         obrwLogger_debug(logMsgFoundWallpaperKey);
                         obrwUtils_freeCString(logMsgFoundWallpaperKey);
 
-                        if ((wpDir = obrwString_parseConfigFileFor(
-                                lineBuffer)) == NULL) {
+                        wpDir = obrwString_parseConfigFileFor(lineBuffer);
+                        if (wpDir == NULL) {
                             obrwLogger_error("WallpaperDir is NULL.");
                             return EXIT_FAILURE;
-                        } else {
-                            obrwConfig_setWallpaperDir(wpDir);
                         }
+
+                        obrwConfig_setWallpaperDir(wpDir);
                     }
                     break;
 
                 // checks if the line starts with 'l' --> lastSet
                 case 'l':
-                    if (strncmp(lineBuffer, "lastSet =", 9) == 0) {
+                    if (strncmp(lineBuffer, lastSetKeyword, strlen(lastSetKeyword)) == 0) {
                         charSizeNeeded = snprintf(NULL,
                                                   0,
                                                   "Found key 'lastSet =' in config file: <%s>",
@@ -240,21 +242,17 @@ int obrwConfig_readConfigFile(void) {
                         obrwLogger_debug(logMsgFoundLastWallpaperKey);
                         obrwUtils_freeCString(logMsgFoundLastWallpaperKey);
 
-                        if ((lastSet = obrwString_parseConfigFileFor(
-                                lineBuffer)) == NULL) {
+                        lastSet = obrwString_parseConfigFileFor(lineBuffer);
+                        if (lastSet == NULL) {
                             obrwLogger_error("Last set wallpaper is NULL.");
                             return EXIT_FAILURE;
-                        } else {
-                            wallpaperLast = (char *) malloc(
-                                    sizeof(char) * strlen(lastSet) + 1);
+                        }
 
-                            if (wallpaperLast) {
-                                strncpy(wallpaperLast, lastSet,
-                                        strlen(lastSet));
-                            }
+                        wallpaperLast = (char *) malloc(sizeof(char) * strlen(lastSet) + 1);
+                        if (wallpaperLast) {
+                            strncpy(wallpaperLast, lastSet,strlen(lastSet));
                         }
                     }
-
                     break;
 
                 default:
