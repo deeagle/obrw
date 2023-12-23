@@ -154,7 +154,8 @@ int obrwConfig_isConfigFileReadWriteable(void) {
     return EXIT_SUCCESS;
 }
 
-/** Read the configfile and parse included wallpaper path and last set wallpaper.
+/**
+ * Read the configfile and parse included wallpaper path and last set wallpaper.
  */
 int obrwConfig_readConfigFile(void) {
     FILE *fp;
@@ -194,24 +195,14 @@ int obrwConfig_readConfigFile(void) {
             }
 
             size_t charSizeNeeded;
-            char *logMsgFoundComment;
 
             switch (lineBuffer[0]) {
                 // checks if the line starts with '#'
                 case '#':
-                    // next line
-                    charSizeNeeded = snprintf(NULL,
-                                              0,
-                                              "Found comment in config file: <%s>", lineBuffer);
-                    logMsgFoundComment = malloc(charSizeNeeded + 1);
-                    sprintf(logMsgFoundComment,
-                            "Found comment in config file: <%s>", lineBuffer);
-                    obrwLogger_debug(logMsgFoundComment);
-                    obrwUtils_freeCString(logMsgFoundComment);
-
+                    obrwConfig_handleConfigFileCommentLine(lineBuffer);
                     break;
-                    // checks if the line starts with 'w' --> wpDir
 
+                // checks if the line starts with 'w' --> wpDir
                 case 'w':
                     if (strncmp(lineBuffer, "wpDir =", 7) == 0) {
                         charSizeNeeded = snprintf(NULL,
@@ -233,10 +224,9 @@ int obrwConfig_readConfigFile(void) {
                             obrwConfig_setWallpaperDir(wpDir);
                         }
                     }
-
                     break;
-                    // checks if the line starts with 'l' --> lastSet
 
+                // checks if the line starts with 'l' --> lastSet
                 case 'l':
                     if (strncmp(lineBuffer, "lastSet =", 9) == 0) {
                         charSizeNeeded = snprintf(NULL,
@@ -266,10 +256,9 @@ int obrwConfig_readConfigFile(void) {
                     }
 
                     break;
-                    // checks if the line starts with ' '
+
                 default:
-                    // next line
-                    obrwLogger_debug("Empty line in configfile found.");
+                    obrwConfig_handleConfigFileEmptyLine();
             }
         }
 
@@ -286,6 +275,26 @@ int obrwConfig_readConfigFile(void) {
     obrwUtils_freeCString(lastSet);
 
     return EXIT_SUCCESS;
+}
+
+/**
+ * Handles a detected comment line in the config file.
+ */
+void obrwConfig_handleConfigFileCommentLine(const char *line) {
+    size_t charSizeNeeded =
+        snprintf(NULL, 0, "Found comment in config file: <%s>", line);
+    char *logMsgFoundComment = malloc(charSizeNeeded + 1);
+    sprintf(logMsgFoundComment, "Found comment in config file: <%s>", line);
+
+    obrwLogger_debug(logMsgFoundComment);
+    obrwUtils_freeCString(logMsgFoundComment);
+}
+
+/**
+ * Handles a detected empty line in the config file.
+ */
+void obrwConfig_handleConfigFileEmptyLine(void) {
+    obrwLogger_debug("Empty line in configfile found.");
 }
 
 /** Write the now used settings into the configfile. */

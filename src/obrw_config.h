@@ -96,6 +96,22 @@ const char *obrwConfig_getWallpaperLastSet(void);
 int obrwConfig_readConfigFile(void);
 
 /**
+ * Handles a detected comment line in the config file.
+ *
+ * @param line The line comment.
+ *
+ * \return Nothing, it's void.
+ */
+void obrwConfig_handleConfigFileCommentLine(const char *);
+
+/**
+ * Handles a detected empty line in the config file.
+ *
+ * \return Nothing, it's void.
+ */
+void obrwConfig_handleConfigFileEmptyLine(void);
+
+/**
  * Write the now used settings into the configfile.
  *
  * \return If the file (~/.obrw.conf) is read and writeable (checked at
