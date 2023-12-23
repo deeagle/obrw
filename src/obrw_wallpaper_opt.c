@@ -299,7 +299,7 @@ int obrwWallpaperOpt_chooseWallpaperAndTryToSet(
 int obrwWallpaperOpt_setWallpaperWithFeh(const char *dirPath,
                                          const char *wpToSet) {
     char *sysCmd;
-    const char *fehCmd;
+    const char *fehCmd = "feh --bg-scale";
     size_t sysCmdLen = 0;
 
     if (NULL == wpToSet) {
@@ -308,24 +308,9 @@ int obrwWallpaperOpt_setWallpaperWithFeh(const char *dirPath,
         return SET_WALLPAPER_ERROR_NO_WALLPAPER_GIVEN;
     }
 
-    // feh command to set a wallpaper over full display size
-    //'feh --bg-scale /wonderfully/canonical/file.name'
-    // Chars   01234567890 1234     --> 14 chars
-    // sysCmd = feh --bg-sc ale		--> 14 chars
-    fehCmd = "feh --bg-scale \0";
-    sysCmdLen = strlen(fehCmd) + strlen(dirPath) + strlen(wpToSet) + 1;
-
-    sysCmd = (char *) malloc(sizeof(char) * sysCmdLen);
-
-    if (NULL == sysCmd) {
-        obrwLogger_error("Got no heap-space for feh-string.");
-        return SET_WALLPAPER_ERROR_NO_HEAP_SPACE;
-    }
-
-    // TODO if one failure, free it!
-    strncpy(sysCmd, fehCmd, strlen(fehCmd));
-    strncat(sysCmd, dirPath, strlen(dirPath));
-    strncat(sysCmd, wpToSet, strlen(wpToSet));
+    sysCmdLen = snprintf(NULL, 0, "%s %s%s", fehCmd, dirPath, wpToSet);
+    sysCmd = malloc(sysCmdLen + 1);
+    sprintf(sysCmd, "%s %s%s", fehCmd, dirPath, wpToSet);
 
     size_t charSizeNeeded = snprintf(NULL,
                                      0,
