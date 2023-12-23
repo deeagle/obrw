@@ -78,8 +78,8 @@ int obrwConfig_isConfigFileReadWriteable(void) {
         return EXIT_FAILURE;
     }
 
-    size_t needed = snprintf(NULL, 0, "User home is <%s>", userHome);
-    char *logMsg = malloc(needed + 1);
+    size_t charSizeNeeded = snprintf(NULL, 0, "User home is <%s>", userHome);
+    char *logMsg = malloc(charSizeNeeded + 1);
     sprintf(logMsg, "User home is <%s>", userHome);
 
     obrwLogger_debug(logMsg);
@@ -92,8 +92,11 @@ int obrwConfig_isConfigFileReadWriteable(void) {
         if (access(configPath, READ) != -1) {
             if (access(configPath, WRITE) != -1) {
             } else {
-                char *message =
-                        (char *) malloc((56 + strlen(configPath)) * sizeof(char));
+                charSizeNeeded = snprintf(NULL,
+                                                 0,
+                                                 "Configfile <%s> exists and is readable, but not writeable.",
+                                                 configPath);
+                char *message = malloc(charSizeNeeded + 1);
                 sprintf(message,
                         "Configfile <%s> exists and is readable, but not "
                         "writeable.",
@@ -104,8 +107,11 @@ int obrwConfig_isConfigFileReadWriteable(void) {
                 return EXIT_FAILURE;
             }
         } else {
-            char *message =
-                    (char *) malloc((41 + strlen(configPath)) * sizeof(char));
+            charSizeNeeded = snprintf(NULL,
+                                      0,
+                                      "Configfile <%s> exists but is not readable.",
+                                      configPath);
+            char *message = malloc(charSizeNeeded + 1);
             sprintf(message, "Configfile <%s> exists but is not readable.",
                     configPath);
             obrwLogger_error(message);
@@ -114,8 +120,11 @@ int obrwConfig_isConfigFileReadWriteable(void) {
             return EXIT_FAILURE;
         }
     } else {
-        char *message =
-                (char *) malloc((41 + strlen(configPath)) * sizeof(char));
+        charSizeNeeded = snprintf(NULL,
+                                  0,
+                                  "Configfile <%s> doesn't exists.",
+                                  configPath);
+        char *message = malloc(charSizeNeeded + 1);
         sprintf(message, "Configfile <%s> doesn't exists.", configPath);
         obrwLogger_error(message);
         obrwUtils_freeCString(message);
@@ -130,8 +139,11 @@ int obrwConfig_isConfigFileReadWriteable(void) {
     obrwLogger_debug(logMsgConfigAccess);
     obrwUtils_freeCString(logMsgConfigAccess);
 
-    char *logMsgConfigReadable =
-            (char *) malloc((38 + strlen(configPath)) * sizeof(char));
+    charSizeNeeded = snprintf(NULL,
+                              0,
+                              "Configfile is <%s> (EXISTS and READABLE)",
+                              configPath);
+    char *logMsgConfigReadable = malloc(charSizeNeeded + 1);
     sprintf(logMsgConfigReadable, "Configfile is <%s> (EXISTS and READABLE)",
             configPath);
     obrwLogger_debug(logMsgConfigReadable);
@@ -181,14 +193,17 @@ int obrwConfig_readConfigFile(void) {
                 *bufP = '\0';
             }
 
+            size_t charSizeNeeded;
             char *logMsgFoundComment;
 
             switch (lineBuffer[0]) {
                 // checks if the line starts with '#'
                 case '#':
                     // next line
-                    logMsgFoundComment = (char *) malloc(
-                            (32 + strlen(lineBuffer)) * sizeof(char));
+                    charSizeNeeded = snprintf(NULL,
+                                              0,
+                                              "Found comment in config file: <%s>", lineBuffer);
+                    logMsgFoundComment = malloc(charSizeNeeded + 1);
                     sprintf(logMsgFoundComment,
                             "Found comment in config file: <%s>", lineBuffer);
                     obrwLogger_debug(logMsgFoundComment);
@@ -279,7 +294,11 @@ int obrwConfig_writeSettingsToConfigFile(struct wallpaper *wallpaperItem) {
 
     filename = obrwString_2CStringsTo1(userHome, obrwConf);
 
-    char *msg = (char *) malloc(17 + strlen(filename));
+    size_t charSizeNeeded = snprintf(NULL,
+                                     0,
+                                     "Config file is <%s>.",
+                                     filename);
+    char *msg = malloc(charSizeNeeded + 1);
     sprintf(msg, "Config file is <%s>.", filename);
     obrwLogger_debug(msg);
     obrwUtils_freeCString(msg);
@@ -309,8 +328,11 @@ int obrwConfig_writeSettingsToConfigFile(struct wallpaper *wallpaperItem) {
                     strncat(configNow, toSet, strlen(toSet));
                     strcat(configNow, "\"\n");
                 } else {
-                    char *logMsg = (char *) malloc((28 + strlen(lineBuffer)) *
-                                                   sizeof(char));
+                    charSizeNeeded = snprintf(NULL,
+                                              0,
+                                              "Was no config value key: <%s>.",
+                                              lineBuffer);
+                    char *logMsg = malloc(charSizeNeeded + 1);
                     sprintf(logMsg, "Was no config value key: <%s>.",
                             lineBuffer);
                     obrwLogger_debug(logMsg);

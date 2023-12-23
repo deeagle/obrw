@@ -43,7 +43,11 @@ int obrwWallpaperOpt_filterWallpapersEndTag(const char *possibleWallpaperName) {
         return -1;
     }
 
-    char *logMsg = (char *) malloc((13 + strlen(buffer)) * sizeof(char));
+    size_t charSizeNeeded = snprintf(NULL,
+                                     0,
+                                     "Buffer is <%s>.",
+                                     buffer);
+    char *logMsg = malloc(charSizeNeeded + 1);
     sprintf(logMsg, "Buffer is <%s>.", buffer);
     obrwLogger_debug(logMsg);
     obrwUtils_freeCString(logMsg);
@@ -105,7 +109,10 @@ int obrwWallpaperOpt_addWallpaper(const char *wallpaper) {
         return -1;
     }
 
-    char *logMsg = (char *) malloc(27 * sizeof(char) * strlen(wallpaper));
+    size_t charSizeNeeded = snprintf(NULL,
+                                     0,
+                                     "Add possible wallpaper: <%s>.", wallpaper);
+    char *logMsg = malloc(charSizeNeeded + 1);
     sprintf(logMsg, "Add possible wallpaper: <%s>.", wallpaper);
     obrwLogger_debug(logMsg);
     obrwUtils_freeCString(logMsg);
@@ -145,7 +152,11 @@ int obrwWallpaperOpt_addWallpaper(const char *wallpaper) {
             strlen(wallpaper) + 1);
     wallpaperNames[wallpaperNamesLength][strlen(wallpaper) + 1] = '\0';
 
-    logMsg = (char *) malloc((12 + strlen(wallpaper)) * sizeof(char));
+    charSizeNeeded = snprintf(NULL,
+                              0,
+                              "Add file <%s>.",
+                              wallpaper);
+    logMsg = malloc(charSizeNeeded + 1);
     sprintf(logMsg, "Add file <%s>.", wallpaper);
     obrwLogger_debug(logMsg);
     obrwUtils_freeCString(logMsg);
@@ -168,7 +179,11 @@ int obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath,
         return EXIT_FAILURE;
     }
 
-    char *logMsg = (char *) malloc((22 + strlen(dirPath)) * sizeof(char));
+    size_t charSizeNeeded = snprintf(NULL,
+                                     0,
+                                     "Wallpaper path is <%s>.",
+                                     dirPath);
+    char *logMsg = malloc(charSizeNeeded + 1);
     sprintf(logMsg, "Wallpaper path is <%s>.", dirPath);
     obrwLogger_debug(logMsg);
     obrwUtils_freeCString(logMsg);
@@ -222,7 +237,11 @@ int obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath,
         }
 
         // char length for wallpaper count: 1.000.000.000 = 10
-        char *message = (char *) malloc((32 + 10) * sizeof(char));
+        charSizeNeeded = snprintf(NULL,
+                                  0,
+                                  "Count of found wallpapers is <%d>.",
+                                  wpEntry);
+        char *message = malloc(charSizeNeeded + 1);
         sprintf(message, "Count of found wallpapers is <%d>.", wpEntry);
         obrwLogger_info(message);
         obrwUtils_freeCString(message);
@@ -309,7 +328,11 @@ int obrwWallpaperOpt_setWallpaperWithFeh(const char *dirPath,
     strncat(sysCmd, dirPath, strlen(dirPath));
     strncat(sysCmd, wpToSet, strlen(wpToSet));
 
-    char *logMsg = (char *) malloc((32 + strlen(sysCmd)) * sizeof(char));
+    size_t charSizeNeeded = snprintf(NULL,
+                                     0,
+                                     "Try to set wallpaper via: <%s>.",
+                                     sysCmd);
+    char *logMsg = malloc(charSizeNeeded + 1);
     sprintf(logMsg, "Try to set wallpaper via: <%s>.", sysCmd);
     obrwLogger_debug(logMsg);
     obrwUtils_freeCString(logMsg);

@@ -50,8 +50,11 @@ char *obrwString_parseConfigFileFor(const char *line) {
                     strncat(parsedStr, strPtr,
                             lenToCopyWithoutClosingQuotationMark);
 
-                    char *logMsg =
-                            (char *) malloc((20 + strlen(parsedStr)) * sizeof(char));
+                    size_t charSizeNeeded = snprintf(NULL,
+                                                     0,
+                                                     "Parsed string is <%s>.",
+                                                     parsedStr);
+                    char *logMsg = malloc(charSizeNeeded + 1);
                     sprintf(logMsg, "Parsed string is <%s>.", parsedStr);
                     obrwLogger_info(logMsg);
                     obrwUtils_freeCString(logMsg);
@@ -60,8 +63,11 @@ char *obrwString_parseConfigFileFor(const char *line) {
                     // return NULL;
                 }
             } else {
-                char *logMsg =
-                        (char *) malloc((33 + strlen(line)) * sizeof(char));
+                size_t charSizeNeeded = snprintf(NULL,
+                                                 0,
+                                                 "Parsed string <%s> (return NULL).",
+                                                 line);
+                char *logMsg = malloc(charSizeNeeded + 1);
                 sprintf(logMsg, "Parsed string <%s> (return NULL).", line);
                 obrwLogger_debug(logMsg);
                 obrwUtils_freeCString(logMsg);

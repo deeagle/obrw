@@ -33,7 +33,11 @@ char *obrwUtils_getUserHomeDir(void) {
 /** OBRW Version of free(). */
 void obrwUtils_freeCString(char *cstr) {
     if (cstr != NULL) {
-        char *logMsg = (char *) malloc((16 + strlen(cstr)) * sizeof(char));
+        size_t charSizeNeeded = snprintf(NULL,
+                                         0,
+                                         "free string <%s>.",
+                                         cstr);
+        char *logMsg = malloc(charSizeNeeded + 1);
         sprintf(logMsg, "free string <%s>.", cstr);
         obrwLogger_debugSystem(logMsg);
 
