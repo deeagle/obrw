@@ -54,6 +54,7 @@ int main(int argc, char **argv) {
             &usedWallpaperItem) != SET_WALLPAPER_OK) {
         freeAllToClose();
         obrwLogger_error("Wallpaper options error!");
+        return EXIT_FAILURE;
     }
 
     obrwLogger_success("Setting wallpaper successfully handled.");
@@ -62,6 +63,7 @@ int main(int argc, char **argv) {
             &usedWallpaperItem) /* == EXIT_FAILURE */) {
         freeAllToClose();
         obrwLogger_error("Wallpaper write error!");
+        return EXIT_FAILURE;
     }
 
     obrwLogger_success("Writing history successfully to file.");
