@@ -19,4 +19,8 @@ do
   docker run --rm -i -v "${PWD}:/mnt" koalaman/shellcheck:stable "$shellfile"
 done
 
+echo "Run cppcheck ..."
+docker run --rm -i cppcheck:local
+docker run --rm -i -v ./src:/app:ro cppcheck:local /app
+
 echo "Running CI successfull finished."
