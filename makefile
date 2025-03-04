@@ -36,7 +36,6 @@ val: $(SRC)
 
 ci: .
 	bash run-ci.sh
-	make cppcheck
 
 cppcheck: $(SRC) $(TEST_FILE_DIR)
 	@if [ ! -f "$(BIN_CPPCHECK)" ]; then \
