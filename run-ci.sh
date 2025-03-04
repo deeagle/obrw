@@ -20,7 +20,7 @@ do
 done
 
 echo "Run cppcheck ..."
-docker run --rm -i cppcheck:local
-docker run --rm -i -v ./src:/app:ro cppcheck:local /app
+docker run --rm -i docdee/cppcheck:latest
+docker run --rm -i -v ./src:/app:ro docdee/cppcheck:latest --enable=warning,performance,portability,style --language=c --std=c99 /app
 
 echo "Running CI successfull finished."
