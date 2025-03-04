@@ -16,8 +16,7 @@ steps:
       - markdownlint README.md CHANGELOG.md
 
   - name: cppcheck
-    image: alpine
+    image: docdee/cppcheck
     commands:
-      - apk --no-cache add make cppcheck g++
       - cppcheck --version
       - make test
