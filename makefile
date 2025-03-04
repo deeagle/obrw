@@ -34,6 +34,10 @@ val: $(SRC)
 		$(CC) $(CFLAGS) -g -o $(TARGET_DIR)/$(NAME) $(MAIN_C)
 		valgrind -v --tool=memcheck --leak-check=full --show-reachable=yes --track-origins=yes --gen-suppressions=all ./$(TARGET_DIR)/$(NAME)
 
+ci: .
+	bash run-ci.sh
+	make cppcheck
+
 cppcheck: $(SRC) $(TEST_FILE_DIR)
 	@if [ ! -f "$(BIN_CPPCHECK)" ]; then \
 		echo "ERROR: $(BIN_CPPCHECK) not found."; \
