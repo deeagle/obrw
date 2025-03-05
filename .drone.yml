@@ -1,6 +1,10 @@
 kind: pipeline
 type: docker
-name: ci
+name: lint-n-style
+
+trigger:
+  event:
+    - pull_request
 
 steps:
   - name: linefeed-and-encoding
@@ -13,9 +17,20 @@ steps:
     image: docdee/mdlint
     commands:
       - markdownlint README.md CHANGELOG.md
+---
+kind: pipeline
+type: docker
+name: ci
 
+trigger:
+  event:
+    - pull_request
+
+steps:
   - name: cppcheck
     image: docdee/cppcheck
     commands:
       - cppcheck --version
       - cppcheck --enable=warning,performance,portability,style --language=c --std=c99 --check-level=exhaustive src/*
+depends_on:
+  - lint-n-style
