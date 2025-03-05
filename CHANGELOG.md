@@ -8,7 +8,8 @@ All notable changes will be documented in this file.
 
 ### Refactored
 
-- ensure obrwUtils_freeCString correctly nullifies pointer.
+- Add more possible `const`.
+- Ensure obrwUtils_freeCString correctly nullifies pointer.
 
 ## 0.3.3 - 2022.12.28
 
