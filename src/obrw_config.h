@@ -103,7 +103,7 @@ int obrwConfig_readConfigFile(void);
  * error occur EXIT_FAILURE returns. \retval EXIT_SUCCESS success. \retval
  * EXIT_FAILURE failed.
  */
-int obrwConfig_writeSettingsToConfigFile(struct wallpaper *);
+int obrwConfig_writeSettingsToConfigFile(const struct wallpaper *);
 
 /**
  * Free memory of used locale variables with help of the free-methods in
