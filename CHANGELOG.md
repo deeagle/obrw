@@ -6,6 +6,10 @@ All notable changes will be documented in this file.
 
 ## UNRELEASED
 
+### Refactored
+
+- ensure obrwUtils_freeCString correctly nullifies pointer.
+
 ## 0.3.3 - 2022.12.28
 
 ### Fixed
