@@ -191,5 +191,5 @@ static void obrwLogger_printLogLevel() {
     char *logMsg = (char *) malloc(21 * sizeof(char));
     sprintf(logMsg, "Used Log-Level is %d.", LOG_LEVEL);
     obrwLogger_info(logMsg);
-    obrwUtils_freeCString(logMsg);
+    obrwUtils_freeCString(&logMsg);
 }

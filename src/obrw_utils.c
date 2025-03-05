@@ -31,21 +31,21 @@ char *obrwUtils_getUserHomeDir(void) {
 }
 
 /** OBRW Version of free(). */
-void obrwUtils_freeCString(char *cstr) {
-    if (cstr != NULL) {
-        char *logMsg = (char *) malloc((16 + strlen(cstr)) * sizeof(char));
-        sprintf(logMsg, "free string <%s>.", cstr);
+void obrwUtils_freeCString(char **cstr) {
+    if (cstr != NULL && *cstr != NULL) {
+        char *logMsg = (char *) malloc((16 + strlen(*cstr)) * sizeof(char));
+        sprintf(logMsg, "free string <%s>.", *cstr);
         obrwLogger_debugSystem(logMsg);
 
         // TODO
         // valgrind-error ?
         // memset( cstr, '0', strlen( cstr ) );
         free(logMsg);
-        free(cstr);
+        free(*cstr);
 
         // free:
         // - it marks the memory as free, that means the value can still exist!
         // - so I set it manually to NULL.
-        cstr = NULL;
+        *cstr = NULL;
     }
 }
