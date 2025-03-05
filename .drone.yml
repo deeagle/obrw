@@ -18,4 +18,4 @@ steps:
     image: docdee/cppcheck
     commands:
       - cppcheck --version
-      - cppcheck --enable=warning,performance,portability,style --language=c --std=c99 --check-level=exhaustive
+      - cppcheck --enable=warning,performance,portability,style --language=c --std=c99 --check-level=exhaustive src/*
