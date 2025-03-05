@@ -19,4 +19,4 @@ steps:
     image: docdee/cppcheck
     commands:
       - cppcheck --version
-      - make test
+      - cppcheck --enable=warning,performance,portability,style --language=c --std=c99 --check-level=exhaustive
