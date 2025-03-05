@@ -35,7 +35,7 @@ static const char *CLI_VERSION = "--version";
 /** Helper constant to show version only (if called). */
 static int IS_USER_CALLED_VERSION = FALSE;
 /** App version */
-static const char *APP_VERSION = "0.3.3";
+static const char *APP_VERSION = "0.3.4-SNAPSHOT";
 
 /**
  * The main-method, which starts the obrw-process.
