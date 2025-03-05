@@ -54,7 +54,7 @@ char *obrwString_parseConfigFileFor(const char *line) {
                             (char *) malloc((20 + strlen(parsedStr)) * sizeof(char));
                     sprintf(logMsg, "Parsed string is <%s>.", parsedStr);
                     obrwLogger_info(logMsg);
-                    obrwUtils_freeCString(logMsg);
+                    obrwUtils_freeCString(&logMsg);
                 } else {
                     obrwLogger_error("No memory (heap) available!");
                     // return NULL;
@@ -64,7 +64,7 @@ char *obrwString_parseConfigFileFor(const char *line) {
                         (char *) malloc((33 + strlen(line)) * sizeof(char));
                 sprintf(logMsg, "Parsed string <%s> (return NULL).", line);
                 obrwLogger_debug(logMsg);
-                obrwUtils_freeCString(logMsg);
+                obrwUtils_freeCString(&logMsg);
                 // return NULL;
             }
         }

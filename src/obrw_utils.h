@@ -56,6 +56,6 @@ char *obrwUtils_getUserHomeDir(void);
  *
  * \returns Nothing, it's void.
  */
-void obrwUtils_freeCString(char *);
+void obrwUtils_freeCString(char **);
 
 #endif  // OBRW_UTILS_H
