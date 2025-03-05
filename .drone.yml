@@ -10,9 +10,8 @@ steps:
       - (find . -maxdepth 1 -name "*.*" -not -type d -not -name "*.png" -not -type d -exec isutf8 "{}" "+")
 
   - name: markdownlint-cli
-    image: node:current-alpine
+    image: docdee/mdlint
     commands:
-      - npm install -g markdownlint-cli
       - markdownlint README.md CHANGELOG.md
 
   - name: cppcheck
