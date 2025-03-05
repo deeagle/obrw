@@ -266,9 +266,9 @@ int obrwConfig_readConfigFile(void) {
 }
 
 /** Write the now used settings into the configfile. */
-int obrwConfig_writeSettingsToConfigFile(struct wallpaper *wallpaperItem) {
+int obrwConfig_writeSettingsToConfigFile(const struct wallpaper *wallpaperItem) {
     FILE *fp;
-    char *filename;
+    const char *filename;
     char *configNow;
     int bufferSize = 256;
 
@@ -303,7 +303,7 @@ int obrwConfig_writeSettingsToConfigFile(struct wallpaper *wallpaperItem) {
                 if (strncmp(lineBuffer, "lastSet = ", 10) == 0) {
                     obrwLogger_debug("Found line with 'lastSet' information");
                     strcat(configNow, "lastSet = \"");
-                    char *toSet = wallpaperItem->name;
+                    const char *toSet = wallpaperItem->name;
                     strncat(configNow, toSet, strlen(toSet));
                     strcat(configNow, "\"\n");
                 } else {

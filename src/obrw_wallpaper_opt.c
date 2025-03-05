@@ -159,7 +159,7 @@ int obrwWallpaperOpt_addWallpaper(const char *wallpaper) {
 int obrwWallpaperOpt_readDirAndSetWallpaper(const char *dirPath,
                                             struct wallpaper *wallpaperItem) {
     DIR *wpDir = NULL;
-    struct dirent *entry = NULL;
+    const struct dirent *entry = NULL;
     int wpCounter = 0;
 
     if (NULL == dirPath || strlen(dirPath) < 1) {
