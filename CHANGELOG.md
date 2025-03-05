@@ -8,6 +8,7 @@ All notable changes will be documented in this file.
 
 ### Refactored
 
+- Restructure `makefile`.
 - Add more possible `const`.
 - Ensure obrwUtils_freeCString correctly nullifies pointer.
 
